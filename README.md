@@ -1,12 +1,12 @@
-# FFmpeg Slideshow Scripts
+# FFmpeg Video Slideshow Scripts
 
 Shell scripts to create video slideshows from images using [ffmpeg](https://www.ffmpeg.org/).
 
 
 ## Features
-- [Transition scripts](https://) 
-- [Text scripts](https://)
-- [Special scripts](https://)
+- [Transition scripts](transition_scripts/README.md) 
+- [Text scripts](text_scripts/README.md)
+- [Special scripts](special_scripts/README.md)
 
 
 ## Requirements
