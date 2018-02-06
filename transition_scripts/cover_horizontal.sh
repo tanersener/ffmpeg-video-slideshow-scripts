@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal collapse transition v1 (01.10.2017)
+# ffmpeg video slideshow script with horizontal cover transition v1 (01.10.2017)
 #
 # Copyright (c) 2017, Taner Sener (https://github.com/tanersener)
 #
@@ -31,12 +31,12 @@ ffmpeg -y \
 [stream4out2]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=2[stream4starting][stream4ending];\
 [stream5out1]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=2,select=lte(n\,60)[stream5overlaid];\
 [stream5out2]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30)[stream5starting];\
-[stream2starting][stream1ending]blend=all_expr='if(gte(X,(W/2)*T/1)*lte(X,W-(W/2)*T/1),B,A)':shortest=1[stream2blended];\
-[stream3starting][stream2ending]blend=all_expr='if(gte(X,(W/2)*T/1)*lte(X,W-(W/2)*T/1),B,A)':shortest=1[stream3blended];\
-[stream4starting][stream3ending]blend=all_expr='if(gte(X,(W/2)*T/1)*lte(X,W-(W/2)*T/1),B,A)':shortest=1[stream4blended];\
-[stream5starting][stream4ending]blend=all_expr='if(gte(X,(W/2)*T/1)*lte(X,W-(W/2)*T/1),B,A)':shortest=1[stream5blended];\
+[stream2starting][stream1ending]blend=all_expr='if(gte(X,W*T/1),B,A)':shortest=1[stream2blended];\
+[stream3starting][stream2ending]blend=all_expr='if(gte(X,W*T/1),B,A)':shortest=1[stream3blended];\
+[stream4starting][stream3ending]blend=all_expr='if(gte(X,W*T/1),B,A)':shortest=1[stream4blended];\
+[stream5starting][stream4ending]blend=all_expr='if(gte(X,W*T/1),B,A)':shortest=1[stream5blended];\
 [stream1overlaid][stream2blended][stream2overlaid][stream3blended][stream3overlaid][stream4blended][stream4overlaid][stream5blended][stream5overlaid]concat=n=9:v=1:a=0,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../transition_collapse_horizontal.mp4
+ -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../transition_cover_horizontal.mp4
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
