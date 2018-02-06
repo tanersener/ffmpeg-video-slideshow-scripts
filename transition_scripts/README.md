@@ -9,6 +9,7 @@ Transitions are implemented as custom filters in the following execution order.
 3. Generate transition frames
 4. Concat static and transition streams
 
+
 ## Checkerboard
 
 New photo appears in growing 128x128 boxes
