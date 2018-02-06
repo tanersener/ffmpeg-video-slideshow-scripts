@@ -12,7 +12,7 @@ Transitions are implemented as custom filters in the following execution order.
 
 ## Checkerboard
 
-New photo appears in growing 128x128 boxes
+New photo appears in growing 128x128 px boxes
 
 ![Checkerboard Transition](../docs/transition_checkerboard.gif)
 

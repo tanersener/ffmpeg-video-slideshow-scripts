@@ -4,23 +4,24 @@ Shell scripts to create video slideshows from images using [ffmpeg](https://www.
 
 
 ## Features
-- [Transition scripts](transition_scripts/README.md) 
-- [Text scripts](text_scripts/README.md)
-- [Advanced scripts](advanced_scripts/README.md)
+- [Transition scripts](transition_scripts) 
+- [Advanced scripts](advanced_scripts)
 
 
 ## Requirements
 
-Nearly all scripts should be working on `ffmpeg 2.8.x` or later. A few scripts use some new properties defined in `ffmpeg 3.x`.
+`ffmpeg 2.8.x` or later
 
-**Note:** Text scripts need ffmpeg to be build with freetype. If you compile ffmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. Under macOS, ffmpeg is available under [Homebrew](https://brew.sh/), you can install it using `--with-freetype` option, aka `brew install ffmpeg --with-freetype`.
+Advanced 'Moving Text' script needs ffmpeg to be build with freetype. If you compile ffmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. Under macOS, ffmpeg is available under [Homebrew](https://brew.sh/), you can install it using `--with-freetype` option, aka `brew install ffmpeg --with-freetype`.
 
 
 ## Description
 
-Each script under this project creates a video slideshow using 5 photos provided. Slideshow has 1280x720 dimensions and duration of 15 seconds (3 seconds for each photo).
+Each script creates a video slideshow using 5 photos inside `photos` folder. Advanced scripts use additional objects & fonts from their respective folders.
 
-Input images are scaled to fit into 1280x720 dimensions using `scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))'` formula. Alternatively cropping input images can be implemented by replacing scale statement with `crop=min(iw\,1280):min(ih\,720)`.
+Output slideshow is an h264 encoded 1280x720 MPEG-4 video.
+
+**Note:** Input images are scaled to fit using `scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))'` formula. Alternatively cropping input images can be implemented by replacing scale statement with `crop=min(iw\,1280):min(ih\,720)`.
 
 
 ## Known Issues
@@ -35,22 +36,18 @@ This warning is printed because input image streams are decoded with "yuvj444p" 
 
   **[Parsed_overlay_80 @ 0x............] [framesync @ 0x............] Buffer queue overflow, dropping.**
 
-Statements inside filter_complex are ordered into logical groups to give a better understanding of how they work. In this ordering scheme, too many streams/statements wait in the buffer queue; which generates these two warnings. You can fix them by changing the order of statements inside filter_complex; by using new streams immediately after they are created.
+Statements inside filter_complex are ordered into logical groups to give a better understanding of how they work. In this ordering scheme too many streams/statements wait in the buffer queue, which generates these two warnings. You can resolve them by changing the order of statements inside filter_complex using new streams immediately after they are created.
+
+
+## Contributing
+
+Feel free to submit issues or pull requests.
 
 
 ## License
-This project is licensed under the MIT License.
-```
-Copyright 2018 (c) Taner Sener
+This project is licensed under the (MIT License)[https://opensource.org/licenses/MIT] with the following exceptions.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
-
-Scripts provided in this project use 5 photos (under `photos` folder) published in the ![Public Domain](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Public_Domain_Mark_button.svg/88px-Public_Domain_Mark_button.svg.png "Public Domain"). These photos are:
+Photos inside `photos` folder are published in the ![Public Domain](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Public_Domain_Mark_button.svg/88px-Public_Domain_Mark_button.svg.png "Public Domain"). These photos are:
 
 - [Colosseum](https://www.flickr.com/photos/134331036@N08/35674227104/) by [Klaus Berdiin Jensen](https://www.flickr.com/photos/134331036@N08/)
 
@@ -62,6 +59,11 @@ Scripts provided in this project use 5 photos (under `photos` folder) published 
 
 - [chichen itza](https://www.flickr.com/photos/kanvc/15398655930/) by [kan_v_c](https://www.flickr.com/photos/kanvc/)
 
+Snow flake image inside `objects` folder is licensed under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/).
+
+Film strip images inside `objects` folder are modified from [Film Strip](https://commons.wikimedia.org/wiki/File:Film_strip.svg) by [Nevit Dilmen](https://commons.wikimedia.org/wiki/User:Nevit) and licensed under [Creative Commons Attribution-Share Alike 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/deed.en).
+
+Falling Sky font inside `fonts` folder is licensed under [SIL Open Font License (OFL)](https://opensource.org/licenses/OFL-1.1).
 
 ## See Also
 
