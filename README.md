@@ -45,7 +45,7 @@ Feel free to submit issues or pull requests.
 
 
 ## License
-This project is licensed under the (MIT License)[https://opensource.org/licenses/MIT] with the following exceptions.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) with the following exceptions.
 
 Photos inside `photos` folder are published in the ![Public Domain](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Public_Domain_Mark_button.svg/88px-Public_Domain_Mark_button.svg.png "Public Domain"). These photos are:
 

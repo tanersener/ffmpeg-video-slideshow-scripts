@@ -35,20 +35,20 @@ Snow flakes are falling during slideshow
 
 ## Photo Collection
 
-This script is enhanced version of **Rotate** transition. Each photo stops rotating on a specific angle; where some parts of old photos are still visible
+This script is enhanced version of 'Rotate' transition. Each photo stops rotating on a specific angle; where some parts of old photos are still visible
 
 ![Photo Collection](../docs/advanced_photo_collection.gif)
 
 
 ## Push Horizontal Film
 
-This script is enhanced version of **Push Horizontal** transition. A film frame is overlaid to images and static frames are removed to create movie film looking
+This script is enhanced version of 'Push Horizontal' transition. A film frame is overlaid to images and static frames are removed to create movie film looking
 
 ![Push Horizontal Film](../docs/advanced_push_horizontal_film.gif)
 
 
 ## Push Vertical Film
 
-This script is enhanced version of **Push Vertical** transition. A film frame is overlaid to images and static frames are removed to create movie film looking
+This script is enhanced version of 'Push Vertical' transition. A film frame is overlaid to images and static frames are removed to create movie film looking
 
 ![Push Vertical Film](../docs/advanced_push_vertical_film.gif)
