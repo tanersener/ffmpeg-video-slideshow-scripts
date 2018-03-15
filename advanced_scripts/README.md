@@ -28,7 +28,7 @@ Text moving from right to left at the bottom of the slideshow
 
 ## Object Move
 
-Snow flakes are falling during slideshow
+Snow flakes falling
 
 ![Object Move](../docs/advanced_object_move.gif)
 
@@ -49,6 +49,6 @@ This script is enhanced version of 'Push Horizontal' transition. A film frame is
 
 ## Push Vertical Film
 
-This script is enhanced version of 'Push Vertical' transition. A film frame is overlaid to images and static frames are removed to create movie film looking
+Vertical version of 'Push Horizontal Film'
 
 ![Push Vertical Film](../docs/advanced_push_vertical_film.gif)

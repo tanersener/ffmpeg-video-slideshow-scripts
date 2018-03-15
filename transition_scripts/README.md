@@ -82,7 +82,7 @@ New photo appears fading in
 
 ## Fade In #2
 
-New photo appears fading in while old one is fading out
+New photo appears fading in while the old one is fading out
 
 ![Fade In #2 Transition](../docs/transition_fade_in_two.gif)
 

@@ -10,7 +10,7 @@ Shell scripts to create video slideshows from images using [ffmpeg](https://www.
 
 ## Requirements
 
-`ffmpeg 2.8.x` or later
+- `ffmpeg 2.8.x` or later
 
 Advanced 'Moving Text' script needs ffmpeg to be build with freetype. If you compile ffmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. Under macOS, ffmpeg is available under [Homebrew](https://brew.sh/), you can install it using `--with-freetype` option, aka `brew install ffmpeg --with-freetype`.
 
@@ -21,7 +21,7 @@ Each script creates a video slideshow using 5 photos inside `photos` folder. Adv
 
 Output slideshow is an h264 encoded 1280x720 MPEG-4 video.
 
-**Note:** Input images are scaled to fit using `scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))'` formula. Alternatively cropping input images can be implemented by replacing scale statement with `crop=min(iw\,1280):min(ih\,720)`.
+**Note:** Input images are scaled to fit the screen using `scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))'` formula. Alternatively cropping input images can be implemented by replacing the scale statement with `crop=min(iw\,1280):min(ih\,720)`.
 
 
 ## Known Issues
