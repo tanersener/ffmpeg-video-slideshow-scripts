@@ -10,6 +10,20 @@ Transitions are implemented as custom filters in the following execution order.
 4. Concat static and transition streams
 
 
+## Bars (Horizontal)
+
+New photo appears through growing horizontal bars
+
+![Bars (Horizontal)](../docs/transition_bars_horizontal.gif)
+
+
+## Bars (Vertical)
+
+New photo appears through growing vertical bars
+
+![Bars (Vertical)](../docs/transition_bars_vertical.gif)
+
+
 ## Checkerboard
 
 New photo appears in growing 128x128 px boxes
