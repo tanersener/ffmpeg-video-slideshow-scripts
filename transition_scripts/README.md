@@ -42,6 +42,13 @@ New photo appears in growing 128x128 px boxes
 ![Checkerboard Transition](../docs/transition_checkerboard.gif)
 
 
+## Clock
+
+New photo is revealed by a clock like line swiping across the screen
+
+![Clock Transition](../docs/transition_clock.gif)
+
+
 ## Collapse Horizontal
 
 New photo appears as two vertical lines move horizontally from sides to center

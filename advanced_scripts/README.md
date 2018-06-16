@@ -52,3 +52,17 @@ This script is enhanced version of 'Push Horizontal' transition. A film frame is
 Vertical version of 'Push Horizontal Film'
 
 ![Push Vertical Film](../docs/advanced_push_vertical_film.gif)
+
+
+## Sliding Horizontal Bars
+
+Enhanced version of 'Wipe In' transition. Screen is divided into five horizontal bars sliding from left to right in 0.2 second intervals.
+
+![Sliding Horizontal Bars](../docs/advanced_sliding_bars_horizontal.gif)
+
+
+## Sliding Vertical Bars
+
+Vertical version of 'Sliding Horizontal Bars'. Screen is divided into five vertical bars sliding from top to bottom in 0.2 second intervals.
+
+![Sliding Vertical Bars](../docs/advanced_sliding_bars_vertical.gif)
