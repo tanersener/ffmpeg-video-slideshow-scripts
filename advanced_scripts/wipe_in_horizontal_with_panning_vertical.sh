@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for horizontal wipe in with vertical panning (21.06.2018)
+# ffmpeg video slideshow script for horizontal wipe in with vertical panning v2 (21.06.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
@@ -18,11 +18,11 @@ ffmpeg -y \
 -f lavfi -i color=black:s=640x360 \
 -f lavfi -i nullsrc=s=640x360 \
 -filter_complex "\
-[0:v]setpts=PTS-STARTPTS,scale=640:-1,setsar=sar=1/1,format=rgba,split=2[stream1out1][stream1out2];\
-[1:v]setpts=PTS-STARTPTS,scale=640:-1,setsar=sar=1/1,format=rgba,split=3[stream2out1][stream2out2][stream2out3];\
-[2:v]setpts=PTS-STARTPTS,scale=640:-1,setsar=sar=1/1,format=rgba,split=3[stream3out1][stream3out2][stream3out3];\
-[3:v]setpts=PTS-STARTPTS,scale=640:-1,setsar=sar=1/1,format=rgba,split=3[stream4out1][stream4out2][stream4out3];\
-[4:v]setpts=PTS-STARTPTS,scale=640:-1,setsar=sar=1/1,format=rgba,split=2[stream5out1][stream5out2];\
+[0:v]setpts=PTS-STARTPTS,scale=640*2:-1,setsar=sar=1/1,format=rgba,split=2[stream1out1][stream1out2];\
+[1:v]setpts=PTS-STARTPTS,scale=640*2:-1,setsar=sar=1/1,format=rgba,split=3[stream2out1][stream2out2][stream2out3];\
+[2:v]setpts=PTS-STARTPTS,scale=640*2:-1,setsar=sar=1/1,format=rgba,split=3[stream3out1][stream3out2][stream3out3];\
+[3:v]setpts=PTS-STARTPTS,scale=640*2:-1,setsar=sar=1/1,format=rgba,split=3[stream4out1][stream4out2][stream4out3];\
+[4:v]setpts=PTS-STARTPTS,scale=640*2:-1,setsar=sar=1/1,format=rgba,split=2[stream5out1][stream5out2];\
 [5:v][stream1out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream1ending];\
 [5:v][stream2out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream2ending];\
 [5:v][stream2out3]overlay=x=0:y=-(overlay_h-360):format=rgb,trim=duration=1,select=lte(n\,30)[stream2starting];\
