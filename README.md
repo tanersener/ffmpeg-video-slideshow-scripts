@@ -6,6 +6,7 @@ Shell scripts to create video slideshows from images using [ffmpeg](https://www.
 ## Features
 - [Transition scripts](transition_scripts) 
 - [Advanced scripts](advanced_scripts)
+- [Display options](display_options)
 
 
 ## Requirements
