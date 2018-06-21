@@ -72,4 +72,4 @@ Vertical version of 'Sliding Horizontal Bars'. Screen is divided into five verti
 
 This script enhances 'Wipe In Horizontal' where photos do not stand in static positions and pan through time from top to bottom.
 
-![Wipe In Horizontal with Vertical Panning](../docs/advanced_wipe_in_horizontal_with_panning_vertical.gif)
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/master/docs/advanced_wipe_in_horizontal_with_panning_vertical.gif" height="270">
