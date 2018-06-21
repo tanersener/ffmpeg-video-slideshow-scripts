@@ -36,10 +36,10 @@ ffmpeg -y \
 [6:v][stream3ending]overlay=x='t/1*640':y=0,trim=duration=1,select=lte(n\,30)[stream3moving];\
 [6:v][stream4ending]overlay=x='t/1*640':y=0,trim=duration=1,select=lte(n\,30)[stream4moving];\
 [5:v][stream1out1]overlay=x=0:y='360-overlay_h+t/3*(overlay_h-360)':format=rgb,trim=duration=3,select=lte(n\,90)[stream1panning];\
-[5:v][stream2out1]overlay=x=0:y='360-overlay_h+t/3*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream2panning];\
-[5:v][stream3out1]overlay=x=0:y='360-overlay_h+t/3*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream3panning];\
-[5:v][stream4out1]overlay=x=0:y='360-overlay_h+t/3*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream4panning];\
-[5:v][stream5out1]overlay=x=0:y='360-overlay_h+t/3*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream5panning];\
+[5:v][stream2out1]overlay=x=0:y='360-overlay_h+t/2*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream2panning];\
+[5:v][stream3out1]overlay=x=0:y='360-overlay_h+t/2*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream3panning];\
+[5:v][stream4out1]overlay=x=0:y='360-overlay_h+t/2*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream4panning];\
+[5:v][stream5out1]overlay=x=0:y='360-overlay_h+t/2*(overlay_h-360)':format=rgb,trim=duration=2,select=lte(n\,60)[stream5panning];\
 [stream1moving][stream2starting]overlay=x='-w+t/1*640':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream2blended];\
 [stream2moving][stream3starting]overlay=x='-w+t/1*640':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream3blended];\
 [stream3moving][stream4starting]overlay=x='-w+t/1*640':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream4blended];\
