@@ -66,3 +66,10 @@ Enhanced version of 'Wipe In' transition. Screen is divided into five horizontal
 Vertical version of 'Sliding Horizontal Bars'. Screen is divided into five vertical bars sliding from top to bottom in 0.2 second intervals.
 
 ![Sliding Vertical Bars](../docs/advanced_sliding_bars_vertical.gif)
+
+
+## Wipe In Horizontal with Vertical Panning
+
+This script enhances 'Wipe In Horizontal' where photos do not stand in static positions and pan through time from top to bottom.
+
+![Wipe In Horizontal with Vertical Panning](../docs/advanced_wipe_in_horizontal_with_panning_vertical.gif)

@@ -2,8 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## - 2017-06-21
-- Display options section added
-- Vertical panning script added in display options
+- Wipe In Horizontal with Vertical panning script added in display options
 
 ## - 2017-06-16
 - Existing bars transition scripts renamed as bars transition #1.
