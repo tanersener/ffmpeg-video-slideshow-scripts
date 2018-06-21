@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for vertical wipe in with horizontal panning v2 (21.06.2018)
+# ffmpeg video slideshow script for vertical wipe in with horizontal panning v3 (21.06.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
@@ -23,23 +23,23 @@ ffmpeg -y \
 [2:v]setpts=PTS-STARTPTS,scale=-1:360*2,setsar=sar=1/1,format=rgba,split=3[stream3out1][stream3out2][stream3out3];\
 [3:v]setpts=PTS-STARTPTS,scale=-1:360*2,setsar=sar=1/1,format=rgba,split=3[stream4out1][stream4out2][stream4out3];\
 [4:v]setpts=PTS-STARTPTS,scale=-1:360*2,setsar=sar=1/1,format=rgba,split=2[stream5out1][stream5out2];\
-[5:v][stream1out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream1ending];\
-[5:v][stream2out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream2ending];\
-[5:v][stream2out3]overlay=x=-(overlay_w-640):y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream2starting];\
-[5:v][stream3out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream3ending];\
-[5:v][stream3out3]overlay=x=-(overlay_w-640):y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream3starting];\
-[5:v][stream4out2]overlay=x=0:y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream4ending];\
-[5:v][stream4out3]overlay=x=-(overlay_w-640):y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream4starting];\
-[5:v][stream5out2]overlay=x=-(overlay_w-640):y=0:format=rgb,trim=duration=1,select=lte(n\,30)[stream5starting];\
+[5:v][stream1out2]overlay=x=640-overlay_w:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream1ending];\
+[5:v][stream2out2]overlay=x=640-overlay_w:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream2ending];\
+[5:v][stream2out3]overlay=x=0:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream2starting];\
+[5:v][stream3out2]overlay=x=640-overlay_w:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream3ending];\
+[5:v][stream3out3]overlay=x=0:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream3starting];\
+[5:v][stream4out2]overlay=x=640-overlay_w:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream4ending];\
+[5:v][stream4out3]overlay=x=0:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream4starting];\
+[5:v][stream5out2]overlay=x=0:y=(360-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream5starting];\
 [6:v][stream1ending]overlay=x=0:y='t/1*360',trim=duration=1,select=lte(n\,30)[stream1moving];\
 [6:v][stream2ending]overlay=x=0:y='t/1*360',trim=duration=1,select=lte(n\,30)[stream2moving];\
 [6:v][stream3ending]overlay=x=0:y='t/1*360',trim=duration=1,select=lte(n\,30)[stream3moving];\
 [6:v][stream4ending]overlay=x=0:y='t/1*360',trim=duration=1,select=lte(n\,30)[stream4moving];\
-[5:v][stream1out1]overlay=x='640-overlay_w+t/3*(overlay_w-640)':y=0:format=rgb,trim=duration=3,select=lte(n\,90)[stream1panning];\
-[5:v][stream2out1]overlay=x='640-overlay_w+t/2*(overlay_w-640)':y=0:format=rgb,trim=duration=2,select=lte(n\,60)[stream2panning];\
-[5:v][stream3out1]overlay=x='640-overlay_w+t/2*(overlay_w-640)':y=0:format=rgb,trim=duration=2,select=lte(n\,60)[stream3panning];\
-[5:v][stream4out1]overlay=x='640-overlay_w+t/2*(overlay_w-640)':y=0:format=rgb,trim=duration=2,select=lte(n\,60)[stream4panning];\
-[5:v][stream5out1]overlay=x='640-overlay_w+t/2*(overlay_w-640)':y=0:format=rgb,trim=duration=2,select=lte(n\,60)[stream5panning];\
+[5:v][stream1out1]overlay=x='t/3*(640-overlay_w)':y=(360-overlay_h)/2:format=rgb,trim=duration=3,select=lte(n\,90)[stream1panning];\
+[5:v][stream2out1]overlay=x='t/2*(640-overlay_w)':y=(360-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream2panning];\
+[5:v][stream3out1]overlay=x='t/2*(640-overlay_w)':y=(360-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream3panning];\
+[5:v][stream4out1]overlay=x='t/2*(640-overlay_w)':y=(360-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream4panning];\
+[5:v][stream5out1]overlay=x='t/2*(640-overlay_w)':y=(360-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream5panning];\
 [stream1moving][stream2starting]overlay=x=0:y='-h+t/1*360',select=lte(n\,30)[stream2blended];\
 [stream2moving][stream3starting]overlay=x=0:y='-h+t/1*360',select=lte(n\,30)[stream3blended];\
 [stream3moving][stream4starting]overlay=x=0:y='-h+t/1*360',select=lte(n\,30)[stream4blended];\
