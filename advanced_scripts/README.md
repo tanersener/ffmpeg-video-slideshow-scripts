@@ -68,15 +68,15 @@ Vertical version of 'Sliding Horizontal Bars'. Screen is divided into five verti
 ![Sliding Vertical Bars](../docs/advanced_sliding_bars_vertical.gif)
 
 
-## Wipe In Horizontal with Vertical Panning
+## Zoom In & Pan with Fade In/Out Transition
 
-This script enhances 'Wipe In Horizontal' where photos do not stand in static positions and pan through time from top to bottom.
+This script demonstrates zoom in & pan effect on the photos. Each photo pans towards a different area of the photo.
 
-![Wipe In Horizontal with Vertical Panning](../docs/advanced_wipe_in_horizontal_with_panning_vertical.gif)
+![Zoom In & Pan with Fade In/Out Transition](../docs/advanced_zoom_in_and_pan_with_fade_in_out.gif)
 
 
-## Wipe In Vertical with Horizontal Panning
+## Zoom Out & Pan with Fade In/Out Transition
 
-This script enhances 'Wipe In Vertical' where photos do not stand in static positions and pan through time from left to right.
+This script demonstrates zoom out & pan effect on the photos. Each photo pans towards a different area of the photo.
 
-![Wipe In Vertical with Horizontal Panning](../docs/advanced_wipe_in_vertical_with_panning_horizontal.gif)
+![Zoom Out & Pan with Fade In/Out Transition](../docs/advanced_zoom_out_and_pan_with_fade_in_out.gif)
