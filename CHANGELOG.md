@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2017-06-27
+- Object Move script renamed to Object Animation. New script uses a new snowflake image. Snowflakes are both rotating and falling.
+- Logo Overlay updated. New script overlays a beating heart animation instead of static camera image.
+
 ## - 2017-06-23
 - Wipe In Horizontal with Vertical Panning and Wipe In Vertical with Horizontal Panning scripts updated as gists 
 and removed from Advanced Scripts section.
