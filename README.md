@@ -1,6 +1,6 @@
 # FFmpeg Video Slideshow Scripts
 
-Shell scripts to create video slideshows from images using [ffmpeg](https://www.ffmpeg.org/).
+Shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
 
 
 ## Features

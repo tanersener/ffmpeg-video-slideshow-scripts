@@ -35,6 +35,19 @@ New photo appears through growing vertical bars, bars grow from center to horizo
 ![Bars # 2 (Vertical)](../docs/transition_bars_vertical_two.gif)
 
 
+## Box In (Horizontal)
+
+New photo appears as a box moving from left of the screen to center
+
+![Box In (Horizontal)](../docs/transition_box_in_horizontal.gif)
+
+## Box In (Vertical)
+
+New photo appears as a box moving from bottom of the screen to the center 
+
+![Box In (Vertical)](../docs/transition_box_in_vertical.gif)
+
+
 ## Checkerboard
 
 New photo appears in growing 128x128 px boxes
