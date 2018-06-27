@@ -22,9 +22,9 @@ you can install it using `--with-freetype` option, aka `brew install ffmpeg --wi
 
 Each script creates a video slideshow using 5 photos inside `photos` folder. 
 Advanced scripts use additional objects & fonts from their respective folders. 
-Output slideshow is an h264 encoded 1280x720 MPEG-4 video.
+Output slideshow is an h264 encoded 1280x720 px MPEG-4 video.
 
-Most of the scripts use the following scene arrangement.
+Scripts use the following scene arrangement.
 ```
 photo 1 - 3 seconds
 - transition to photo 2 - 1 second
@@ -51,16 +51,16 @@ You may notice the following warnings when executing the scripts. Below you can 
 
 >[swscaler @ 0x............] deprecated pixel format used, make sure you did set range correctly
 
-This warning is printed because input image streams are decoded with "yuvj444p" pixel format, which is deprecated. 
+This warning is printed because input image streams are decoded with `yuvj444p` pixel format, which is deprecated. 
 You can safely ignore it, `ffmpeg` users are not effected from this warning.
 
 >[out_0_0 @ 0x............] 100 buffers queued in out_0_0, something may be wrong.s dup=. drop=. speed=...
 
 >[Parsed_overlay_80 @ 0x............] [framesync @ 0x............] Buffer queue overflow, dropping.
 
-Statements inside filter_complex are ordered into logical groups to give a better understanding of how they work. 
+Statements inside `filter_complex` are ordered into logical groups to give a better understanding of how they work. 
 In this ordering scheme too many streams/statements wait in the buffer queue, which generates these two warnings. 
-If you want to resolve them change the order of statements inside filter_complex and use new streams immediately 
+If you want to resolve them change the order of statements inside `filter_complex` and use new streams immediately 
 after they are created.
 
 
