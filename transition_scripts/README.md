@@ -130,13 +130,13 @@ New photo appears fading in while the old one is fading out
 
 ## Push Box Horizontal
 
-`Box In` and `Push` transitions combined.
+'Box In' and 'Push' transitions combined.
 
 ![Push Box Horizontal Transition](../docs/transition_push_box_horizontal.gif)
 
 ## Push Box Vertical
 
-Vertical `Box In` and `Push` transitions combined.
+Vertical 'Box In' and 'Push' transitions combined.
 
 ![Push Box Vertical Transition](../docs/transition_push_box_vertical.gif)
 
