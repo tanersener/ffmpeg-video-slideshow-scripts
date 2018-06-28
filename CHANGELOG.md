@@ -2,7 +2,8 @@
 All notable changes to this project will be documented in this file.
 
 ## - 2017-06-28
-- Box In transition implemented.
+- Box In transitions implemented.
+- Push Box transitions implemented.
 
 ## - 2017-06-27
 - Object Move script renamed to Object Animation. New script uses a new snowflake image. Snowflakes are both rotating and falling.

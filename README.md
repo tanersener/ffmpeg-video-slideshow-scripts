@@ -24,7 +24,7 @@ Each script creates a video slideshow using 5 photos inside `photos` folder.
 Advanced scripts use additional objects & fonts from their respective folders. 
 Output slideshow is an h264 encoded 1280x720 px MPEG-4 video.
 
-Scripts use the following scene arrangement.
+Generally, scripts use the following scene arrangement.
 ```
 photo 1 - 3 seconds
 - transition to photo 2 - 1 second
@@ -62,6 +62,11 @@ Statements inside `filter_complex` are ordered into logical groups to give a bet
 In this ordering scheme too many streams/statements wait in the buffer queue, which generates these two warnings. 
 If you want to resolve them change the order of statements inside `filter_complex` and use new streams immediately 
 after they are created.
+
+>Past duration 0.xyz too large
+
+Currently `push_box` and `box_in` transitions print this warning. `setpts=0.5*PTS` statements used inside the scripts 
+cause this. If you know how to remove it safely please submit an issue.
 
 
 ## Useful Links
