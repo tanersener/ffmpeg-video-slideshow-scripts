@@ -14,25 +14,38 @@ Transitions are implemented as custom filters in the following execution order.
 
 New photo appears through growing horizontal bars, bars grow from top to bottom
 
-![Bars #1 (Horizontal)](../docs/transition_bars_horizontal_one.gif)
+![Bars #1 Horizontal Transition](../docs/transition_bars_horizontal_one.gif)
 
 ## Bars #2 (Horizontal)
 
 New photo appears through growing horizontal bars, bars grow from center to vertical sides
 
-![Bars #2 (Horizontal)](../docs/transition_bars_horizontal_two.gif)
+![Bars #2 Horizontal Transition](../docs/transition_bars_horizontal_two.gif)
 
 ## Bars # 1 (Vertical)
 
 New photo appears through growing vertical bars, bars grow from left to right
 
-![Bars # 1 (Vertical)](../docs/transition_bars_vertical_one.gif)
+![Bars # 1 Vertical Transition](../docs/transition_bars_vertical_one.gif)
 
 ## Bars # 2 (Vertical)
 
 New photo appears through growing vertical bars, bars grow from center to horizontal sides
 
-![Bars # 2 (Vertical)](../docs/transition_bars_vertical_two.gif)
+![Bars # 2 Vertical Transition](../docs/transition_bars_vertical_two.gif)
+
+
+## Box In (Horizontal)
+
+New photo appears as a box moving from left of the screen to center
+
+![Box In Horizontal Transition](../docs/transition_box_in_horizontal.gif)
+
+## Box In (Vertical)
+
+New photo appears as a box moving from bottom of the screen to the center 
+
+![Box In Vertical Transition](../docs/transition_box_in_vertical.gif)
 
 
 ## Checkerboard
@@ -55,13 +68,11 @@ New photo appears as two vertical lines move horizontally from sides to center
 
 ![Collapse Horizontal Transition](../docs/transition_collapse_horizontal.gif)
 
-
 ## Collapse Vertical
 
 New photo appears as two horizontal lines move vertically from top and bottom to center
 
 ![Collapse Vertical Transition](../docs/transition_collapse_vertical.gif)
-
 
 ## Collapse Both
 
@@ -75,7 +86,6 @@ Horizontal and vertical collapse at the same time
 A vertical line moving from left to right shows new photo
 
 ![Cover Horizontal Transition](../docs/transition_cover_horizontal.gif)
-
 
 ## Cover Vertical
 
@@ -96,7 +106,6 @@ New photo appears as two vertical lines move horizontally from center to left an
 New photo appears as two horizontal lines move vertically from center to top and bottom  
 
 ![Expand Vertical Transition](../docs/transition_expand_vertical.gif)
-
 
 ## Expand Both
 
@@ -119,12 +128,23 @@ New photo appears fading in while the old one is fading out
 ![Fade In #2 Transition](../docs/transition_fade_in_two.gif)
 
 
+## Push Box Horizontal
+
+'Box In' and 'Push' transitions combined.
+
+![Push Box Horizontal Transition](../docs/transition_push_box_horizontal.gif)
+
+## Push Box Vertical
+
+Vertical 'Box In' and 'Push' transitions combined.
+
+![Push Box Vertical Transition](../docs/transition_push_box_vertical.gif)
+
 ## Push Horizontal
 
 New photo pushes old photo from left to right
 
 ![Push Horizontal Transition](../docs/transition_push_horizontal.gif)
-
 
 ## Push Vertical
 
@@ -146,7 +166,6 @@ New photo appears moving from left to right
 
 ![Wipe In Horizontal Transition](../docs/transition_wipe_in_horizontal.gif)
 
-
 ## Wipe In Vertical
 
 New photo appears moving from top to bottom
@@ -159,7 +178,6 @@ New photo appears moving from top to bottom
 New photo disappears moving from left to right
 
 ![Wipe Out Horizontal Transition](../docs/transition_wipe_out_horizontal.gif)
-
 
 ## Wipe Out Vertical
 

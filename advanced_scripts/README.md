@@ -14,7 +14,7 @@ This script removes black areas from sides/top/bottom with blur effect
 
 ## Logo Overlay
 
-Logo is overlaid at the right bottom corner of the slideshow
+A beating heart animation is overlaid at the right bottom corner of the slideshow
 
 ![Logo Overlay](../docs/advanced_logo_overlay.gif)
 
@@ -26,11 +26,11 @@ Text moving from right to left at the bottom of the slideshow
 ![Moving Text](../docs/advanced_moving_text.gif)
 
 
-## Object Move
+## Object Animation
 
-Snow flakes falling
+Snow flakes falling and rotating around themselves
 
-![Object Move](../docs/advanced_object_move.gif)
+![Object Animation](../docs/advanced_object_animation.gif)
 
 
 ## Photo Collection
