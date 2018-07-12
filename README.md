@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Scripts
+# FFmpeg Video Slideshow Scripts [![Join the chat at https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby](https://badges.gitter.im/ffmpeg-video-slideshow-scripts/Lobby.svg)](https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
 
