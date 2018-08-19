@@ -28,7 +28,7 @@ Text moving from right to left at the bottom of the slideshow
 
 ## Object Animation
 
-Snow flakes falling and rotating around themselves
+Snow flakes falling from random positions and rotating around themselves
 
 ![Object Animation](../docs/advanced_object_animation.gif)
 
