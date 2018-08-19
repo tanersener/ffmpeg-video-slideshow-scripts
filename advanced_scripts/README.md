@@ -12,11 +12,11 @@ This script removes black areas from sides/top/bottom with blur effect
 ![Blurred Background](../docs/advanced_blurred_background.gif)
 
 
-## Logo Overlay
+## Logo Overlay & Zoom
 
-A beating heart animation is overlaid at the right bottom corner of the slideshow
+A beating heart animation is created from a static heart image with zoom effect and output is overlaid at the right bottom corner of the slideshow
 
-![Logo Overlay](../docs/advanced_logo_overlay.gif)
+![Logo Overlay & Zoom](../docs/advanced_logo_overlay_and_zoom.gif)
 
 
 ## Moving Text

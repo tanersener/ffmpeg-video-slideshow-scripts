@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## - 2017-08-19
 - Spin blur rotation transition implemented.
+- Logo Overlay script renamed as Logo Overlay & Zoom
 
 ## - 2017-06-28
 - Box In transitions implemented.

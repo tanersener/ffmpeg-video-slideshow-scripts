@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for advanced logo overlay v2 (27.06.2018)
+# ffmpeg video slideshow script for advanced logo overlay and zoom v2 (19.08.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -39,7 +39,7 @@ ffmpeg -y \
 [stream1overlaid][stream2blended][stream2overlaid][stream3blended][stream3overlaid][stream4blended][stream4overlaid][stream5blended][stream5overlaid]concat=n=9:v=1:a=0,format=yuv420p[videowithoutlogo];\
 [5:v]setpts=PTS-STARTPTS,scale=128:-1,pad=w=256:h=240:x=64:y=60:color=#00000000,zoompan=z='min(zoom+0.02,1.5)':fps=30:d=14:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=256x240,trim=duration=15,select=lte(n\,450)[logo];\
 [videowithoutlogo][logo]overlay=x=950:y=450,trim=duration=15,select=lte(n\,450)[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../advanced_logo_overlay.mp4
+ -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../advanced_logo_overlay_and_zoom.mp4
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
