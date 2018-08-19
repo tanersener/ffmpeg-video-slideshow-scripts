@@ -12,7 +12,7 @@ Shell scripts to create video slideshows from images using [FFmpeg](https://www.
 
 - `ffmpeg 2.8.x` or later
 
-Advanced 'Moving Text' script needs ffmpeg to be build with freetype. 
+'Advanced Moving Text' script needs ffmpeg to be build with freetype. 
 If you compile ffmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 Under macOS, ffmpeg is available under [Homebrew](https://brew.sh/), 
 you can install it using `--with-freetype` option, aka `brew install ffmpeg --with-freetype`.

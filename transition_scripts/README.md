@@ -160,6 +160,13 @@ New photo appears moving from left to right and rotating
 ![Rotate Transition](../docs/transition_rotate.gif)
 
 
+## Spin Blur Rotation
+
+New photo appears with (my interpretation of) spin blur rotation effect
+
+![Spin Blur Rotation](../docs/transition_spin_blur_rotation.gif)
+
+
 ## Wipe In Horizontal
 
 New photo appears moving from left to right
