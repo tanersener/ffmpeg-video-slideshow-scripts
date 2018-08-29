@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2017-08-29
+- v1.0 tag created from master.
+- Development branch renamed to v2.x.
+- Project log added.
+
 ## - 2017-06-28
 - Box In transitions implemented.
 - Push Box transitions implemented.
