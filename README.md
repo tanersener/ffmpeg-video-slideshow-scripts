@@ -1,7 +1,8 @@
-# FFmpeg Video Slideshow Scripts [![Join the chat at https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby](https://badges.gitter.im/ffmpeg-video-slideshow-scripts/Lobby.svg)](https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# FFmpeg Video Slideshow Scripts [![Join the chat at https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby](https://badges.gitter.im/ffmpeg-video-slideshow-scripts/Lobby.svg)](https://gitter.im/ffmpeg-video-slideshow-scripts/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 Shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
 
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/master/docs/ffmpeg-video-slideshow-scripts-logo-v1.png" width="240">
 
 ## Features
 - [Transition scripts](transition_scripts) 
