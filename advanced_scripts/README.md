@@ -49,7 +49,7 @@ This script is enhanced version of 'Push' transition. Static frames are removed 
 
 <p float="left">
   <img src="../docs/advanced_push_horizontal_film.gif" width="380">
-  <img src="../docs/advanced_push_vertical_film.gif" width="380" hspace="0"> 
+  <img src="../docs/advanced_push_vertical_film.gif" width="380" hspace="70"> 
 </p>
 
 
@@ -61,7 +61,7 @@ Enhanced version of 'Wipe In' transition. Screen is divided into five bars slidi
 
 <p float="left">
   <img src="../docs/advanced_sliding_bars_horizontal.gif" width="380">
-  <img src="../docs/advanced_sliding_bars_vertical.gif" width="380" hspace="0"> 
+  <img src="../docs/advanced_sliding_bars_vertical.gif" width="380" hspace="70"> 
 </p>
 
 
@@ -73,5 +73,5 @@ This script demonstrates zoom & pan effect on the photos. Each photo pans toward
 
 <p float="left">
   <img src="../docs/advanced_zoom_in_and_pan_with_fade_in_out.gif" width="380">
-  <img src="../docs/advanced_zoom_out_and_pan_with_fade_in_out.gif" width="380" hspace="0"> 
+  <img src="../docs/advanced_zoom_out_and_pan_with_fade_in_out.gif" width="380" hspace="70"> 
 </p>
