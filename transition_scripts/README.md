@@ -19,7 +19,7 @@ New photo appears through growing bars, bars grow from one side to the other sid
 
 <p float="left">
   <img src="../docs/transition_bars_horizontal_one.gif" width="380">
-  <img src="../docs/transition_bars_vertical_one.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_bars_vertical_one.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -31,7 +31,7 @@ New photo appears through growing bars, bars grow from center to the both sides
 
 <p float="left">
   <img src="../docs/transition_bars_horizontal_two.gif" width="380">
-  <img src="../docs/transition_bars_vertical_two.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_bars_vertical_two.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -43,7 +43,7 @@ New photo appears as a box moving
 
 <p float="left">
   <img src="../docs/transition_box_in_horizontal.gif" width="380">
-  <img src="../docs/transition_box_in_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_box_in_vertical.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -69,7 +69,7 @@ New photo appears as two lines move from sides to center
 
 <p float="left">
   <img src="../docs/transition_collapse_horizontal.gif" width="380">
-  <img src="../docs/transition_collapse_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_collapse_vertical.gif" width="380" hspace="90"> 
 </p>
 
 ## Collapse Both
@@ -87,7 +87,7 @@ A line moving shows the new photo
 
 <p float="left">
   <img src="../docs/transition_cover_horizontal.gif" width="380">
-  <img src="../docs/transition_cover_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_cover_vertical.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -99,7 +99,7 @@ New photo appears as two lines move from center to sides
 
 <p float="left">
   <img src="../docs/transition_expand_horizontal.gif" width="380">
-  <img src="../docs/transition_expand_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_expand_vertical.gif" width="380" hspace="90"> 
 </p>
 
 ## Expand Both
@@ -131,7 +131,7 @@ New photo pushes old photo
 
 <p float="left">
   <img src="../docs/transition_push_horizontal.gif" width="380">
-  <img src="../docs/transition_push_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_push_vertical.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -143,7 +143,7 @@ New photo pushes old photo
 
 <p float="left">
   <img src="../docs/transition_push_box_horizontal.gif" width="380">
-  <img src="../docs/transition_push_box_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_push_box_vertical.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -169,7 +169,7 @@ New photo appears moving in
 
 <p float="left">
   <img src="../docs/transition_wipe_in_horizontal.gif" width="380">
-  <img src="../docs/transition_wipe_in_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_wipe_in_vertical.gif" width="380" hspace="90"> 
 </p>
 
 
@@ -181,5 +181,5 @@ New photo disappears moving out
 
 <p float="left">
   <img src="../docs/transition_wipe_out_horizontal.gif" width="380">
-  <img src="../docs/transition_wipe_out_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_wipe_out_vertical.gif" width="380" hspace="90"> 
 </p>
