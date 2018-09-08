@@ -10,184 +10,175 @@ Transitions are implemented as custom filters in the following execution order.
 4. Concat static and transition streams
 
 
-## Bars #1 (Horizontal)
+## Bars #1
 
-New photo appears through growing horizontal bars, bars grow from top to bottom
+New photo appears through growing bars, bars grow from one side to the other side
 
-![Bars #1 Horizontal Transition](../docs/transition_bars_horizontal_one.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Bars #2 (Horizontal)
-
-New photo appears through growing horizontal bars, bars grow from center to vertical sides
-
-![Bars #2 Horizontal Transition](../docs/transition_bars_horizontal_two.gif)
-
-## Bars # 1 (Vertical)
-
-New photo appears through growing vertical bars, bars grow from left to right
-
-![Bars # 1 Vertical Transition](../docs/transition_bars_vertical_one.gif)
-
-## Bars # 2 (Vertical)
-
-New photo appears through growing vertical bars, bars grow from center to horizontal sides
-
-![Bars # 2 Vertical Transition](../docs/transition_bars_vertical_two.gif)
+<p float="left">
+  <img src="../docs/transition_bars_horizontal_one.gif" width="380">
+  <img src="../docs/transition_bars_vertical_one.gif" width="380" hspace="60"> 
+</p>
 
 
-## Box In (Horizontal)
+## Bars #2
 
-New photo appears as a box moving from left of the screen to center
+New photo appears through growing bars, bars grow from center to the both sides
 
-![Box In Horizontal Transition](../docs/transition_box_in_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Box In (Vertical)
+<p float="left">
+  <img src="../docs/transition_bars_horizontal_two.gif" width="380">
+  <img src="../docs/transition_bars_vertical_two.gif" width="380" hspace="60"> 
+</p>
 
-New photo appears as a box moving from bottom of the screen to the center 
 
-![Box In Vertical Transition](../docs/transition_box_in_vertical.gif)
+## Box In
+
+New photo appears as a box moving
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
+
+<p float="left">
+  <img src="../docs/transition_box_in_horizontal.gif" width="380">
+  <img src="../docs/transition_box_in_vertical.gif" width="380" hspace="60"> 
+</p>
 
 
 ## Checkerboard
 
 New photo appears in growing 128x128 px boxes
 
-![Checkerboard Transition](../docs/transition_checkerboard.gif)
+<img src="../docs/transition_checkerboard.gif" width="380">
 
 
 ## Clock
 
 New photo is revealed by a clock like line swiping across the screen
 
-![Clock Transition](../docs/transition_clock.gif)
+<img src="../docs/transition_clock.gif" width="380">
 
 
-## Collapse Horizontal
+## Collapse
 
-New photo appears as two vertical lines move horizontally from sides to center
+New photo appears as two lines move from sides to center
 
-![Collapse Horizontal Transition](../docs/transition_collapse_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Collapse Vertical
-
-New photo appears as two horizontal lines move vertically from top and bottom to center
-
-![Collapse Vertical Transition](../docs/transition_collapse_vertical.gif)
+<p float="left">
+  <img src="../docs/transition_collapse_horizontal.gif" width="380">
+  <img src="../docs/transition_collapse_vertical.gif" width="380" hspace="60"> 
+</p>
 
 ## Collapse Both
 
 Horizontal and vertical collapse at the same time
 
-![Collapse Both Transition](../docs/transition_collapse_both.gif)
+<img src="../docs/transition_collapse_both.gif" width="380">
 
 
-## Cover Horizontal
+## Cover
 
-A vertical line moving from left to right shows new photo
+A line moving shows the new photo
 
-![Cover Horizontal Transition](../docs/transition_cover_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Cover Vertical
-
-A horizontal line moving from top to bottom shows new photo
-
-![Cover Vertical Transition](../docs/transition_cover_vertical.gif)
+<p float="left">
+  <img src="../docs/transition_cover_horizontal.gif" width="380">
+  <img src="../docs/transition_cover_vertical.gif" width="380" hspace="60"> 
+</p>
 
 
 ## Expand Horizontal
 
-New photo appears as two vertical lines move horizontally from center to left and right
+New photo appears as two lines move from center to sides
 
-![Expand Horizontal Transition](../docs/transition_expand_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-
-## Expand Vertical
-
-New photo appears as two horizontal lines move vertically from center to top and bottom  
-
-![Expand Vertical Transition](../docs/transition_expand_vertical.gif)
+<p float="left">
+  <img src="../docs/transition_expand_horizontal.gif" width="380">
+  <img src="../docs/transition_expand_vertical.gif" width="380" hspace="60"> 
+</p>
 
 ## Expand Both
 
 Horizontal and vertical expand at the same time
 
-![Expand Both Transition](../docs/transition_expand_both.gif)
+<img src="../docs/transition_expand_both.gif" width="380">
 
 
 ## Fade In #1
 
 New photo appears fading in
 
-![Fade In #1 Transition](../docs/transition_fade_in_one.gif)
+<img src="../docs/transition_fade_in_one.gif" width="380">
 
 
 ## Fade In #2
 
 New photo appears fading in while the old one is fading out
 
-![Fade In #2 Transition](../docs/transition_fade_in_two.gif)
+<img src="../docs/transition_fade_in_two.gif" width="380">
 
 
-## Push Box Horizontal
+## Push
+
+New photo pushes old photo
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
+
+<p float="left">
+  <img src="../docs/transition_push_horizontal.gif" width="380">
+  <img src="../docs/transition_push_vertical.gif" width="380" hspace="60"> 
+</p>
+
+
+## Push Box
 
 'Box In' and 'Push' transitions combined.
 
-![Push Box Horizontal Transition](../docs/transition_push_box_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Push Box Vertical
-
-Vertical 'Box In' and 'Push' transitions combined.
-
-![Push Box Vertical Transition](../docs/transition_push_box_vertical.gif)
-
-## Push Horizontal
-
-New photo pushes old photo from left to right
-
-![Push Horizontal Transition](../docs/transition_push_horizontal.gif)
-
-## Push Vertical
-
-New photo pushes old photo from top to bottom
-
-![Push Vertical Transition](../docs/transition_push_vertical.gif)
+<p float="left">
+  <img src="../docs/transition_push_box_horizontal.gif" width="380">
+  <img src="../docs/transition_push_box_vertical.gif" width="380" hspace="60"> 
+</p>
 
 
 ## Rotate
 
 New photo appears moving from left to right and rotating
 
-![Rotate Transition](../docs/transition_rotate.gif)
+<img src="../docs/transition_rotate.gif" width="380">
 
 
 ## Spin Blur Rotation
 
 New photo appears with (my interpretation of) spin blur rotation effect
 
-![Spin Blur Rotation](../docs/transition_spin_blur_rotation.gif)
+<img src="../docs/transition_spin_blur_rotation.gif" width="380">
 
 
-## Wipe In Horizontal
+## Wipe In
 
-New photo appears moving from left to right
+New photo appears moving in
 
-![Wipe In Horizontal Transition](../docs/transition_wipe_in_horizontal.gif)
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-## Wipe In Vertical
+<p float="left">
+  <img src="../docs/transition_wipe_in_horizontal.gif" width="380">
+  <img src="../docs/transition_wipe_in_vertical.gif" width="380" hspace="60"> 
+</p>
 
-New photo appears moving from top to bottom
 
-![Wipe In Vertical Transition](../docs/transition_wipe_in_vertical.gif)
+## Wipe Out
 
+New photo disappears moving out
 
-## Wipe Out Horizontal
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
-New photo disappears moving from left to right
-
-![Wipe Out Horizontal Transition](../docs/transition_wipe_out_horizontal.gif)
-
-## Wipe Out Vertical
-
-New photo disappears moving from top to bottom
-
-![Wipe Out Vertical Transition](../docs/transition_wipe_out_vertical.gif)
+<p float="left">
+  <img src="../docs/transition_wipe_out_horizontal.gif" width="380">
+  <img src="../docs/transition_wipe_out_vertical.gif" width="380" hspace="60"> 
+</p>
