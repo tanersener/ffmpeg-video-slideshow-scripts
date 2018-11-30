@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2018-11-30
+- v1.x branch created.
+
 ## - 2018-08-29
 - v1.0 tag created from master.
 - Development branch renamed to v2.x.
