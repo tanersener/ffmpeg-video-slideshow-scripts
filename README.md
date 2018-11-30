@@ -41,7 +41,8 @@ Total = 15 seconds
 
 ## Versions
 
-- Master includes latest tested scripts.
+- Master includes latest tested scripts from v1.x branch.
+- v1.x branch: Scripts in this branch generate videos from 5 photos. 
 - v2.x branch is the current development branch.
 
 
