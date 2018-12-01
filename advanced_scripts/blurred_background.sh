@@ -2,7 +2,7 @@
 #
 # ffmpeg video slideshow script with advanced blurred background v2 (01.12.2018)
 #
-# Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -14,7 +14,7 @@ FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
 
-# PHOTO OPTIONS
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED
 PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
@@ -26,12 +26,15 @@ if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     exit 1;
 fi
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
-Transition duration: ${TRANSITION_DURATION} s\nTotal duration: $(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - 1 )) s\n"
-
 # INTERNAL VARIABLES - DO NO MODIFY
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
 PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
 # 1. START COMMAND

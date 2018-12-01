@@ -9,7 +9,7 @@ Transitions are implemented as custom filters in the following execution order.
 3. Generate transition frames
 4. Concat static and transition streams
 
-Please note that sample animations used in page are low quality and does not represent the full functionality of scripts.
+PS: Please note that sample animations used in this page are low quality and does not represent full functionality of the scripts.
 
 ## Bars #1
 
