@@ -1,54 +1,113 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom out and pan and fade in/out transition v1 (23.06.2018)
+# ffmpeg video slideshow script with zoom out and pan and fade in/out transition v2 (04.12.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
+# SCRIPT OPTIONS - CAN BE MODIFIED
+WIDTH=1280
+HEIGHT=720
+FPS=30
+TRANSITION_DURATION=1
+PHOTO_DURATION=2
+
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
+# PHOTOS=`find ../photos/* | sort -r`
+PHOTOS=`find ../photos/*`
+
+############################
+# DO NO MODIFY LINES BELOW
+############################
+
+# CALCULATE LENGTH MANUALLY
+let PHOTOS_COUNT=0
+for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+
+if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
+    echo "Error: photos folder should contain at least two photos"
+    exit 1;
+fi
+
+# INTERNAL VARIABLES
+TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
+PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+2*TRANSITION_DURATION)*PHOTOS_COUNT ))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
-ffmpeg -y \
--loop 1 -i ../photos/1.jpg \
--loop 1 -i ../photos/2.jpg \
--loop 1 -i ../photos/3.jpg \
--loop 1 -i ../photos/4.jpg \
--loop 1 -i ../photos/5.jpg \
--filter_complex "\
-[0:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',crop=1280:720,setsar=sar=1/1,format=rgba,split=2[stream1out1][stream1out2];\
-[1:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',crop=1280:720,setsar=sar=1/1,format=rgba,split=2[stream2out1][stream2out2];\
-[2:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',crop=1280:720,setsar=sar=1/1,format=rgba,split=2[stream3out1][stream3out2];\
-[3:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',crop=1280:720,setsar=sar=1/1,format=rgba,split=2[stream4out1][stream4out2];\
-[4:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',crop=1280:720,setsar=sar=1/1,format=rgba,split=2[stream5out1][stream5out2];\
-[stream1out1]trim=duration=1,select=lte(n\,30),split=2[stream1in][stream1out];\
-[stream1out2]trim=duration=2,select=lte(n\,60)[stream1];\
-[stream2out1]trim=duration=1,select=lte(n\,30),split=2[stream2in][stream2out];\
-[stream2out2]trim=duration=2,select=lte(n\,60)[stream2];\
-[stream3out1]trim=duration=1,select=lte(n\,30),split=2[stream3in][stream3out];\
-[stream3out2]trim=duration=2,select=lte(n\,60)[stream3];\
-[stream4out1]trim=duration=1,select=lte(n\,30),split=2[stream4in][stream4out];\
-[stream4out2]trim=duration=2,select=lte(n\,60)[stream4];\
-[stream5out1]trim=duration=1,select=lte(n\,30),split=2[stream5in][stream5out];\
-[stream5out2]trim=duration=2,select=lte(n\,60)[stream5];\
-[stream1in]fade=t=in:s=0:n=30[stream1fadein];\
-[stream1out]fade=t=out:s=0:n=30[stream1fadeout];\
-[stream2in]fade=t=in:s=0:n=30[stream2fadein];\
-[stream2out]fade=t=out:s=0:n=30[stream2fadeout];\
-[stream3in]fade=t=in:s=0:n=30[stream3fadein];\
-[stream3out]fade=t=out:s=0:n=30[stream3fadeout];\
-[stream4in]fade=t=in:s=0:n=30[stream4fadein];\
-[stream4out]fade=t=out:s=0:n=30[stream4fadeout];\
-[stream5in]fade=t=in:s=0:n=30[stream5fadein];\
-[stream5out]fade=t=out:s=0:n=30[stream5fadeout];\
-[stream1fadein][stream1][stream1fadeout]concat=n=3:v=1:a=0,scale=1280*5:-1,zoompan=z='1.5-in*0.004':d=1:x='iw/2-(iw/zoom/2)':s=1280x720[stream1panning];\
-[stream2fadein][stream2][stream2fadeout]concat=n=3:v=1:a=0,scale=1280*5:-1,zoompan=z='1.5-in*0.004':d=1:x='iw/2':y='(ih/zoom/2)':s=1280x720[stream2panning];\
-[stream3fadein][stream3][stream3fadeout]concat=n=3:v=1:a=0,scale=1280*5:-1,zoompan=z='1.5-in*0.004':d=1:x='1280-(iw/zoom/2)':y='-720-(ih/zoom/2)':s=1280x720[stream3panning];\
-[stream4fadein][stream4][stream4fadeout]concat=n=3:v=1:a=0,scale=1280*5:-1,zoompan=z='1.5-in*0.004':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=1280x720[stream4panning];\
-[stream5fadein][stream5][stream5fadeout]concat=n=3:v=1:a=0,scale=1280*5:-1,zoompan=z='1.5-in*0.004':d=1:x='-(iw/zoom/2)':y='ih/2-720':s=1280x720[stream5panning];\
-[stream1panning][stream2panning][stream3panning][stream4panning][stream5panning]concat=n=5:v=1:a=0,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../advanced_zoom_out_and_pan_with_fade_in_out.mp4
+# 1. START COMMAND
+FULL_SCRIPT="ffmpeg -y "
+
+# 2. ADD INPUTS
+for photo in ${PHOTOS}; do
+    FULL_SCRIPT+="-loop 1 -i ${photo} "
+done
+
+# 3. START FILTER COMPLEX
+FULL_SCRIPT+="-filter_complex \""
+
+# 4. PREPARING SCALED INPUTS & FADE IN/OUT PARTS
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+
+    FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
+    FULL_SCRIPT+="[stream$((c+1))out2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+
+    FULL_SCRIPT+="[stream$((c+1))in]fade=t=in:s=0:n=${TRANSITION_FRAME_COUNT}[stream$((c+1))fadein];"
+    FULL_SCRIPT+="[stream$((c+1))out]fade=t=out:s=0:n=${TRANSITION_FRAME_COUNT}[stream$((c+1))fadeout];"
+done
+
+# 5. ZOOM & PAN EACH STREAM
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+
+    POSITION_NUMBER=$((c%5));
+
+    case ${POSITION_NUMBER} in
+        0)
+            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y=0"
+        ;;
+        1)
+            POSITION_FORMULA="x='iw/2':y='(ih/zoom/2)'"
+        ;;
+        2)
+            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='-${HEIGHT}-(ih/zoom/2)'"
+        ;;
+        3)
+            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+        ;;
+        4)
+            POSITION_FORMULA="x='-(iw/zoom/2)':y='ih/2-${HEIGHT}'"
+        ;;
+    esac
+
+    FULL_SCRIPT+="[stream$((c+1))fadein][stream$((c+1))][stream$((c+1))fadeout]concat=n=3:v=1:a=0,scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.004':d=1:${POSITION_FORMULA}:s=${WIDTH}x${HEIGHT}[stream$((c+1))panning];"
+
+done
+
+
+# 8. BEGIN CONCAT
+for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}panning]"
+done
+
+# 9. END CONCAT
+FULL_SCRIPT+="concat=n=${PHOTOS_COUNT}:v=1:a=0,format=yuv420p[video]\""
+
+# 10. END
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_zoom_out_and_pan_with_fade_in_out.mp4"
+
+eval ${FULL_SCRIPT}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
-echo 'Slideshow created in '$ELAPSED_TIME' seconds'
+echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'

@@ -7,7 +7,6 @@
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
-
 # SCRIPT OPTIONS - CAN BE MODIFIED
 WIDTH=1280
 HEIGHT=720
