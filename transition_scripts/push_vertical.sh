@@ -68,28 +68,31 @@ done
 # 7. OVERLAY INPUTS ON TOP OF BLACK SCREEN
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
+
+    # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
+
+    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:threads=1:format=rgb,trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
     if [[ ${c} -eq 1 ]]; then
         if  [[ ${PHOTOS_COUNT} -gt 1 ]]; then
-            FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
+            FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:threads=1:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
         fi
     elif [[ ${c} -lt ${PHOTOS_COUNT} ]]; then
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
+        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:threads=1:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
     elif [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
+        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:threads=1:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
     fi
 done
 
 # 8. CREATING TRANSITIONS 1
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=y='t/${TRANSITION_DURATION}*${HEIGHT}':x=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+    FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=y='t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
 done
 
 # 9. CREATING TRANSITIONS 2
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
 done
 
 # 10. BEGIN CONCAT
