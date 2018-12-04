@@ -37,7 +37,7 @@ TOTAL_DURATION=$(( (PHOTO_DURATION+1)*PHOTOS_COUNT - 1 ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
 echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
-Total duration: ${TOTAL_DURATION} s\n"
+Transition duration: 1 s\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
 
