@@ -69,7 +69,7 @@ done
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
 
-    POSITION_NUMBER=$((c%5));
+    POSITION_NUMBER=$((RANDOM % 5));
 
     case ${POSITION_NUMBER} in
         0)
