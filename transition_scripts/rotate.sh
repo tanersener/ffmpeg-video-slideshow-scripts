@@ -1,40 +1,112 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with rotate transition v1 (01.10.2017)
+# ffmpeg video slideshow script with rotate transition v2 (04.12.2018)
 #
-# Copyright (c) 2017, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
+# SCRIPT OPTIONS - CAN BE MODIFIED
+WIDTH=1280
+HEIGHT=720
+FPS=30
+TRANSITION_DURATION=1
+PHOTO_DURATION=2
+
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
+# PHOTOS=`find ../photos/* | sort -r`
+PHOTOS=`find ../photos/*`
+
+############################
+# DO NO MODIFY LINES BELOW
+############################
+
+# CALCULATE LENGTH MANUALLY
+let PHOTOS_COUNT=0
+for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+
+if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
+    echo "Error: photos folder should contain at least two photos"
+    exit 1;
+fi
+
+# INTERNAL VARIABLES
+TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
+PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
-ffmpeg -y \
--loop 1 -i ../photos/1.jpg \
--loop 1 -i ../photos/2.jpg \
--loop 1 -i ../photos/3.jpg \
--loop 1 -i ../photos/4.jpg \
--loop 1 -i ../photos/5.jpg \
--f lavfi -i color=black:s=1280x720 \
--filter_complex "\
-[0:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream1];\
-[1:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream2];\
-[2:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream3];\
-[3:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream4];\
-[4:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream5];\
-[stream1]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=4[stream1out1][stream1out2][stream1out3][stream1out4];\
-[stream2]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=4[stream2out1][stream2out2][stream2out3][stream2out4];\
-[stream3]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=4[stream3out1][stream3out2][stream3out3][stream3out4];\
-[stream4]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=4[stream4out1][stream4out2][stream4out3][stream4out4];\
-[stream5]pad=width=1280:height=720:x=(1280-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=1,select=lte(n\,30),split=3[stream5out1][stream5out2][stream5out3];\
-[stream1out1]rotate=2*PI*t:ow=5120:c=#00000000,[5:v]overlay=x='1920-w+t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream1rotating];\
-[stream2out1]rotate=2*PI*t:ow=5120:c=#00000000,[stream1out2]overlay=x='1920-w+t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream2rotating];\
-[stream3out1]rotate=2*PI*t:ow=5120:c=#00000000,[stream2out2]overlay=x='1920-w+t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream3rotating];\
-[stream4out1]rotate=2*PI*t:ow=5120:c=#00000000,[stream3out2]overlay=x='1920-w+t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream4rotating];\
-[stream5out1]rotate=2*PI*t:ow=5120:c=#00000000,[stream4out2]overlay=x='1920-w+t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream5rotating];\
-[stream1rotating][stream1out3][stream1out4][stream2rotating][stream2out3][stream2out4][stream3rotating][stream3out3][stream3out4][stream4rotating][stream4out3][stream4out4][stream5rotating][stream5out2][stream5out3]concat=n=15:v=1:a=0,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../transition_rotate.mp4
+# 1. START COMMAND
+FULL_SCRIPT="ffmpeg -y "
+
+# 2. ADD INPUTS
+for photo in ${PHOTOS}; do
+    FULL_SCRIPT+="-loop 1 -i ${photo} "
+done
+
+# 3. ADD BLACK SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i color=black:s=${WIDTH}x${HEIGHT} "
+
+# 4. START FILTER COMPLEX
+FULL_SCRIPT+="-filter_complex \""
+
+# 5. PREPARING SCALED INPUTS
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream$((c+1))];"
+done
+
+# 6. APPLYING PADDING
+for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+do
+
+    if [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
+        SPLIT_COUNT="3"
+    else
+        SPLIT_COUNT="4"
+    fi
+
+    FULL_SCRIPT+="[stream${c}]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=${SPLIT_COUNT}[stream${c}out1][stream${c}out2][stream${c}out3]"
+
+    if [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
+        FULL_SCRIPT+=";"
+    else
+        FULL_SCRIPT+="[stream${c}out4];"
+    fi
+done
+
+# 7. CREATING ROTATING FRAMES
+for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+do
+    if [[ ${c} -eq 1 ]]; then
+        OVERLAY_FRAME="${PHOTOS_COUNT}:v"
+    else
+        OVERLAY_FRAME="stream$((c-1))out2"
+    fi
+
+    FULL_SCRIPT+="[stream${c}out1]rotate=2*PI*t:ow=4*${WIDTH}:c=#00000000,[${OVERLAY_FRAME}]overlay=x='${WIDTH}*3/2-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}rotating];"
+done
+
+# 8. BEGIN CONCAT
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}rotating][stream${c}out3][stream${c}out4]"
+done
+
+# 9. END CONCAT
+FULL_SCRIPT+="[stream${PHOTOS_COUNT}rotating][stream${PHOTOS_COUNT}out2][stream${PHOTOS_COUNT}out3]concat=n=$((3*PHOTOS_COUNT)):v=1:a=0,format=yuv420p[video]\""
+
+# 10. END
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_rotate.mp4"
+
+eval ${FULL_SCRIPT}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
-echo 'Slideshow created in '$ELAPSED_TIME' seconds'
+echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'
