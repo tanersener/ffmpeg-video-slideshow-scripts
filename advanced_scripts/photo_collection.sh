@@ -13,6 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
+MAX_PHOTO_ANGLE=25
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -64,7 +65,9 @@ for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=$((WIDTH*4)):height=${HEIGHT}:x=($((WIDTH*4))-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=$(( (c+1)*(TRANSITION_DURATION+PHOTO_DURATION) )),setpts=PTS-STARTPTS[stream$((c+1))];"
 
-    FULL_SCRIPT+="[stream$((c+1))]rotate=if(between(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c ))\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,2*PI*t+if(eq(mod(${c}\,2)\,0)\,1\,-1)*$((c+2))*5*PI/180\,if(eq(mod(${c}\,2)\,0)\,1\,-1)*$((c+2))*5*PI/180):ow=$((WIDTH*4)):c=#00000000,[stream${c}collected]overlay=x=if(gt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c )))\,if(lt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,$((WIDTH*3/2))-w+(t-$(( c*(TRANSITION_DURATION+PHOTO_DURATION) )))/${TRANSITION_DURATION}*${WIDTH}\,(main_w-overlay_w)/2)\,-w):(main_h-overlay_h)/2"
+    ANGLE_RANDOMNESS=$(( (RANDOM % MAX_PHOTO_ANGLE) + 1 ));
+
+    FULL_SCRIPT+="[stream$((c+1))]rotate=if(between(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c ))\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,2*PI*t+if(eq(mod(${c}\,2)\,0)\,1\,-1)*${ANGLE_RANDOMNESS}*PI/180\,if(eq(mod(${c}\,2)\,0)\,1\,-1)*${ANGLE_RANDOMNESS}*PI/180):ow=$((WIDTH*4)):c=#00000000,[stream${c}collected]overlay=x=if(gt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c )))\,if(lt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,$((WIDTH*3/2))-w+(t-$(( c*(TRANSITION_DURATION+PHOTO_DURATION) )))/${TRANSITION_DURATION}*${WIDTH}\,(main_w-overlay_w)/2)\,-w):(main_h-overlay_h)/2"
 
     if [[ $((c+1)) -eq ${PHOTOS_COUNT} ]]; then
         FULL_SCRIPT+=",format=yuv420p[video]\""
