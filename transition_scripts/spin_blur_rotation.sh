@@ -1,53 +1,105 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with spin blur rotation transition v1 (19.08.2018)
+# ffmpeg video slideshow script with spin blur rotation transition v2 (05.12.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
+# SCRIPT OPTIONS - CAN BE MODIFIED
+WIDTH=1280
+HEIGHT=720
+FPS=30
+PHOTO_DURATION=2
+
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
+# PHOTOS=`find ../photos/* | sort -r`
+PHOTOS=`find ../photos/*`
+
+############################
+# DO NO MODIFY LINES BELOW
+############################
+
+# CALCULATE LENGTH MANUALLY
+let PHOTOS_COUNT=0
+for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+
+if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
+    echo "Error: photos folder should contain at least two photos"
+    exit 1;
+fi
+
+# INTERNAL VARIABLES
+TRANSITION_FRAME_COUNT=$(( 1*FPS ))
+PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+1)*PHOTOS_COUNT - 1 ))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Total duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
-ffmpeg -y \
--loop 1 -i ../photos/1.jpg \
--loop 1 -i ../photos/2.jpg \
--loop 1 -i ../photos/3.jpg \
--loop 1 -i ../photos/4.jpg \
--loop 1 -i ../photos/5.jpg \
--filter_complex "\
-[0:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=3,crop=1280:720,split=2[stream1][stream1sample];\
-[1:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=3,crop=1280:720,split=3[stream2][stream2sample][stream2sample2];\
-[2:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=3,crop=1280:720,split=3[stream3][stream3sample][stream3sample2];\
-[3:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=3,crop=1280:720,split=3[stream4][stream4sample][stream4sample2];\
-[4:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),-1,1280)':h='if(gte(iw/ih,1280/720),720,-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=3,crop=1280:720,split=2[stream5][stream5sample];\
-[stream1sample]split=2[stream1rotate_out_background][stream1pre_rotate_out];\
-[stream1pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream1rotate_out];\
-[stream1rotate_out_background][stream1rotate_out]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.2,crop=1280:720[transition1part1];\
-[stream2sample]rotate=PI,split=2[stream2rotate_in_background][stream2pre_rotate_in];\
-[stream2pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream2rotate_in];\
-[stream2rotate_in_background][stream2rotate_in]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.3,crop=1280:720[transition1part2];\
-[stream2sample2]split=2[stream2rotate_out_background][stream2pre_rotate_out];\
-[stream2pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream2rotate_out];\
-[stream2rotate_out_background][stream2rotate_out]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.2,crop=1280:720[transition2part1];\
-[stream3sample]rotate=PI,split=2[stream3rotate_in_background][stream3pre_rotate_in];\
-[stream3pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream3rotate_in];\
-[stream3rotate_in_background][stream3rotate_in]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.3,crop=1280:720[transition2part2];\
-[stream3sample2]split=2[stream3rotate_out_background][stream3pre_rotate_out];\
-[stream3pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream3rotate_out];\
-[stream3rotate_out_background][stream3rotate_out]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.2,crop=1280:720[transition3part1];\
-[stream4sample]rotate=PI,split=2[stream4rotate_in_background][stream4pre_rotate_in];\
-[stream4pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream4rotate_in];\
-[stream4rotate_in_background][stream4rotate_in]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.3,crop=1280:720[transition3part2];\
-[stream4sample2]split=2[stream4rotate_out_background][stream4pre_rotate_out];\
-[stream4pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream4rotate_out];\
-[stream4rotate_out_background][stream4rotate_out]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.2,crop=1280:720[transition4part1];\
-[stream5sample]rotate=PI,split=2[stream5rotate_in_background][stream5pre_rotate_in];\
-[stream5pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream5rotate_in];\
-[stream5rotate_in_background][stream5rotate_in]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=1280:720,trim=duration=0.3,crop=1280:720[transition4part2];\
-[stream1][transition1part1][transition1part2][stream2][transition2part1][transition2part2][stream3][transition3part1][transition3part2][stream4][transition4part1][transition4part2][stream5]concat=n=13:v=1:a=0,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../transition_spin_blur_rotation.mp4
+# 1. START COMMAND
+FULL_SCRIPT="ffmpeg -y "
+
+# 2. ADD INPUTS
+for photo in ${PHOTOS}; do
+    FULL_SCRIPT+="-loop 1 -i ${photo} "
+done
+
+# 3. START FILTER COMPLEX
+FULL_SCRIPT+="-filter_complex \""
+
+# 4. PREPARING SCALED INPUTS
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+    if [[ $((c+1)) -eq 1 ]] || [[ $((c+1)) -eq ${PHOTOS_COUNT} ]]; then
+        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=$(( PHOTO_DURATION+1 )),crop=${WIDTH}:${HEIGHT},split=2[stream$((c+1))][stream$((c+1))sample];"
+    else
+        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,trim=duration=$(( PHOTO_DURATION+1 )),crop=${WIDTH}:${HEIGHT},split=3[stream$((c+1))][stream$((c+1))sample][stream$((c+1))sample2];"
+    fi
+done
+
+# 5. ROTATING & BLURRING
+for (( c=2; c<=${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}sample]rotate=PI,split=2[stream${c}rotate_in_background][stream${c}pre_rotate_in];"
+    FULL_SCRIPT+="[stream${c}pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream${c}rotate_in];"
+done
+
+# 6. CREATING TRANSITION FRAMES
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream${c}rotate_out];"
+
+    if [[ ${c} -eq 1 ]]; then
+        FULL_SCRIPT+="[stream${c}sample]split=2[stream${c}rotate_out_background][stream${c}pre_rotate_out];"
+    else
+        FULL_SCRIPT+="[stream${c}sample2]split=2[stream${c}rotate_out_background][stream${c}pre_rotate_out];"
+    fi
+
+    FULL_SCRIPT+="[stream${c}rotate_out_background][stream${c}rotate_out]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=${WIDTH}:${HEIGHT},trim=duration=0.2[transition${c}part1];"
+
+    FULL_SCRIPT+="[stream$((c+1))rotate_in_background][stream$((c+1))rotate_in]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,crop=${WIDTH}:${HEIGHT},trim=duration=0.3[transition${c}part2];"
+
+done
+
+# 7. BEGIN CONCAT
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}][transition${c}part1][transition${c}part2]"
+done
+
+# 8. END CONCAT
+FULL_SCRIPT+="[stream${PHOTOS_COUNT}]concat=n=$((3*PHOTOS_COUNT-2)):v=1:a=0,format=yuv420p[video]\""
+
+# 9. END
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_spin_blur_rotation.mp4"
+
+eval ${FULL_SCRIPT}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
-echo 'Slideshow created in '$ELAPSED_TIME' seconds'
+echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'
