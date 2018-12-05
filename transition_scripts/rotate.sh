@@ -13,6 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
+BACKGROUND_COLOR="black"
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -50,8 +51,8 @@ for photo in ${PHOTOS}; do
     FULL_SCRIPT+="-loop 1 -i ${photo} "
 done
 
-# 3. ADD BLACK SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i color=black:s=${WIDTH}x${HEIGHT} "
+# 3. ADD BACKGROUND COLOR SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
 
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
@@ -59,7 +60,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 5. PREPARING SCALED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream$((c+1))];"
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))pre1][stream$((c+1))pre2];"
 done
 
 # 6. APPLYING PADDING
@@ -67,12 +68,14 @@ for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
 
     if [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
-        SPLIT_COUNT="3"
+        SPLIT_COUNT="2"
     else
-        SPLIT_COUNT="4"
+        SPLIT_COUNT="3"
     fi
 
-    FULL_SCRIPT+="[stream${c}]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=${SPLIT_COUNT}[stream${c}out1][stream${c}out2][stream${c}out3]"
+    FULL_SCRIPT+="[stream${c}pre1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}out1];"
+
+    FULL_SCRIPT+="[stream${c}pre2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=${SPLIT_COUNT}[stream${c}out2][stream${c}out3]"
 
     if [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
         FULL_SCRIPT+=";"

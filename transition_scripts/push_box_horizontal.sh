@@ -13,6 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
+BACKGROUND_COLOR="black"
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -60,8 +61,8 @@ for photo in ${PHOTOS}; do
     FULL_SCRIPT+="-loop 1 -i ${photo} "
 done
 
-# 3. ADD BLACK SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i color=black:s=${WIDTH}x${HEIGHT} "
+# 3. ADD BACKGROUND COLOR SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
 
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
@@ -69,15 +70,15 @@ FULL_SCRIPT+="-filter_complex \""
 # 5. PREPARING SCALED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=#00000000,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=${BACKGROUND_COLOR},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
 
     FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))overlaid];"
 
-    FULL_SCRIPT+="[stream$((c+1))out2]scale=w=${WIDTH}/2:-1,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=#00000000,
+    FULL_SCRIPT+="[stream$((c+1))out2]scale=w=${WIDTH}/2:-1,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=${BACKGROUND_COLOR},
     trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=5[stream$((c+1))prephasein][stream$((c+1))checkpoint][stream$((c+1))prezoomin][stream$((c+1))prezoomout][stream$((c+1))prephaseout];"
 done
 
-# 6. OVERLAY INPUTS ON TOP OF BLACK SCREEN
+# 6. OVERLAY INPUTS ON TOP OF BACKGROUND COLOR SCREEN
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}prephaseout]overlay=x='t/(${TRANSITION_DURATION}/2)*${WIDTH}':y=0,trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phaseout];"
