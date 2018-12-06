@@ -45,7 +45,7 @@ Total = 15 seconds
 
 ## Customization
 
-Scripts in this branch are mostly static and hard to customize. It is possible to change the photos used by replacing files under `photos` folder but other than that there are not any parameters/options defined to change number of photos, video size or scene arrangement.
+Scripts in this branch are mostly static and hard to customize. It is possible to change the photos used by replacing files under `photos` folder but other than that there are not any parameters/options defined to customize the slideshow.
 
 If you need to customize scripts please refer to [v2.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v2.x) branch of this repository.
 
