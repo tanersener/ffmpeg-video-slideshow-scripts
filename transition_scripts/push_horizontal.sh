@@ -1,49 +1,112 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal push transition v1 (01.10.2017)
+# ffmpeg video slideshow script with horizontal push transition v2 (01.12.2018)
 #
-# Copyright (c) 2017, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
+# SCRIPT OPTIONS - CAN BE MODIFIED
+WIDTH=1280
+HEIGHT=720
+FPS=30
+TRANSITION_DURATION=1
+PHOTO_DURATION=2
+BACKGROUND_COLOR="black"
+
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
+# PHOTOS=`find ../photos/* | sort -r`
+PHOTOS=`find ../photos/*`
+
+############################
+# DO NO MODIFY LINES BELOW
+############################
+
+# CALCULATE LENGTH MANUALLY
+let PHOTOS_COUNT=0
+for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+
+if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
+    echo "Error: photos folder should contain at least two photos"
+    exit 1;
+fi
+
+# INTERNAL VARIABLES
+TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
+PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
-ffmpeg -y \
--loop 1 -i ../photos/1.jpg \
--loop 1 -i ../photos/2.jpg \
--loop 1 -i ../photos/3.jpg \
--loop 1 -i ../photos/4.jpg \
--loop 1 -i ../photos/5.jpg \
--f lavfi -i color=black:s=1280x720 \
--f lavfi -i nullsrc=s=1280x720 \
--filter_complex "\
-[0:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream1out1][stream1out2];\
-[1:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream2out1][stream2out2];\
-[2:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream3out1][stream3out2];\
-[3:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream4out1][stream4out2];\
-[4:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream5out1][stream5out2];\
-[5:v][stream1out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=3,select=lte(n\,90)[stream1overlaid];\
-[5:v][stream1out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream1ending];\
-[5:v][stream2out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream2overlaid];\
-[5:v][stream2out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30),split=2[stream2starting][stream2ending];\
-[5:v][stream3out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream3overlaid];\
-[5:v][stream3out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30),split=2[stream3starting][stream3ending];\
-[5:v][stream4out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream4overlaid];\
-[5:v][stream4out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30),split=2[stream4starting][stream4ending];\
-[5:v][stream5out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=2,select=lte(n\,60)[stream5overlaid];\
-[5:v][stream5out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=1,select=lte(n\,30)[stream5starting];\
-[6:v][stream1ending]overlay=x='t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream1moving];\
-[6:v][stream2ending]overlay=x='t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream2moving];\
-[6:v][stream3ending]overlay=x='t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream3moving];\
-[6:v][stream4ending]overlay=x='t/1*1280':y=0,trim=duration=1,select=lte(n\,30)[stream4moving];\
-[stream1moving][stream2starting]overlay=x='-w+t/1*1280':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream2blended];\
-[stream2moving][stream3starting]overlay=x='-w+t/1*1280':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream3blended];\
-[stream3moving][stream4starting]overlay=x='-w+t/1*1280':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream4blended];\
-[stream4moving][stream5starting]overlay=x='-w+t/1*1280':y=0:shortest=1,trim=duration=1,select=lte(n\,30)[stream5blended];\
-[stream1overlaid][stream2blended][stream2overlaid][stream3blended][stream3overlaid][stream4blended][stream4overlaid][stream5blended][stream5overlaid]concat=n=9:v=1:a=0,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../transition_push_horizontal.mp4
+# 1. START COMMAND
+FULL_SCRIPT="ffmpeg -y "
+
+# 2. ADD INPUTS
+for photo in ${PHOTOS}; do
+    FULL_SCRIPT+="-loop 1 -i ${photo} "
+done
+
+# 3. ADD BACKGROUND COLOR SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
+
+# 4. ADD TRANSPARENT SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT} "
+
+# 5. START FILTER COMPLEX
+FULL_SCRIPT+="-filter_complex \""
+
+# 6. PREPARING SCALED INPUTS
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+done
+
+# 7. OVERLAY INPUTS ON TOP OF BACKGROUND COLOR SCREEN
+for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
+    if [[ ${c} -eq 1 ]]; then
+        if  [[ ${PHOTOS_COUNT} -gt 1 ]]; then
+            FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
+        fi
+    elif [[ ${c} -lt ${PHOTOS_COUNT} ]]; then
+        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
+    elif [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
+        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
+    fi
+done
+
+# 8. CREATING TRANSITIONS 1
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+done
+
+# 9. CREATING TRANSITIONS 2
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=x='-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+done
+
+# 10. BEGIN CONCAT
+for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[stream${c}overlaid][stream$((c+1))blended]"
+done
+
+# 11. END CONCAT
+FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
+
+# 12. END
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_horizontal.mp4"
+
+eval ${FULL_SCRIPT}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
-echo 'Slideshow created in '$ELAPSED_TIME' seconds'
+echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'

@@ -1,35 +1,87 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for advanced photo collection v1 (01.10.2017)
+# ffmpeg video slideshow script for advanced photo collection v2 (03.12.2018)
 #
-# Copyright (c) 2017, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
 
+# SCRIPT OPTIONS - CAN BE MODIFIED
+WIDTH=1280
+HEIGHT=720
+FPS=30
+TRANSITION_DURATION=1
+PHOTO_DURATION=2
+MAX_PHOTO_ANGLE=25
+BACKGROUND_COLOR="#00000000"
+
+# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
+# PHOTOS=`find ../photos/* | sort -r`
+PHOTOS=`find ../photos/*`
+
+############################
+# DO NO MODIFY LINES BELOW
+############################
+
+# CALCULATE LENGTH MANUALLY
+let PHOTOS_COUNT=0
+for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+
+if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
+    echo "Error: photos folder should contain at least two photos"
+    exit 1;
+fi
+
+# INTERNAL VARIABLES
+TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
+PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
+
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
+Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+
 START_TIME=$SECONDS
 
-ffmpeg -y \
--loop 1 -i ../photos/1.jpg \
--loop 1 -i ../photos/2.jpg \
--loop 1 -i ../photos/3.jpg \
--loop 1 -i ../photos/4.jpg \
--loop 1 -i ../photos/5.jpg \
--f lavfi -i color=black:s=1280x720 \
--filter_complex "\
-[5:v]trim=duration=15[background];\
-[0:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=5120:height=720:x=(5120-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=3,setpts=PTS-STARTPTS[stream1];\
-[1:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=5120:height=720:x=(5120-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=6,setpts=PTS-STARTPTS[stream2];\
-[2:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=5120:height=720:x=(5120-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=9,setpts=PTS-STARTPTS[stream3];\
-[3:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=5120:height=720:x=(5120-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=12,setpts=PTS-STARTPTS[stream4];\
-[4:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,1280/720),min(iw,1280),-1)':h='if(gte(iw/ih,1280/720),-1,min(ih,720))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=5120:height=720:x=(5120-iw)/2:y=(720-ih)/2:color=#00000000,trim=duration=15,setpts=PTS-STARTPTS[stream5];\
-[stream1]rotate=if(gt(t\,1)\,25*PI/180\,2*PI*t+25*PI/180):ow=5120:c=#00000000,[background]overlay=x=if(gt(t\,1)\,(main_w-overlay_w)/2\,'1920-w+t/1*1280'):y=(main_h-overlay_h)/2[stream1collected];\
-[stream2]rotate=if(between(t\,3\,4)\,2*PI*t-15*PI/180\,-15*PI/180):ow=5120:c=#00000000,[stream1collected]overlay=x=if(gt(t\,3)\,if(lt(t\,4)\,1920-w+(t-3)/1*1280\,(main_w-overlay_w)/2)\,-w):(main_h-overlay_h)/2[stream2collected];\
-[stream3]rotate=if(between(t\,6\,7)\,2*PI*t+10*PI/180\,10*PI/180):ow=5120:c=#00000000,[stream2collected]overlay=x=if(gt(t\,6)\,if(lt(t\,7)\,1920-w+(t-6)/1*1280\,(main_w-overlay_w)/2)\,-w):y=(main_h-overlay_h)/2[stream3collected];\
-[stream4]rotate=if(between(t\,9\,10)\,2*PI*t-5*PI/180\,-5*PI/180):ow=5120:c=#00000000,[stream3collected]overlay=x=if(gt(t\,9)\,if(lt(t\,10)\,1920-w+(t-9)/1*1280\,(main_w-overlay_w)/2)\,-w):y=(main_h-overlay_h)/2[stream4collected];\
-[stream5]rotate=if(between(t\,12\,13)\,2*PI*t+20*PI/180\,+20*PI/180):ow=5120:c=#00000000,[stream4collected]overlay=x=if(gt(t\,12)\,if(lt(t\,13)\,1920-w+(t-12)/1*1280\,(main_w-overlay_w)/2)\,-w):y=(main_h-overlay_h)/2,format=yuv420p[video]"\
- -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r 30 ../advanced_photo_collection.mp4
+# 1. START COMMAND
+FULL_SCRIPT="ffmpeg -y "
+
+# 2. ADD INPUTS
+for photo in ${PHOTOS}; do
+    FULL_SCRIPT+="-loop 1 -i ${photo} "
+done
+
+# 3. ADD BACKGROUND COLOR SCREEN INPUT
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
+
+# 4. START FILTER COMPLEX
+FULL_SCRIPT+="-filter_complex \""
+
+# 5. PREPARE BACKGROUND
+FULL_SCRIPT+="[${PHOTOS_COUNT}:v]trim=duration=${TOTAL_DURATION}[stream0collected];"
+
+# 6. PREPARING SCALED INPUTS
+for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+do
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,pad=width=$((WIDTH*4)):height=${HEIGHT}:x=($((WIDTH*4))-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=$(( (c+1)*(TRANSITION_DURATION+PHOTO_DURATION) )),setpts=PTS-STARTPTS[stream$((c+1))];"
+
+    ANGLE_RANDOMNESS=$(( (RANDOM % MAX_PHOTO_ANGLE) + 1 ));
+
+    FULL_SCRIPT+="[stream$((c+1))]rotate=if(between(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c ))\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,2*PI*t+if(eq(mod(${c}\,2)\,0)\,1\,-1)*${ANGLE_RANDOMNESS}*PI/180\,if(eq(mod(${c}\,2)\,0)\,1\,-1)*${ANGLE_RANDOMNESS}*PI/180):ow=$((WIDTH*4)):c=#00000000,[stream${c}collected]overlay=x=if(gt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c )))\,if(lt(t\,$(( (TRANSITION_DURATION+PHOTO_DURATION)*c+TRANSITION_DURATION )))\,$((WIDTH*3/2))-w+(t-$(( c*(TRANSITION_DURATION+PHOTO_DURATION) )))/${TRANSITION_DURATION}*${WIDTH}\,(main_w-overlay_w)/2)\,-w):(main_h-overlay_h)/2"
+
+    if [[ $((c+1)) -eq ${PHOTOS_COUNT} ]]; then
+        FULL_SCRIPT+=",format=yuv420p[video]\""
+    else
+        FULL_SCRIPT+="[stream$((c+1))collected];"
+    fi
+done
+
+# 7. END
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_photo_collection.mp4"
+
+eval ${FULL_SCRIPT}
 
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
-echo 'Slideshow created in '$ELAPSED_TIME' seconds'
+echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'
