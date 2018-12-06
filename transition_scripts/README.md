@@ -2,7 +2,7 @@
 
 Each script in this section demonstrates a different transition animation.
 
-Transitions are implemented as custom filters in the following execution order.
+Transitions are implemented in `-filter_complex` blocks in the following execution order.
 
 1. Prepare input streams
 2. Generate static frames

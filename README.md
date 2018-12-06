@@ -13,37 +13,48 @@ Shell scripts to create video slideshows from images using [FFmpeg](https://www.
 
 - `ffmpeg 2.8.x` or later
 
-'Advanced Moving Text' script needs FFmpeg to be build with freetype. 
-If you compile FFmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. 
+`Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile FFmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 
 
 ## Description
 
-Each script creates a video slideshow using 5 photos inside `photos` folder. 
-Advanced scripts use additional objects & fonts from their respective folders. 
-Output slideshow is an h264 encoded 1280x720 px MPEG-4 video.
+Each script in this branch creates a video slideshow using 5 photos inside `photos` folder. Transition scripts 
+implements different transition effects and advanced scripts implements more complex animation like 
+transitions/transformations.
 
+Output of all scripts is an `h264` encoded `1280x720` px `MPEG-4` video.
+
+
+## Scene Arrangement
+  
 Most of the scripts use the following scene arrangement.
 ```
-photo 1 - 3 seconds
+show photo 1 - 2 seconds
 - transition to photo 2 - 1 second
-photo 2 - 2 seconds
+show photo 2 - 2 seconds
 - transition to photo 3 - 1 second
-photo 3 - 2 seconds
+show photo 3 - 2 seconds
 - transition to photo 4 - 1 second
-photo 4 - 2 seconds
+show photo 4 - 2 seconds
 - transition to photo 5 - 1 second
-photo 5 - 2 seconds
+show photo 5 - 2 seconds
 =======
 Total = 15 seconds
 ```
 
 
+## Customization
+
+Scripts in this branch are mostly static and hard to customize. It is possible to change the photos used by replacing files under `photos` folder but other than that there are not any parameters/options defined to change number of photos, output video dimension or scene arrangement.
+
+If you need to customize scripts please refer to [v2.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v2.x) branch of this repository.
+
+
 ## Versions
 
-- Master includes latest tested scripts from v1.x branch.
-- v1.x branch: Scripts in this branch generate videos from 5 photos. 
-- v2.x branch is the current development branch.
+- **v1.x branch:** Main focus of scripts in this branch is to show how `ffmpeg` filters work and how they can be used to implement a transition or animation. So scripts in this branch are mostly static and hard to customize.  
+ 
+- **v2.x branch:** Scripts are optimized/rearranged in order to be customized. They are hard to understand but easy to customize.
 
 
 ## Updates
@@ -61,11 +72,13 @@ As an alternative, cropping input images can be implemented by replacing the sca
 
 You may notice the following warnings when executing the scripts. Below you can find their reasons and possible fixes.
 
+##### 1. 
 >[swscaler @ 0x............] deprecated pixel format used, make sure you did set range correctly
 
 This warning is printed because input image streams are decoded with `yuvj444p` pixel format, which is deprecated. 
 You can safely ignore it, `ffmpeg` users are not effected from this warning.
 
+##### 2.
 >[out_0_0 @ 0x............] 100 buffers queued in out_0_0, something may be wrong.s dup=. drop=. speed=...
 
 >[Parsed_overlay_80 @ 0x............] [framesync @ 0x............] Buffer queue overflow, dropping.
@@ -75,6 +88,7 @@ In this ordering scheme too many streams/statements wait in the buffer queue, wh
 If you want to resolve them change the order of statements inside `filter_complex` and use new streams immediately 
 after they are created.
 
+##### 3.
 >Past duration 0.xyz too large
 
 Currently `push_box` and `box_in` transitions print this warning. `setpts=0.5*PTS` statements used inside the scripts 

@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2018-12-06
+- v1.x branch documentation updated.
+
 ## - 2018-11-30
 - v1.x branch created.
 

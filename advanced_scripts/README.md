@@ -1,6 +1,6 @@
 # FFmpeg Video Slideshow Advanced Scripts
 
-Scripts in this section demonstrate enhanced animations.
+Scripts in this section demonstrate complex animation like transitions/transformations.
 
 Animations are implemented inside filter_complex blocks.
 
