@@ -1,49 +1,61 @@
 # FFmpeg Video Slideshow Advanced Scripts
 
-Scripts in this section demonstrate enhanced animations.
+Scripts in this section demonstrate complex animation like transitions/transformations.
 
 Animations are implemented inside filter_complex blocks.
 
-PS: Please note that sample animations used in this page are low quality and does not represent full functionality of the scripts.
+Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Blurred Background
 
-This script removes black areas from sides/top/bottom with blur effect
+Replaces empty areas from sides/top/bottom with blur effect
+
+**Supported Options:** width, height, fps, photo duration, transition duration
 
 <img src="../docs/advanced_blurred_background.gif" width="380">
 
 
 ## Logo Overlay & Zoom
 
-A beating heart animation is created from a static heart image with zoom effect and output is overlaid at the right bottom corner of the slideshow
+Overlays a beating heart animation (generated from a static heart image with zoom effect) at the right bottom corner of the slideshow
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
 
 <img src="../docs/advanced_logo_overlay_and_zoom.gif" width="380">
 
 
 ## Moving Text
 
-Text moving from right to left at the bottom of the slideshow
+Moves text from right to the left on a slideshow
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position
 
 <img src="../docs/advanced_moving_text.gif" width="380">
 
 
 ## Object Animation
 
-Snow flakes falling from random positions and rotating around themselves
+Animates snow flakes falling (from random positions) and rotating around themselves
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
 
 <img src="../docs/advanced_object_animation.gif" width="380">
 
 
 ## Photo Collection
 
-This script is enhanced version of 'Rotate' transition. Each photo stops rotating on a specific angle; where some parts of old photos are still visible
+Enhanced version of `Rotate` transition. Each photo stops rotating on a specific angle where some parts of the previous photos are still visible
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color, max photo angle 
 
 <img src="../docs/advanced_photo_collection.gif" width="380">
 
 
 ## Push Film
 
-This script is enhanced version of 'Push' transition. Static frames are removed and a film frame is used as overlay image to create movie film looking
+Enhanced version of `Push` transition. Static parts are removed and a strip frame is used as overlay image to create film strip animation
+
+**Supported Options:** width, height, fps, transition duration, background color
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -55,7 +67,9 @@ This script is enhanced version of 'Push' transition. Static frames are removed 
 
 ## Sliding Bars
 
-Enhanced version of 'Wipe In' transition. Screen is divided into five bars sliding in 0.2 second intervals
+Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one to side to another
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color, bar count
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -67,7 +81,9 @@ Enhanced version of 'Wipe In' transition. Screen is divided into five bars slidi
 
 ## Zoom & Pan with Fade In/Out Transition
 
-This script demonstrates zoom & pan effect on the photos. Each photo pans towards a different area of the photo
+Each photo focuses towards a different area of the photo
+
+**Supported Options:** width, height, fps, photo duration, transition duration
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
 
