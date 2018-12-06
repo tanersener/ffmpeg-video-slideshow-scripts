@@ -18,7 +18,7 @@ Shell scripts to create video slideshows from images using [FFmpeg](https://www.
 
 ## Description
 
-Each script in this branch creates a video slideshow using 5 photos inside `photos` folder. Transition scripts 
+Each script creates a video slideshow using 5 photos inside `photos` folder. Transition scripts 
 implements different transition effects and advanced scripts implements more complex animation like 
 transitions/transformations.
 
@@ -45,14 +45,14 @@ Total = 15 seconds
 
 ## Customization
 
-Scripts in this branch are mostly static and hard to customize. It is possible to change the photos used by replacing files under `photos` folder but other than that there are not any parameters/options defined to change number of photos, output video dimension or scene arrangement.
+Scripts in this branch are mostly static and hard to customize. It is possible to change the photos used by replacing files under `photos` folder but other than that there are not any parameters/options defined to change number of photos, video size or scene arrangement.
 
 If you need to customize scripts please refer to [v2.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v2.x) branch of this repository.
 
 
 ## Versions
 
-- **v1.x branch:** Main focus of scripts in this branch is to show how `ffmpeg` filters work and how they can be used to implement a transition or animation. So scripts in this branch are mostly static and hard to customize.  
+- **v1.x branch:** Main focus of this branch is to show how `ffmpeg` filters work and how they can be used to implement a transition or animation. So scripts in this branch are mostly static and hard to customize.  
  
 - **v2.x branch:** Scripts are optimized/rearranged in order to be customized. They are hard to understand but easy to customize.
 
