@@ -13,19 +13,19 @@ Configurable shell scripts to create video slideshows from images using [FFmpeg]
 
 - `ffmpeg 2.8.x` or later
 
-`Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile FFmpeg from source you need to provide `--enable-libfreetype` flag on `./configure`. 
+`Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile `FFmpeg` from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 
 
 ## Description
 
-Each script creates a video slideshow using photos inside `photos` folder. Transition scripts implements different transition effects and advanced scripts implements more complex animation like transitions/transformations.
+Each script creates a video slideshow using files inside `photos` folder. Transition scripts implements different transition effects and advanced scripts implements more complex animation like transitions/transformations.
 
 Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 
 ## Customization
 
-- There is a `# SCRIPT OPTIONS - CAN BE MODIFIED` section at the top of each script. That section lists all customizable options for that individual file. Below you can see the list of common options. Please note that supported options are not limited to the list below and some of the scripts define options only valid for themselves.
+- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all customizable options for that individual file. Below you can see the list of common options. Please note that supported options are not limited to the list below and some of the scripts define options only valid for themselves.
 
     - **WIDTH:** Width of the slideshow, in pixels
     - **HEIGHT:** Height of the slideshow, in pixels
