@@ -11,7 +11,7 @@ Configurable shell scripts to create video slideshows from images using [FFmpeg]
 
 ## Requirements
 
-- `ffmpeg 2.8.x` or later
+- `ffmpeg 2.8.x` or later, except `ffmpeg 4.1` which has some bugs and crashes for some of the scripts
 
 `Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile `FFmpeg` from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 
