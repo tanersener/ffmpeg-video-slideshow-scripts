@@ -19,7 +19,7 @@ Replaces empty areas from sides/top/bottom with blur effect
 
 Overlays a beating heart animation (generated from a static heart image with zoom effect) at the right bottom corner of the slideshow
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
+**Supported Options:** photo mode, width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
 
 <img src="../docs/advanced_logo_overlay_and_zoom.gif" width="380">
 
@@ -28,7 +28,7 @@ Overlays a beating heart animation (generated from a static heart image with zoo
 
 Moves text from right to the left on a slideshow
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position
+**Supported Options:** photo mode, width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position
 
 <img src="../docs/advanced_moving_text.gif" width="380">
 
@@ -37,7 +37,7 @@ Moves text from right to the left on a slideshow
 
 Animates snow flakes falling (from random positions) and rotating around themselves
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
+**Supported Options:** photo mode, width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
 
 <img src="../docs/advanced_object_animation.gif" width="380">
 
@@ -55,7 +55,7 @@ Enhanced version of `Rotate` transition. Each photo stops rotating on a specific
 
 Enhanced version of `Push` transition. Static parts are removed and a strip frame is used as overlay image to create film strip animation
 
-**Supported Options:** width, height, fps, transition duration, background color
+**Supported Options:** photo mode, width, height, fps, transition duration, background color
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -69,7 +69,7 @@ Enhanced version of `Push` transition. Static parts are removed and a strip fram
 
 Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one to side to another
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, bar count
+**Supported Options:** photo mode, width, height, fps, photo duration, transition duration, background color, bar count
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
