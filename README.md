@@ -25,13 +25,17 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 ## Customization
 
-- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all customizable options for that individual file. Below you can see the list of common options. Please note that supported options are not limited to the list below and some of the scripts define options only valid for themselves.
+- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
+  
+  Below you can see the list of commonly used options. Please note that editable options are not limited to the list below and some scripts define their own options.
 
     - **WIDTH:** Width of the slideshow, in pixels
     - **HEIGHT:** Height of the slideshow, in pixels
     - **FPS:** Frames per second value for the output video
     - **PHOTO DURATION:** Defines how long each photo will be displayed, excluding transition, in seconds
     - **TRANSITION DURATION:** Defines transition duration, in seconds
+    - **PHOTO_MODE:** Defines how photos will be fitted to screen. Supported modes are `center`, `crop`, `scale` and `blur`
+    - **DIRECTION:** Controls transition direction in supported scripts, e.g., `left to right`, `right to left`, `top to bottom`, `bottom to top` 
     - **BACKGROUND COLOR:** Defines background color. You can use short names like `black`, `white`; hex values in `0xYYYYYY` format like `0x265074`, `0xc4cdd4` or transparent color with `#00000000`. Refer to [color-syntax documentation](https://ffmpeg.org/ffmpeg-utils.html#color-syntax) for the details.
 
 - `# PHOTO OPTIONS` section defines a command to select which photos will be included in the slideshow and in which order. Default value is `find ../photos/*`, which selects all files found in the `photos` directory. Order is not defined in default selection. To provide ordering it is possible to append `sort` at the end of `find` as in `find ../photos/* | sort`. Please refer to man pages of [find](http://man7.org/linux/man-pages/man1/find.1.html) and [sort](http://man7.org/linux/man-pages/man1/sort.1.html) for additional information.

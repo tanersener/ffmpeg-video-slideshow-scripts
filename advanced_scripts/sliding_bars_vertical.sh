@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced vertical sliding bars v2 (03.12.2018)
+# ffmpeg video slideshow script with advanced vertical sliding bars v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -13,8 +13,10 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
-BAR_COUNT=10             # WIDTH SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT VERTICAL LINES WILL APPEAR ON TRANSITION
+PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+BAR_COUNT=10                # WIDTH SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT VERTICAL LINES WILL APPEAR ON TRANSITION
 BACKGROUND_COLOR="black"
+DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -58,7 +60,22 @@ FULL_SCRIPT+="-filter_complex \""
 # 4. PREPARING SCALED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+    case ${PHOTO_MODE} in
+        1)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        2)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        3)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        4)
+            FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,format=rgba,boxblur=100,setsar=sar=1/1[stream${c}blurred];"
+            FULL_SCRIPT+="[${c}:v]scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream${c}raw];"
+            FULL_SCRIPT+="[stream${c}blurred][stream${c}raw]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,setpts=PTS-STARTPTS,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+    esac
 done
 
 # 5. APPLYING PADDING
@@ -104,7 +121,14 @@ do
 
         # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
 
-        FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+        case ${DIRECTION} in
+            1)
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+            ;;
+            *)
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),h-${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+            ;;
+        esac
 
         if [[ ${d} -eq ${BAR_COUNT} ]]; then
             FULL_SCRIPT+="[stream${c}blended];"

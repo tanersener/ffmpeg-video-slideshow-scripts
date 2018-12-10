@@ -10,7 +10,7 @@ Please note that sample animations used in this page are low in quality and does
 
 Replaces empty areas from sides/top/bottom with blur effect
 
-**Supported Options:** width, height, fps, photo duration, transition duration
+**Options:** width, height, fps, photo duration, transition duration
 
 <img src="../docs/advanced_blurred_background.gif" width="380">
 
@@ -19,16 +19,16 @@ Replaces empty areas from sides/top/bottom with blur effect
 
 Overlays a beating heart animation (generated from a static heart image with zoom effect) at the right bottom corner of the slideshow
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
+**Options:** photo mode, width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
 
 <img src="../docs/advanced_logo_overlay_and_zoom.gif" width="380">
 
 
 ## Moving Text
 
-Moves text from right to the left on a slideshow
+Moves text from right to the left or from left to the right on a slideshow
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position
+**Options:** photo mode, width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position, direction
 
 <img src="../docs/advanced_moving_text.gif" width="380">
 
@@ -37,7 +37,7 @@ Moves text from right to the left on a slideshow
 
 Animates snow flakes falling (from random positions) and rotating around themselves
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
+**Options:** photo mode, width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
 
 <img src="../docs/advanced_object_animation.gif" width="380">
 
@@ -46,16 +46,30 @@ Animates snow flakes falling (from random positions) and rotating around themsel
 
 Enhanced version of `Rotate` transition. Each photo stops rotating on a specific angle where some parts of the previous photos are still visible
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, max photo angle 
+**Options:** width, height, fps, photo duration, transition duration, background color, max photo angle 
 
 <img src="../docs/advanced_photo_collection.gif" width="380">
+
+
+## Push Box
+
+`Box In` and `Push` transitions combined.
+
+**Options:** photo mode, width, height, fps, photo duration, transition duration, background color, direction
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
+
+<p float="left">
+  <img src="../docs/advanced_push_box_horizontal.gif" width="380">
+  <img src="../docs/advanced_push_box_vertical.gif" width="380" hspace="60"> 
+</p>
 
 
 ## Push Film
 
 Enhanced version of `Push` transition. Static parts are removed and a strip frame is used as overlay image to create film strip animation
 
-**Supported Options:** width, height, fps, transition duration, background color
+**Options:** photo mode, width, height, fps, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -69,7 +83,7 @@ Enhanced version of `Push` transition. Static parts are removed and a strip fram
 
 Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one to side to another
 
-**Supported Options:** width, height, fps, photo duration, transition duration, background color, bar count
+**Options:** photo mode, width, height, fps, photo duration, transition duration, background color, bar count, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -83,7 +97,7 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars sliding fr
 
 Each photo focuses towards a different area of the photo
 
-**Supported Options:** width, height, fps, photo duration, transition duration
+**Options:** width, height, fps, photo duration, transition duration
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
 
