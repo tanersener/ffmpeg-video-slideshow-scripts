@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for advanced moving text v3 (10.12.2018)
+# ffmpeg video slideshow script for advanced moving text v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -23,6 +23,7 @@ TEXT_FONT_SIZE=30
 TEXT_FONT_COLOR=white
 TEXT_SPEED=3                # 1=FASTEST, 2=FASTER, 3=MODERATE, 4=SLOW, 5=SLOWEST
 BACKGROUND_COLOR="#00000000"
+DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -114,11 +115,18 @@ done
 # 8. END CONCAT
 FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[videowithouttext];"
 
-# 10. PREPARE HEART PHOTO INPUT
+# 10. PREPARE TEXT BOX
 FULL_SCRIPT+="[videowithouttext]drawbox=x=0:y=${TEXT_FRAME_Y}:w=${WIDTH}:h=${TEXT_FRAME_HEIGHT}:color=black@0.65:t=${TEXT_FRAME_HEIGHT},trim=duration=${TOTAL_DURATION}[videowithbox];"
 
 # 11. OVERLAY TEXT ON TOP OF SLIDESHOW
-FULL_SCRIPT+="[videowithbox]drawtext=fontfile=${TEXT_FONT}:text='${TEXT}':fontsize=${TEXT_FONT_SIZE}:fontcolor=${TEXT_FONT_COLOR}:x='${WIDTH} - mod(t/${TEXT_SPEED}*((${WIDTH}+text_w)/$((TEXT_SPEED))),${WIDTH}+text_w)':y=${TEXT_Y}[video]\""
+case ${DIRECTION} in
+    1)
+        FULL_SCRIPT+="[videowithbox]drawtext=fontfile=${TEXT_FONT}:text='${TEXT}':fontsize=${TEXT_FONT_SIZE}:fontcolor=${TEXT_FONT_COLOR}:x='-text_w + mod(t/${TEXT_SPEED}*((${WIDTH}+text_w)/$((TEXT_SPEED))),${WIDTH}+text_w)':y=${TEXT_Y}[video]\""
+    ;;
+    *)
+        FULL_SCRIPT+="[videowithbox]drawtext=fontfile=${TEXT_FONT}:text='${TEXT}':fontsize=${TEXT_FONT_SIZE}:fontcolor=${TEXT_FONT_COLOR}:x='${WIDTH} - mod(t/${TEXT_SPEED}*((${WIDTH}+text_w)/$((TEXT_SPEED))),${WIDTH}+text_w)':y=${TEXT_Y}[video]\""
+    ;;
+esac
 
 # 12. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_moving_text.mp4"

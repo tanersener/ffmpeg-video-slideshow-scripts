@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with vertical wipe in transition v3 (10.12.2018)
+# ffmpeg video slideshow script with vertical wipe in transition v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -13,6 +13,7 @@ TRANSITION_DURATION=1
 PHOTO_DURATION=2
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
+DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -92,7 +93,14 @@ done
 # 6. CREATING TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream${c}ending][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+    case ${DIRECTION} in
+        1)
+            FULL_SCRIPT+="[stream${c}ending][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+        *)
+            FULL_SCRIPT+="[stream${c}ending][stream$((c+1))starting]overlay=y='h-t/${TRANSITION_DURATION}*${HEIGHT}':x=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+    esac
 done
 
 # 7. BEGIN CONCAT

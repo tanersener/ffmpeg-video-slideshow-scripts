@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced vertical sliding bars v3 (10.12.2018)
+# ffmpeg video slideshow script with advanced vertical sliding bars v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -16,6 +16,7 @@ PHOTO_DURATION=2
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BAR_COUNT=10                # WIDTH SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT VERTICAL LINES WILL APPEAR ON TRANSITION
 BACKGROUND_COLOR="black"
+DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -120,7 +121,14 @@ do
 
         # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
 
-        FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+        case ${DIRECTION} in
+            1)
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+            ;;
+            *)
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),h-${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+            ;;
+        esac
 
         if [[ ${d} -eq ${BAR_COUNT} ]]; then
             FULL_SCRIPT+="[stream${c}blended];"

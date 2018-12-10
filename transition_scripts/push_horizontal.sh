@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal push transition v3 (10.12.2018)
+# ffmpeg video slideshow script with horizontal push transition v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -15,6 +15,7 @@ TRANSITION_DURATION=1
 PHOTO_DURATION=2
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
+DIRECTION=1                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -100,25 +101,31 @@ done
 # 8. CREATING TRANSITIONS 1
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
-done
 
-# 9. CREATING TRANSITIONS 2
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
-do
+    case ${DIRECTION} in
+        1)
+            FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+
     FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=x='-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+        *)
+            FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='-t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+
+    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=x='w-t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+    esac
 done
 
-# 10. BEGIN CONCAT
+# 9. BEGIN CONCAT
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}overlaid][stream$((c+1))blended]"
 done
 
-# 11. END CONCAT
+# 10. END CONCAT
 FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
 
-# 12. END
+# 11. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_horizontal.mp4"
 
 eval ${FULL_SCRIPT}

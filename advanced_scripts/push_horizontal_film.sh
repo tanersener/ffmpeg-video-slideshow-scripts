@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced push horizontal film v3 (10.12.2018)
+# ffmpeg video slideshow script with advanced push horizontal film v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -14,6 +14,7 @@ FPS=30
 TRANSITION_DURATION=1
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="#00000000"
+DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -95,15 +96,30 @@ for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}][frame${c}]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
 
-    FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+    case ${DIRECTION} in
+        1)
+            FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
 
-    if [[ ${c} -eq 1 ]]; then
-        FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v]"
-    else
-        FULL_SCRIPT+="[stream$(( c-1 ))moving]"
-    fi
+            if [[ ${c} -eq 1 ]]; then
+                FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v]"
+            else
+                FULL_SCRIPT+="[stream$(( c-1 ))moving]"
+            fi
 
-    FULL_SCRIPT+="[stream${c}starting]overlay=x='-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
+            FULL_SCRIPT+="[stream${c}starting]overlay=x='-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
+        ;;
+        *)
+            FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v][stream${c}ending]overlay=x='-t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+
+            if [[ ${c} -eq 1 ]]; then
+                FULL_SCRIPT+="[$(( PHOTOS_COUNT+1 )):v]"
+            else
+                FULL_SCRIPT+="[stream$(( c-1 ))moving]"
+            fi
+
+            FULL_SCRIPT+="[stream${c}starting]overlay=x='w-t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
+        ;;
+    esac
 done
 
 # 9. BEGIN CONCAT

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal wipe out transition v3 (10.12.2018)
+# ffmpeg video slideshow script with horizontal wipe out transition v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -13,8 +13,9 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
-PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+PHOTO_MODE=1                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
+DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -94,7 +95,14 @@ done
 # 6. CREATING TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+    case ${DIRECTION} in
+        1)
+            FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+        *)
+            FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]overlay=x='-t/${TRANSITION_DURATION}*${WIDTH}':y=0,select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+        ;;
+    esac
 done
 
 # 7. BEGIN CONCAT

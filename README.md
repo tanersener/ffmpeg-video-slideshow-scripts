@@ -33,6 +33,7 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
     - **FPS:** Frames per second value for the output video
     - **PHOTO DURATION:** Defines how long each photo will be displayed, excluding transition, in seconds
     - **TRANSITION DURATION:** Defines transition duration, in seconds
+    - **DIRECTION:** Controls transition direction in supported scripts, e.g., `left to right`, `right to left`, `top to bottom`, `bottom to top` 
     - **BACKGROUND COLOR:** Defines background color. You can use short names like `black`, `white`; hex values in `0xYYYYYY` format like `0x265074`, `0xc4cdd4` or transparent color with `#00000000`. Refer to [color-syntax documentation](https://ffmpeg.org/ffmpeg-utils.html#color-syntax) for the details.
 
 - `# PHOTO OPTIONS` section defines a command to select which photos will be included in the slideshow and in which order. Default value is `find ../photos/*`, which selects all files found in the `photos` directory. Order is not defined in default selection. To provide ordering it is possible to append `sort` at the end of `find` as in `find ../photos/* | sort`. Please refer to man pages of [find](http://man7.org/linux/man-pages/man1/find.1.html) and [sort](http://man7.org/linux/man-pages/man1/sort.1.html) for additional information.

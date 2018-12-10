@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal cover transition v3 (10.12.2018)
+# ffmpeg video slideshow script with horizontal cover transition v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -15,6 +15,7 @@ TRANSITION_DURATION=1
 PHOTO_DURATION=2
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="#00000000"
+DIRECTION=1                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
@@ -94,7 +95,14 @@ done
 # 6. CREATING TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]blend=all_expr='if(gte(X,W*T/${TRANSITION_DURATION}),B,A)':shortest=1[stream$((c+1))blended];"
+    case ${DIRECTION} in
+        1)
+            FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]blend=all_expr='if(gte(X,W*T/${TRANSITION_DURATION}),B,A)':shortest=1[stream$((c+1))blended];"
+        ;;
+        *)
+            FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]blend=all_expr='if(gte(X,W - W*T/${TRANSITION_DURATION}),A,B)':shortest=1[stream$((c+1))blended];"
+        ;;
+    esac
 done
 
 # 7. BEGIN CONCAT
