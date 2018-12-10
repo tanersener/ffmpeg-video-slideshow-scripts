@@ -25,7 +25,9 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 ## Customization
 
-- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all customizable options for that individual file. Below you can see the list of common options. Please note that supported options are not limited to the list below and some of the scripts define options only valid for themselves.
+- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
+  
+  Below you can see the list of commonly used options. Please note that editable options are not limited to the list below and some scripts define their own options.
 
     - **PHOTO_MODE:** Defines how photos will be fitted to screen. Supported modes are `center`, `crop`, `scale` and `blur`
     - **WIDTH:** Width of the slideshow, in pixels
