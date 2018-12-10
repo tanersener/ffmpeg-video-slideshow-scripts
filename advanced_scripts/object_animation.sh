@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced object animation (formerly object move) v3 (02.12.2018)
+# ffmpeg video slideshow script with advanced object animation (formerly object move) v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #

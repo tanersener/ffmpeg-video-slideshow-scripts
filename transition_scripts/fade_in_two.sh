@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with fade in #2 transition v2 (04.12.2018)
+# ffmpeg video slideshow script with fade in #2 transition v3 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #

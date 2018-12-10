@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for advanced logo overlay and zoom v3 (01.12.2018)
+# ffmpeg video slideshow script for advanced logo overlay and zoom v4 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #

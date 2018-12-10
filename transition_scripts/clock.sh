@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with clock transition v2 (05.12.2018)
+# ffmpeg video slideshow script with clock transition v3 (10.12.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
