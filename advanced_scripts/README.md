@@ -51,6 +51,20 @@ Enhanced version of `Rotate` transition. Each photo stops rotating on a specific
 <img src="../docs/advanced_photo_collection.gif" width="380">
 
 
+## Push Box
+
+`Box In` and `Push` transitions combined.
+
+**Supported Options:** width, height, fps, photo duration, transition duration, background color
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
+
+<p float="left">
+  <img src="../docs/advanced_push_box_horizontal.gif" width="380">
+  <img src="../docs/advanced_push_box_vertical.gif" width="380" hspace="60"> 
+</p>
+
+
 ## Push Film
 
 Enhanced version of `Push` transition. Static parts are removed and a strip frame is used as overlay image to create film strip animation

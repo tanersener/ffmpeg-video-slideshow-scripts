@@ -161,20 +161,6 @@ New photo pushes previous photo
 </p>
 
 
-## Push Box
-
-`Box In` and `Push` transitions combined.
-
-**Supported Options:** width, height, fps, photo duration, transition duration, background color
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
-
-<p float="left">
-  <img src="../docs/transition_push_box_horizontal.gif" width="380">
-  <img src="../docs/transition_push_box_vertical.gif" width="380" hspace="60"> 
-</p>
-
-
 ## Rotate
 
 New photo appears moving from left to right and rotating

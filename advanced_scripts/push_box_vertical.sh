@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal push box transition v2 (04.12.2018)
+# ffmpeg video slideshow script with advanced vertical push box v3 (10.12.2018)
 #
 # Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
 #
@@ -81,7 +81,7 @@ done
 # 6. OVERLAY INPUTS ON TOP OF BACKGROUND COLOR SCREEN
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}prephaseout]overlay=x='t/(${TRANSITION_DURATION}/2)*${WIDTH}':y=0,trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phaseout];"
+    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}prephaseout]overlay=x=0:y='t/(${TRANSITION_DURATION}/2)*${HEIGHT}',trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phaseout];"
 
     if [[ ${c} -eq 1 ]]; then
         FIRST_STREAM="[${PHOTOS_COUNT}:v]"
@@ -89,7 +89,7 @@ do
         FIRST_STREAM="[stream$((c-1))phaseout]"
     fi
 
-    FULL_SCRIPT+="${FIRST_STREAM}[stream${c}prephasein]overlay=x='-${WIDTH}+${WIDTH}*t/(${TRANSITION_DURATION}/2)':y=0,trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phasein];"
+    FULL_SCRIPT+="${FIRST_STREAM}[stream${c}prephasein]overlay=x=0:y='-h+${HEIGHT}*t/(${TRANSITION_DURATION}/2)',trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phasein];"
 
     FULL_SCRIPT+="[stream${c}checkpoint]trim=duration=${CHECKPOINT_DURATION},split=2[stream${c}checkin][stream${c}checkout];"
 done
@@ -116,7 +116,7 @@ done
 FULL_SCRIPT+="[stream${PHOTOS_COUNT}phaseout]concat=n=$(( 6*PHOTOS_COUNT+1 )):v=1:a=0,format=yuv420p[video]\""
 
 # 11. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_box_horizontal.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_push_box_vertical.mp4"
 
 eval ${FULL_SCRIPT}
 
