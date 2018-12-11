@@ -101,7 +101,6 @@ done
 # 8. CREATING TRANSITIONS 1
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
-
     case ${DIRECTION} in
         1)
             FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
