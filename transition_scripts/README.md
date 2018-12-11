@@ -179,6 +179,20 @@ New photo appears with spin blur rotation effect
 <img src="../docs/transition_spin_blur_rotation.gif" width="380">
 
 
+## Stack
+
+Scrolls the photos horizontally or vertically
+
+**Options:** width, height, fps, total duration, background color, direction, include intro, include outro  
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
+
+<p float="left">
+  <img src="../docs/transition_stack_horizontal.gif" width="380">
+  <img src="../docs/transition_stack_vertical.gif" width="380" hspace="60"> 
+</p>
+
+
 ## Wipe In
 
 New photo appears moving in
