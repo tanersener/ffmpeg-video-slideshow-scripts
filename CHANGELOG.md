@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2018-12-11
+- Stack transition implemented in v2.x
+
 ## - 2018-12-10
 - Push box moved under advanced scripts in v2.x
 - Direction parameter implemented in v2.x
