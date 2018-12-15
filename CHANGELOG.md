@@ -1,15 +1,18 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2018-12-15
+- Tips section added in README.
+
 ## - 2018-12-11
-- Stack transition implemented in v2.x
+- Stack transition implemented in v2.x.
 
 ## - 2018-12-10
-- Push box moved under advanced scripts in v2.x
-- Direction parameter implemented in v2.x
+- Push box moved under advanced scripts in v2.x.
+- Direction parameter implemented in v2.x.
 
 ## - 2018-12-09
-- Photo mode parameter implemented in v2.x
+- Photo mode parameter implemented in v2.x.
 
 ## - 2018-12-06
 - v1.x and v2.x branch documentations updated.
@@ -24,7 +27,7 @@ All notable changes to this project will be documented in this file.
 
 ## - 2018-08-19
 - Spin blur rotation transition implemented.
-- Logo Overlay script renamed as Logo Overlay & Zoom
+- Logo Overlay script renamed as Logo Overlay & Zoom.
 
 ## - 2018-06-28
 - Box In transitions implemented.
@@ -35,13 +38,13 @@ All notable changes to this project will be documented in this file.
 - Logo Overlay updated. New script overlays a beating heart animation instead of static camera image.
 
 ## - 2018-06-23
-- Wipe In Horizontal with Vertical Panning and Wipe In Vertical with Horizontal Panning scripts updated as gists 
+- Wipe In Horizontal with Vertical Panning and Wipe In Vertical with Horizontal Panning scripts updated as gists.
 and removed from Advanced Scripts section.
-- Zoom In & Pan with Fade In/Out Transition and Zoom Out & Pan with Fade In/Out Transition scripts added in Advanced Scripts
+- Zoom In & Pan with Fade In/Out Transition and Zoom Out & Pan with Fade In/Out Transition scripts added in Advanced Scripts.
 
 ## - 2018-06-21
-- Wipe In Horizontal with Vertical Panning script added in Advanced Scripts
-- Wipe In Vertical with Horizontal Panning script added in Advanced Scripts
+- Wipe In Horizontal with Vertical Panning script added in Advanced Scripts.
+- Wipe In Vertical with Horizontal Panning script added in Advanced Scripts.
 
 ## - 2018-06-16
 - Existing bars transition scripts renamed as bars transition #1.
