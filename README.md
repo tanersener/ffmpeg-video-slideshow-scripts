@@ -44,7 +44,7 @@ If you want to learn more about how a specific script works refer to [v1.x](http
 
 ## Tips
 
-##### Speed
+#### Speed
 
 - Scripts may take a long time to complete depending on your computer hardware. You can decrease the values of `resolution`, `fps` and `duration` parameters as much as possible to increase the speed.
     
@@ -55,7 +55,7 @@ If you want to learn more about how a specific script works refer to [v1.x](http
   FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_vertical.mp4"
   ```
 
-##### Memory 
+#### Memory 
 
 - Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your photos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. Although this technique works perfect for some scripts and it won't be possible to guess that video is concatenated, some others will not include a transition between the partial videos and it will be noticeable that final video is concatenated. If you decide to apply this method, please pay attention to that.
     
