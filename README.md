@@ -42,6 +42,25 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 If you want to learn more about how a specific script works refer to [v1.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v1.x) branch of this repository. Scripts in `v1.x` branch are not customizable but easier to understand.
 
+## Tips
+
+##### Speed
+
+- Scripts may take a long time to complete depending on your computer hardware. You can decrease the values of `resolution`, `fps` and `duration` parameters as much as possible to increase the speed.
+    
+- At the end of each script there exists a `# XX. END` section which defines the video codec used with additional tuning variables. Currently all scripts use `H264` encoding using `Main` profile and level `4.2`. This information is given in `-profile:v main -level 42 -c:v libx264` part of that section. You can edit this part according to [H.264 Video Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264) to increase the speed of scripts. There are many different tuning parameters defined in that guide and some of them may work for script you used.
+
+  ```
+  # 11. END
+  FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_vertical.mp4"
+  ```
+
+##### Memory 
+
+- Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your photos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. Although this technique works perfect for some scripts and it won't be possible to guess that video is concatenated, some others will not include a transition between the partial videos and it will be noticeable that final video is concatenated. If you decide to apply this method, please pay attention to that.
+    
+    `ffmpeg -i part1.mp4 -i part2.mp4 -filter_complex "[0:v][1:v]concat=n=2:v=1:a=0[slideshow]" -map "[slideshow]" full_slidshow.mp4`
+
 
 ## Versions
 
