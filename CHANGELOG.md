@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-01-23
+- Circular collapse and circular expand transitions added.
+
 ## - 2018-12-15
 - Tips section added in README.
 
