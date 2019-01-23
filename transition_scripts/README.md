@@ -108,6 +108,12 @@ Horizontal and vertical expand at the same time
 
 <img src="../docs/transition_expand_both.gif" width="380">
 
+## Expand Circular
+
+Circular expand
+
+<img src="../docs/transition_expand_circular.gif" width="380">
+
 
 ## Fade In #1
 
