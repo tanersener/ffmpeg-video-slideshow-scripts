@@ -78,6 +78,12 @@ Horizontal and vertical collapse at the same time
 
 <img src="../docs/transition_collapse_both.gif" width="380">
 
+## Collapse Circular
+
+Circular collapse
+
+<img src="../docs/transition_collapse_circular.gif" width="380">
+
 
 ## Cover
 

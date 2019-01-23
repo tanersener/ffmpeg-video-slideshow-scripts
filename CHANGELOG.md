@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-01-23
+- Circular collapse and circular expand transitions added in v1.x branch.
+
 ## - 2018-12-06
 - v1.x branch documentation updated.
 
