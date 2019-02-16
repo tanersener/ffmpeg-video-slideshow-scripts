@@ -94,16 +94,16 @@ do
 done
 
 
-# 8. BEGIN CONCAT
+# 6. BEGIN CONCAT
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}panning]"
 done
 
-# 9. END CONCAT
+# 7. END CONCAT
 FULL_SCRIPT+="concat=n=${PHOTOS_COUNT}:v=1:a=0,format=yuv420p[video]\""
 
-# 10. END
+# 8. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_zoom_out_and_pan_with_fade_in_out_one.mp4"
 
 eval ${FULL_SCRIPT}
