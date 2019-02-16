@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom in and pan and fade in/out transition v2 (04.12.2018)
+# ffmpeg video slideshow script with zoom out and pan and fade in/out #1 transition v2 (04.12.2018)
 #
 # Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
 #
@@ -89,8 +89,10 @@ do
         ;;
     esac
 
-    FULL_SCRIPT+="[stream$((c+1))fadein][stream$((c+1))][stream$((c+1))fadeout]concat=n=3:v=1:a=0,scale=${WIDTH}*5:-1,zoompan=z='min(pzoom+0.002,2)':d=1:${POSITION_FORMULA}:s=${WIDTH}x${HEIGHT}[stream$((c+1))panning];"
+    FULL_SCRIPT+="[stream$((c+1))fadein][stream$((c+1))][stream$((c+1))fadeout]concat=n=3:v=1:a=0,scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.004':d=1:${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT}[stream$((c+1))panning];"
+
 done
+
 
 # 8. BEGIN CONCAT
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
@@ -102,7 +104,7 @@ done
 FULL_SCRIPT+="concat=n=${PHOTOS_COUNT}:v=1:a=0,format=yuv420p[video]\""
 
 # 10. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_zoom_in_and_pan_with_fade_in_out.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_zoom_out_and_pan_with_fade_in_out_one.mp4"
 
 eval ${FULL_SCRIPT}
 

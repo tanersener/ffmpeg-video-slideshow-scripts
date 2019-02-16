@@ -93,7 +93,7 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars sliding fr
 </p>
 
 
-## Zoom & Pan with Fade In/Out Transition
+## Zoom & Pan with Fade In/Out Transition #1
 
 Each photo focuses towards a different area of the photo
 
@@ -107,6 +107,6 @@ Each photo focuses towards a different area of the photo
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
 
 <p float="left">
-  <img src="../docs/advanced_zoom_in_and_pan_with_fade_in_out.gif" width="380">
-  <img src="../docs/advanced_zoom_out_and_pan_with_fade_in_out.gif" width="380" hspace="60"> 
+  <img src="../docs/advanced_zoom_in_and_pan_with_fade_in_out_one.gif" width="380">
+  <img src="../docs/advanced_zoom_out_and_pan_with_fade_in_out_one.gif" width="380" hspace="60"> 
 </p>
