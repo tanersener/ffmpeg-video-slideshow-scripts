@@ -16,6 +16,8 @@ PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="#00000000"
 DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
+IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
 PHOTOS=`find ../photos/*`
@@ -48,7 +50,7 @@ FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
 for photo in ${PHOTOS}; do
-    FULL_SCRIPT+="-loop 1 -i ${photo} "
+    FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
 # 3. ADD FILM STRIP PHOTO INPUT
@@ -68,7 +70,7 @@ do
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,setsar=sar=1/1[stream$((c+1))];"
         ;;
         2)
-            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1[stream$((c+1))];"
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',[${PHOTOS_COUNT}:v]overlay,crop=${WIDTH}:${HEIGHT},setsar=sar=1/1[stream$((c+1))];"
         ;;
         3)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1[stream$((c+1))];"
@@ -142,3 +144,5 @@ eval ${FULL_SCRIPT}
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
 echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'
+
+unset $IFS

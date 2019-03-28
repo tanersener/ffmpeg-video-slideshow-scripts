@@ -25,6 +25,8 @@ TEXT_SPEED=3                # 1=FASTEST, 2=FASTER, 3=MODERATE, 4=SLOW, 5=SLOWEST
 BACKGROUND_COLOR="#00000000"
 DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
+IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+
 # PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
 # PHOTOS=`find ../photos/* | sort -r`
 PHOTOS=`find ../photos/*`
@@ -58,7 +60,7 @@ FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
 for photo in ${PHOTOS}; do
-    FULL_SCRIPT+="-loop 1 -i ${photo} "
+    FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
 # 3. START FILTER COMPLEX
@@ -136,3 +138,5 @@ eval ${FULL_SCRIPT}
 ELAPSED_TIME=$(($SECONDS - $START_TIME))
 
 echo -e '\nSlideshow created in '$ELAPSED_TIME' seconds\n'
+
+unset $IFS

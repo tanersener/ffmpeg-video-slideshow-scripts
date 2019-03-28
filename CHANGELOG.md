@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-03-28
+- Added support for transparent input photos on push scripts in v2.x branch.
+
+## - 2019-03-27
+- Added support for file names with space character in v2.x branch.
+
 ## - 2019-02-16
 - Zoom & Pan with Fade In/Out Transition #2 scripts added in v2.x branch.
 
