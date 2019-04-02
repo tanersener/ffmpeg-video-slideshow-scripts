@@ -20,8 +20,8 @@ New photo appears through growing bars, bars grow from one side to the other sid
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_bars_horizontal_one.gif" width="380">
-  <img src="../docs/transition_bars_vertical_one.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_bars_horizontal_one.gif" width="360">
+  <img src="../docs/transition_bars_vertical_one.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -34,8 +34,8 @@ New photo appears through growing bars, bars grow from center to the both sides
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_bars_horizontal_two.gif" width="380">
-  <img src="../docs/transition_bars_vertical_two.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_bars_horizontal_two.gif" width="360">
+  <img src="../docs/transition_bars_vertical_two.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -48,8 +48,8 @@ New photo appears as a box moving in and out
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_box_in_horizontal.gif" width="380">
-  <img src="../docs/transition_box_in_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_box_in_horizontal.gif" width="360">
+  <img src="../docs/transition_box_in_vertical.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -59,7 +59,7 @@ New photo appears in growing square boxes
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color, cell size
 
-<img src="../docs/transition_checkerboard.gif" width="380">
+<img src="../docs/transition_checkerboard.gif" width="360">
 
 
 ## Clock
@@ -68,7 +68,7 @@ New photo is revealed by a clock like line swiping across the screen
 
 **Options:** photo mode, width, height, fps, photo duration, background color
 
-<img src="../docs/transition_clock.gif" width="380">
+<img src="../docs/transition_clock.gif" width="360">
 
 
 ## Collapse
@@ -80,8 +80,8 @@ New photo appears as two lines move from sides to center
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_collapse_horizontal.gif" width="380">
-  <img src="../docs/transition_collapse_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_collapse_horizontal.gif" width="360">
+  <img src="../docs/transition_collapse_vertical.gif" width="360" hspace="60"> 
 </p>
 
 ## Collapse Both
@@ -90,7 +90,7 @@ Horizontal and vertical collapse at the same time
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_collapse_both.gif" width="380">
+<img src="../docs/transition_collapse_both.gif" width="360">
 
 ## Collapse Circular
 
@@ -98,7 +98,7 @@ Circular collapse
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_collapse_circular.gif" width="380">
+<img src="../docs/transition_collapse_circular.gif" width="360">
 
 
 ## Cover
@@ -110,8 +110,8 @@ A line moving shows the new photo
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_cover_horizontal.gif" width="380">
-  <img src="../docs/transition_cover_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_cover_horizontal.gif" width="360">
+  <img src="../docs/transition_cover_vertical.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -124,8 +124,8 @@ New photo appears as two lines move from center to sides
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_expand_horizontal.gif" width="380">
-  <img src="../docs/transition_expand_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_expand_horizontal.gif" width="360">
+  <img src="../docs/transition_expand_vertical.gif" width="360" hspace="60"> 
 </p>
 
 ## Expand Both
@@ -134,7 +134,7 @@ Horizontal and vertical expand at the same time
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_expand_both.gif" width="380">
+<img src="../docs/transition_expand_both.gif" width="360">
 
 ## Expand Circular
 
@@ -142,7 +142,7 @@ Circular expand
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_expand_circular.gif" width="380">
+<img src="../docs/transition_expand_circular.gif" width="360">
 
 
 ## Fade In #1
@@ -151,7 +151,7 @@ New photo appears fading in
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_fade_in_one.gif" width="380">
+<img src="../docs/transition_fade_in_one.gif" width="360">
 
 
 ## Fade In #2
@@ -160,7 +160,7 @@ New photo appears fading in while the previous one is fading out
 
 **Options:** photo mode, width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_fade_in_two.gif" width="380">
+<img src="../docs/transition_fade_in_two.gif" width="360">
 
 
 ## Push
@@ -172,8 +172,8 @@ New photo pushes previous photo
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_push_horizontal.gif" width="380">
-  <img src="../docs/transition_push_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_push_horizontal.gif" width="360">
+  <img src="../docs/transition_push_vertical.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -183,7 +183,7 @@ New photo appears moving from left to right and rotating
 
 **Options:** width, height, fps, photo duration, transition duration, background color
 
-<img src="../docs/transition_rotate.gif" width="380">
+<img src="../docs/transition_rotate.gif" width="360">
 
 
 ## Spin Blur Rotation
@@ -192,7 +192,7 @@ New photo appears with spin blur rotation effect
 
 **Options:** width, height, fps, photo duration
 
-<img src="../docs/transition_spin_blur_rotation.gif" width="380">
+<img src="../docs/transition_spin_blur_rotation.gif" width="360">
 
 
 ## Stack
@@ -204,8 +204,8 @@ Scrolls the photos horizontally or vertically
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_stack_horizontal.gif" width="380">
-  <img src="../docs/transition_stack_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_stack_horizontal.gif" width="360">
+  <img src="../docs/transition_stack_vertical.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -218,8 +218,8 @@ New photo appears moving in
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_wipe_in_horizontal.gif" width="380">
-  <img src="../docs/transition_wipe_in_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_wipe_in_horizontal.gif" width="360">
+  <img src="../docs/transition_wipe_in_vertical.gif" width="360" hspace="60"> 
 </p>
 
 
@@ -232,6 +232,6 @@ New photo disappears moving out
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
-  <img src="../docs/transition_wipe_out_horizontal.gif" width="380">
-  <img src="../docs/transition_wipe_out_vertical.gif" width="380" hspace="60"> 
+  <img src="../docs/transition_wipe_out_horizontal.gif" width="360">
+  <img src="../docs/transition_wipe_out_vertical.gif" width="360" hspace="60"> 
 </p>
