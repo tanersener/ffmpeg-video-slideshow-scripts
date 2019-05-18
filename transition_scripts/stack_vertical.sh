@@ -36,7 +36,7 @@ if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     exit 1;
 fi
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nTotal duration: ${TOTAL_DURATION} s\n"
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
 

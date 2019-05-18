@@ -48,7 +48,7 @@ else
 fi
 
 echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\n\
-FPS: 30\nPhoto duration: ${PHOTO_DURATION} s\nTransition duration: ${TRANSITION_DURATION} s\n\
+FPS: ${FPS}\nPhoto duration: ${PHOTO_DURATION} s\nTransition duration: ${TRANSITION_DURATION} s\n\
 Total duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS

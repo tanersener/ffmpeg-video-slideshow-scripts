@@ -40,7 +40,7 @@ TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
 TOTAL_DURATION=$(( (TRANSITION_DURATION)*PHOTOS_COUNT + TRANSITION_DURATION ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nTransition duration: ${TRANSITION_DURATION} s\n\
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nTransition duration: ${TRANSITION_DURATION} s\n\
 Total duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
