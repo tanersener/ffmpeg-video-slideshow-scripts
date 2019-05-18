@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-05-18
+- Removed checkpoint phase from box in transition in v2.x branch.
+
 ## - 2019-04-12
 - Zoom speed parameter introduced for zoom & pan with fade in/out transition #1 in v2.x branch.
 

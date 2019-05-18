@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal box in transition v3 (10.12.2018)
+# ffmpeg video slideshow script with horizontal box in transition v4 (18.05.2019)
 #
-# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -39,21 +39,17 @@ fi
 # INTERNAL VARIABLES
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
 PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
-TOTAL_DURATION=$(( (PHOTO_DURATION+2*TRANSITION_DURATION)*PHOTOS_COUNT + (TRANSITION_DURATION*2*PHOTOS_COUNT/5) ))
+TOTAL_DURATION=$(( (PHOTO_DURATION+2*TRANSITION_DURATION)*PHOTOS_COUNT ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 if [[ $(( ((TRANSITION_DURATION*1000)/2)%1000 )) -eq 0 ]]; then
     TRANSITION_PHASE_DURATION="$((TRANSITION_DURATION/2)).0"
 else
     TRANSITION_PHASE_DURATION="$((TRANSITION_DURATION/2)).$(( ((TRANSITION_DURATION*1000)/2)%1000 ))"
 fi
-if [[ $(( ((TRANSITION_DURATION*1000)/5)%1000 )) -eq 0 ]]; then
-    CHECKPOINT_DURATION="$((TRANSITION_DURATION/5)).0"
-else
-    CHECKPOINT_DURATION="$((TRANSITION_DURATION/5)).$(( ((TRANSITION_DURATION*1000)/5)%1000 ))"
-fi
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nPhoto duration: ${PHOTO_DURATION} s\n\
-Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\n\
+FPS: 30\nPhoto duration: ${PHOTO_DURATION} s\nTransition duration: ${TRANSITION_DURATION} s\n\
+Total duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
 
@@ -93,8 +89,7 @@ do
 
     FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))overlaid];"
 
-    FULL_SCRIPT+="[stream$((c+1))out2]scale=w=${WIDTH}/2:-1,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=${BACKGROUND_COLOR},
-    trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=5[stream$((c+1))prephasein][stream$((c+1))checkpoint][stream$((c+1))prezoomin][stream$((c+1))prezoomout][stream$((c+1))prephaseout];"
+    FULL_SCRIPT+="[stream$((c+1))out2]scale=w=${WIDTH}/2:-1,pad=width=${WIDTH}:height=${HEIGHT}:x=(ow-iw)/2:y=(oh-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=4[stream$((c+1))prephasein][stream$((c+1))prezoomin][stream$((c+1))prezoomout][stream$((c+1))prephaseout];"
 done
 
 # 6. OVERLAY INPUTS ON TOP OF BACKGROUND COLOR SCREEN
@@ -110,8 +105,6 @@ do
             FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}prephaseout]overlay=x='${WIDTH}*t/(${TRANSITION_DURATION}/2)':y=0,trim=duration=${TRANSITION_PHASE_DURATION},select=lte(n\,(${TRANSITION_FRAME_COUNT}/2))[stream${c}phaseout];"
         ;;
     esac
-
-    FULL_SCRIPT+="[stream${c}checkpoint]trim=duration=${CHECKPOINT_DURATION},split=2[stream${c}checkin][stream${c}checkout];"
 done
 
 # 7. CREATING TRANSITIONS 1
@@ -129,11 +122,11 @@ done
 # 9. BEGIN CONCAT
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream${c}phasein][stream${c}checkin][stream${c}zoomin][stream${c}overlaid][stream${c}zoomout][stream${c}checkout][stream${c}phaseout]"
+    FULL_SCRIPT+="[stream${c}phasein][stream${c}zoomin][stream${c}overlaid][stream${c}zoomout][stream${c}phaseout]"
 done
 
 # 10. END CONCAT
-FULL_SCRIPT+="concat=n=$((7*PHOTOS_COUNT)):v=1:a=0,format=yuv420p[video]\""
+FULL_SCRIPT+="concat=n=$((5*PHOTOS_COUNT)):v=1:a=0,format=yuv420p[video]\""
 
 # 11. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_box_in_horizontal.mp4"
