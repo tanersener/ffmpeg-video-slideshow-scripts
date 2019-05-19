@@ -109,13 +109,11 @@ do
     case ${DIRECTION} in
         1)
             FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=y='t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
-
-    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+            FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
         ;;
         *)
             FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=y='-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
-
-    FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='h-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
+            FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=y='h-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
         ;;
     esac
 done
