@@ -57,7 +57,7 @@ done
 FULL_SCRIPT+="-loop 1 -i ../objects/film_strip_vertical.png "
 
 # 4. ADD BACKGROUND COLOR SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${FPS} "
 
 # 5. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""

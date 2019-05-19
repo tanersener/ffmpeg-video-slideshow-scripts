@@ -56,10 +56,10 @@ for photo in ${PHOTOS}; do
 done
 
 # 3. ADD BACKGROUND COLOR SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${FPS} "
 
 # 4. ADD TRANSPARENT SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT} "
+FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT},fps=${FPS} "
 
 # 5. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
