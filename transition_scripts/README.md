@@ -181,7 +181,7 @@ New photo pushes previous photo
 
 New photo appears moving from left to right and rotating
 
-**Options:** width, height, fps, photo duration, transition duration, background color
+**Options:** width, height, fps, photo duration, transition duration, photo mode, background color
 
 <img src="../docs/transition_rotate.gif" width="360">
 
