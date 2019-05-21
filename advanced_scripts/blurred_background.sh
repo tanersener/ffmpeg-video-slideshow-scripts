@@ -58,7 +58,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 4. PREPARING BLURRED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,format=rgba,boxblur=100,setsar=sar=1/1[stream$((c+1))blurred];"
+    FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,format=rgba,boxblur=100,setsar=sar=1/1,fps=${FPS}[stream$((c+1))blurred];"
 done
 
 # 5. PREPARING SCALED INPUTS

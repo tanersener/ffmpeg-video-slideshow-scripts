@@ -57,7 +57,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 5. PREPARING SCALED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=${WIDTH}:-1,setsar=sar=1/1[stream$((c+1))];"
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=${WIDTH}:-1,setsar=sar=1/1,fps=${FPS}[stream$((c+1))];"
 done
 
 STACKED_INPUTS=""
