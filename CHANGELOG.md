@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-05-22
+- Updated position formulas in advanced zoom in/out transitions in v2.x branch.
+
+## - 2019-05-21
+- Implemented PHOTO_MODE and BACKGROUND_COLOR options in advanced zoom in/out transitions in v2.x branch.
+
+## - 2019-05-19
+- Implemented PHOTO_MODE option for rotate transition in v2.x branch.
+
 ## - 2019-05-18
 - Removed checkpoint phase from box in transition in v2.x branch.
 

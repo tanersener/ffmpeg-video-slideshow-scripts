@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom in and pan and fade in/out #1 transition v4 (20.05.2019)
+# ffmpeg video slideshow script with zoom in and pan and fade in/out #1 transition v5 (21.05.2019)
 #
 # Copyright (c) 2018-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -101,19 +101,19 @@ do
 
     case ${POSITION_NUMBER} in
         0)
-            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y=0"
+            POSITION_FORMULA="x='iw/2':y='-${HEIGHT}-(ih/zoom/2)'"                      # TOP RIGHT
         ;;
         1)
-            POSITION_FORMULA="x='iw/2':y='(ih/zoom/2)'"
+            POSITION_FORMULA="x='iw/2':y='(ih/zoom/2)'"                                 # BOTTOM RIGHT
         ;;
         2)
-            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='-${HEIGHT}-(ih/zoom/2)'"
+            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"                # CENTER
         ;;
         3)
-            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='-${HEIGHT}-(ih/zoom/2)'"      # TOP LEFT
         ;;
         4)
-            POSITION_FORMULA="x='-(iw/zoom/2)':y='ih/2-${HEIGHT}'"
+            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='${HEIGHT}+(ih/zoom/2)'"       # BOTTOM LEFT
         ;;
     esac
 

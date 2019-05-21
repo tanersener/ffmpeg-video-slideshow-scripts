@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom out and pan and fade in/out #2 transition v2 (20.05.2019)
+# ffmpeg video slideshow script with zoom out and pan and fade in/out #2 transition v3 (21.05.2019)
 #
 # Copyright (c) 2019, Taner Sener (https://github.com/tanersener)
 #
@@ -11,8 +11,8 @@
 WIDTH=1280
 HEIGHT=720
 FPS=30
-TRANSITION_DURATION=2
-PHOTO_DURATION=2
+TRANSITION_DURATION=3
+PHOTO_DURATION=1
 PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
 
@@ -64,57 +64,49 @@ do
 
     case ${POSITION_NUMBER} in
         0)
-            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y=0"
+            POSITION_FORMULA="x='iw/2':y='-${HEIGHT}-(ih/zoom/2)'"                      # TOP RIGHT
         ;;
         1)
-            POSITION_FORMULA="x='iw/2':y='(ih/zoom/2)'"
+            POSITION_FORMULA="x='iw/2':y='(ih/zoom/2)'"                                 # BOTTOM RIGHT
         ;;
         2)
-            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='-${HEIGHT}-(ih/zoom/2)'"
+            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"                # CENTER
         ;;
         3)
-            POSITION_FORMULA="x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
+            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='-${HEIGHT}-(ih/zoom/2)'"      # TOP LEFT
         ;;
         4)
-            POSITION_FORMULA="x='-(iw/zoom/2)':y='ih/2-${HEIGHT}'"
+            POSITION_FORMULA="x='${WIDTH}-(iw/zoom/2)':y='${HEIGHT}+(ih/zoom/2)'"       # BOTTOM LEFT
         ;;
     esac
 
     case ${PHOTO_MODE} in
         1)
-            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR}"
         ;;
         2)
-            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba"
         ;;
         3)
-            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba"
         ;;
         4)
             FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,boxblur=100,setsar=sar=1/1[stream${c}blurred];"
             FULL_SCRIPT+="[${c}:v]scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba[stream${c}raw];"
-            FULL_SCRIPT+="[stream${c}blurred][stream${c}raw]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,setpts=PTS-STARTPTS,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+            FULL_SCRIPT+="[stream${c}blurred][stream${c}raw]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,setpts=PTS-STARTPTS"
         ;;
     esac
 
-    case ${PHOTO_MODE} in
-        1)
-            FULL_SCRIPT+="[stream$((c+1))out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadein];"
-            FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.0017*${TRANSITION_FRAME_COUNT}':d=max(${PHOTO_FRAME_COUNT}\,${TRANSITION_FRAME_COUNT}):${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))outzoom1][stream$((c+1))outzoom2];"
-        ;;
-        *)
-            FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadein];"
-            FULL_SCRIPT+="[stream$((c+1))out2]scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.0017*${TRANSITION_FRAME_COUNT}':d=max(${PHOTO_FRAME_COUNT}\,${TRANSITION_FRAME_COUNT}):${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))outzoom1][stream$((c+1))outzoom2];"
-        ;;
-    esac
+    FULL_SCRIPT+=",trim=start_frame=0:end_frame=${TRANSITION_FRAME_COUNT},setpts=PTS-STARTPTS,scale=${WIDTH}*5:-1,zoompan=z='if(lte(in,0),1.5,pzoom-0.004)':d=1:${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))out1][stream$((c+1))out2];"
 
-    FULL_SCRIPT+="[stream$((c+1))outzoom1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=out:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadeout];"
-    FULL_SCRIPT+="[stream$((c+1))outzoom2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+    FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadeinandzoom];"
+    FULL_SCRIPT+="[stream$((c+1))out2]trim=start_frame=${TRANSITION_FRAME_COUNT}-1:end_frame=${TRANSITION_FRAME_COUNT},setpts=PTS-STARTPTS,split=2[stream$((c+1))pre][stream$((c+1))preout];"
 
-    FULL_SCRIPT+="[stream$((c+1))fadein]scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.004':d=1:${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT}[stream$((c+1))fadeinandzoom];[stream$((c+1))fadeinandzoom][stream$((c+1))][stream$((c+1))fadeout]concat=n=3:v=1:a=0[stream$((c+1))panning];"
+    FULL_SCRIPT+="[stream$((c+1))pre]loop=loop=${PHOTO_FRAME_COUNT}:size=1:start=0,trim=duration=${PHOTO_DURATION},setpts=PTS-STARTPTS[stream$((c+1))];"
+    FULL_SCRIPT+="[stream$((c+1))preout]loop=loop=${TRANSITION_FRAME_COUNT}:size=1:start=0,trim=duration=${TRANSITION_DURATION},setpts=PTS-STARTPTS,fade=t=out:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadeout];"
 
+    FULL_SCRIPT+="[stream$((c+1))fadeinandzoom][stream$((c+1))][stream$((c+1))fadeout]concat=n=3:v=1:a=0[stream$((c+1))panning];"
 done
-
 
 # 5. BEGIN CONCAT
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
