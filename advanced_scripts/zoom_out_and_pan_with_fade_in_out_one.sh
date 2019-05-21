@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom out and pan and fade in/out #1 transition v3 (12.04.2019)
+# ffmpeg video slideshow script with zoom out and pan and fade in/out #1 transition v4 (20.05.2019)
 #
-# Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2018-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -13,7 +13,9 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
+PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 ZOOM_SPEED=2                # 1=SLOWEST, 2=SLOW, 3=MODERATE, 4=FASTER, 5=FASTEST, ...
+BACKGROUND_COLOR="black"
 
 IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
 
@@ -59,10 +61,33 @@ FULL_SCRIPT+="-filter_complex \""
 # 4. PREPARING SCALED INPUTS & FADE IN/OUT PARTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+    case ${PHOTO_MODE} in
+        1)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        2)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        3)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        4)
+            FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,format=rgba,boxblur=100,setsar=sar=1/1[stream${c}blurred];"
+            FULL_SCRIPT+="[${c}:v]scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream${c}raw];"
+            FULL_SCRIPT+="[stream${c}blurred][stream${c}raw]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,setpts=PTS-STARTPTS,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+    esac
 
-    FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
-    FULL_SCRIPT+="[stream$((c+1))out2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+    case ${PHOTO_MODE} in
+        1)
+            FULL_SCRIPT+="[stream$((c+1))out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
+            FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+        ;;
+        *)
+            FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
+            FULL_SCRIPT+="[stream$((c+1))out2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+        ;;
+    esac
 
     FULL_SCRIPT+="[stream$((c+1))in]fade=t=in:s=0:n=${TRANSITION_FRAME_COUNT}[stream$((c+1))fadein];"
     FULL_SCRIPT+="[stream$((c+1))out]fade=t=out:s=0:n=${TRANSITION_FRAME_COUNT}[stream$((c+1))fadeout];"

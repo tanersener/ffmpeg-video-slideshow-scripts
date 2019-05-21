@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom out and pan and fade in/out #2 transition v1 (16.02.2019)
+# ffmpeg video slideshow script with zoom out and pan and fade in/out #2 transition v2 (20.05.2019)
 #
 # Copyright (c) 2019, Taner Sener (https://github.com/tanersener)
 #
@@ -13,6 +13,8 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=2
 PHOTO_DURATION=2
+PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+BACKGROUND_COLOR="black"
 
 IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
 
@@ -78,10 +80,33 @@ do
         ;;
     esac
 
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+    case ${PHOTO_MODE} in
+        1)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        2)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        3)
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+        4)
+            FULL_SCRIPT+="[${c}:v]scale=${WIDTH}x${HEIGHT},setsar=sar=1/1,format=rgba,boxblur=100,setsar=sar=1/1[stream${c}blurred];"
+            FULL_SCRIPT+="[${c}:v]scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,format=rgba[stream${c}raw];"
+            FULL_SCRIPT+="[stream${c}blurred][stream${c}raw]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,setpts=PTS-STARTPTS,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+        ;;
+    esac
 
-    FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadein];"
-    FULL_SCRIPT+="[stream$((c+1))out2]scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.0017*${TRANSITION_FRAME_COUNT}':d=max(${PHOTO_FRAME_COUNT}\,${TRANSITION_FRAME_COUNT}):${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))outzoom1][stream$((c+1))outzoom2];"
+    case ${PHOTO_MODE} in
+        1)
+            FULL_SCRIPT+="[stream$((c+1))out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadein];"
+            FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.0017*${TRANSITION_FRAME_COUNT}':d=max(${PHOTO_FRAME_COUNT}\,${TRANSITION_FRAME_COUNT}):${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))outzoom1][stream$((c+1))outzoom2];"
+        ;;
+        *)
+            FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=in:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadein];"
+            FULL_SCRIPT+="[stream$((c+1))out2]scale=${WIDTH}*5:-1,zoompan=z='1.5-in*0.0017*${TRANSITION_FRAME_COUNT}':d=max(${PHOTO_FRAME_COUNT}\,${TRANSITION_FRAME_COUNT}):${POSITION_FORMULA}:fps=${FPS}:s=${WIDTH}x${HEIGHT},split=2[stream$((c+1))outzoom1][stream$((c+1))outzoom2];"
+        ;;
+    esac
 
     FULL_SCRIPT+="[stream$((c+1))outzoom1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),fade=t=out:s=0:d=${TRANSITION_DURATION}[stream$((c+1))fadeout];"
     FULL_SCRIPT+="[stream$((c+1))outzoom2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
