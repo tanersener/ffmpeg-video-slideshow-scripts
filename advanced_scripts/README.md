@@ -97,7 +97,7 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars sliding fr
 
 Each photo focuses towards a different area of the photo
 
-**Options:** width, height, fps, photo duration, transition duration, zoom speed
+**Options:** width, height, fps, photo duration, transition duration, zoom speed, photo mode, background color
 
 **Scene Arrangement (for each photo): Zoom & Pan is applied during all three stages**
 - fade in photo for `TRANSITION_DURATION` seconds
@@ -116,7 +116,7 @@ Each photo focuses towards a different area of the photo
 
 Each photo focuses towards a different area of the photo
 
-**Options:** width, height, fps, photo duration, transition duration
+**Options:** width, height, fps, photo duration, transition duration, photo mode, background color
 
 **Scene Arrangement (for each photo): Zoom & Pan is applied only during fade in stage**
 - fade in photo for `TRANSITION_DURATION` seconds
