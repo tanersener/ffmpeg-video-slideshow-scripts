@@ -18,7 +18,7 @@ Configurable shell scripts to create video slideshows from images using [FFmpeg]
 
 ## Description
 
-Each script creates a video slideshow using files inside `photos` folder. Transition scripts implements different transition effects and advanced scripts implements more complex animation like transitions/transformations.
+Each script creates a video slideshow using files inside `photos` folder. Transition scripts implement different transition effects and advanced scripts implement more complex animation like transitions/transformations.
 
 Output of all scripts is an `h264` encoded `MPEG-4` video.
 
