@@ -36,7 +36,7 @@ if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     exit 1;
 fi
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: 30\nTotal duration: ${TOTAL_DURATION} s\n"
+echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
 
@@ -49,7 +49,7 @@ for photo in ${PHOTOS}; do
 done
 
 # 3. ADD BACKGROUND COLOR SCREEN INPUT
-FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT} "
+FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${FPS} "
 
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
@@ -57,7 +57,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 5. PREPARING SCALED INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=${WIDTH}:-1,setsar=sar=1/1[stream$((c+1))];"
+    FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=${WIDTH}:-1,setsar=sar=1/1,fps=${FPS}[stream$((c+1))];"
 done
 
 STACKED_INPUTS=""
