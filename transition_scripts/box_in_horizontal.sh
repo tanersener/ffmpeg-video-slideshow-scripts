@@ -19,9 +19,10 @@ DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
-# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
-# PHOTOS=`find ../photos/* | sort -r`
-PHOTOS=`find ../photos/*`
+# FILE OPTIONS
+# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
+FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
 ############################
 # DO NO MODIFY LINES BELOW
@@ -29,7 +30,7 @@ PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
 let PHOTOS_COUNT=0
-for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
 
 if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     echo "Error: photos folder should contain at least two photos"
@@ -57,7 +58,7 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${PHOTOS}; do
+for photo in ${FILES[@]}; do
     FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 

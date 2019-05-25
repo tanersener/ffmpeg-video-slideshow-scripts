@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## - 2019-05-25
 - Renamed PHOTO_MODE as SCREEN_MODE in v2.x branch.
+- Replaced photos folder with media folder in v2.x branch.
 
 ## - 2019-05-22
 - Updated position formulas in advanced zoom in/out transitions in v2.x branch.

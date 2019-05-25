@@ -11,34 +11,37 @@ Configurable shell scripts to create video slideshows from images using [FFmpeg]
 
 ## Requirements
 
-- `ffmpeg 2.8.x` or later, except `ffmpeg 4.1` which has some bugs and crashes for some of the scripts
+- `ffmpeg 2.8.x` or later (newer versions are faster and consume less memory)
 
-`Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile `FFmpeg` from source you need to provide `--enable-libfreetype` flag on `./configure`. 
+Please note that `Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile `FFmpeg` from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 
 
 ## Description
 
-Each script creates a video slideshow using files inside `photos` folder. Transition scripts implement different transition effects and advanced scripts implement more complex animation like transitions/transformations.
+Each script creates a video slideshow using selected files from `media` folder. Transition scripts implement different transition effects and advanced scripts implement more complex animation like transitions/transformations.
 
 Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 
 ## Customization
 
-- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
+- There exists a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
   
-  Below you can see the list of commonly used options. Please note that editable options are not limited to the list below and some scripts define their own options.
+  Below you can see the list of commonly used options. Please note that editable options are not limited to the list below and some scripts define some extra options too.
 
     - **WIDTH:** Width of the slideshow, in pixels
     - **HEIGHT:** Height of the slideshow, in pixels
     - **FPS:** Frames per second value for the output video
-    - **PHOTO DURATION:** Defines how long each photo will be displayed, excluding transition, in seconds
+    - **PHOTO DURATION:** Defines how long each photo will be displayed, in seconds
     - **TRANSITION DURATION:** Defines transition duration, in seconds
-    - **SCREEN MODE:** Defines how photos/videos will be fitted to screen. Supported modes are `center`, `crop`, `scale` and `blur`
+    - **SCREEN MODE:** Defines how photos/videos will be fitted. Supported modes are `center`, `crop`, `scale` and `blur`
     - **DIRECTION:** Controls transition direction in supported scripts, e.g., `left to right`, `right to left`, `top to bottom`, `bottom to top` 
     - **BACKGROUND COLOR:** Defines background color. You can use short names like `black`, `white`; hex values in `0xYYYYYY` format like `0x265074`, `0xc4cdd4` or transparent color with `#00000000`. Refer to [color-syntax documentation](https://ffmpeg.org/ffmpeg-utils.html#color-syntax) for the details.
 
-- `# PHOTO OPTIONS` section defines a command to select which photos will be included in the slideshow and in which order. Default value is `find ../photos/*`, which selects all files found in the `photos` directory. Order is not defined in default selection. To provide ordering it is possible to append `sort` at the end of `find` as in `find ../photos/* | sort`. Please refer to man pages of [find](http://man7.org/linux/man-pages/man1/find.1.html) and [sort](http://man7.org/linux/man-pages/man1/sort.1.html) for additional information.
+- `# FILE OPTIONS` section defines which files will be included in the slideshow and in which order. 
+`find ../media/*.jpg` command is used by default, which selects all .jpg files found in the `media` folder. Order is not defined in default selection. 
+To provide ordering it is possible to append `sort` at the end of `find` as in `find ../media/*.jpg | sort -r`. 
+Please refer to man pages of [find](http://man7.org/linux/man-pages/man1/find.1.html) and [sort](http://man7.org/linux/man-pages/man1/sort.1.html) for additional information.
 
 If you want to learn more about how a specific script works refer to [v1.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v1.x) branch of this repository. Scripts in `v1.x` branch are not customizable but easier to understand.
 
@@ -48,7 +51,10 @@ If you want to learn more about how a specific script works refer to [v1.x](http
 
 - Scripts may take a long time to complete depending on your computer hardware. You can decrease the values of `resolution`, `fps` and `duration` parameters as much as possible to increase the speed.
     
-- At the end of each script there exists a `# XX. END` section which defines the video codec used with additional tuning variables. Currently all scripts use `H264` encoding using `Main` profile and level `4.2`. This information is given in `-profile:v main -level 42 -c:v libx264` part of that section. You can edit this part according to [H.264 Video Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264) to increase the speed of scripts. There are many different tuning parameters defined in that guide and some of them may work for script you used.
+- At the end of each script there exists a `# XX. END` section which defines the output video codec with additional tuning variables. 
+Currently all scripts use `H264` encoding using `Main` profile and level `4.2`. This information is given in `-profile:v main -level 42 -c:v libx264` part of that section. 
+You can edit this part according to [H.264 Video Encoding Guide](https://trac.ffmpeg.org/wiki/Encode/H.264) to increase the speed of the scripts. 
+There are many different tuning parameters defined in that guide and some of them may work for script you used.
 
   ```
   # 11. END
@@ -57,7 +63,9 @@ If you want to learn more about how a specific script works refer to [v1.x](http
 
 #### Memory 
 
-- Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your photos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. Although this technique works perfect for some scripts and it won't be possible to guess that video is concatenated, some others will not include a transition between the partial videos and it will be noticeable that final video is concatenated. If you decide to apply this method, please pay attention to that.
+- Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your photos/videos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. 
+Although this technique works perfect for some scripts and it won't be possible to guess that video is concatenated, some others will not include a transition between the partial videos and it will be noticeable that final video is concatenated. 
+If you decide to apply this method, please pay attention to that.
     
     `ffmpeg -i part1.mp4 -i part2.mp4 -filter_complex "[0:v][1:v]concat=n=2:v=1:a=0[slideshow]" -map "[slideshow]" full_slidshow.mp4`
 
@@ -113,7 +121,7 @@ Feel free to submit issues or pull requests.
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) with the following exceptions.
 
-Photos inside `photos` folder are published in the public domain. These photos are:
+Photos inside `media` folder are published in the public domain. These photos are:
 
 - [Colosseum](https://www.flickr.com/photos/134331036@N08/35674227104/) by [Klaus Berdiin Jensen](https://www.flickr.com/photos/134331036@N08/)
 
@@ -124,6 +132,14 @@ Photos inside `photos` folder are published in the public domain. These photos a
 - [Taj Mahal](https://www.flickr.com/photos/149013784@N08/32862668233/) by [juancolado3](https://www.flickr.com/photos/149013784@N08/)
 
 - [chichen itza](https://www.flickr.com/photos/kanvc/15398655930/) by [kan_v_c](https://www.flickr.com/photos/kanvc/)
+
+Videos inside `media` folder are published in the public domain. These videos are:
+
+- [Robin Bird](https://pixabay.com/videos/robin-bird-forest-nature-spring-21723)
+
+- [Waves](https://pixabay.com/videos/waves-vacation-summer-sun-ocean-3917)
+
+- [Wheat Field](https://pixabay.com/videos/wheat-wheat-field-nature-17285)
 
 Snow flake and heart images inside `objects` folder are downloaded from [pngimg.com](http://pngimg.com/download/7553) and [pngimg.com](http://pngimg.com/download/687), both licensed under the [Creative Commons 4.0 BY-NC](https://creativecommons.org/licenses/by-nc/4.0).
 
