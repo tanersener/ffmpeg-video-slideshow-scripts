@@ -1,11 +1,8 @@
 # FFmpeg Video Slideshow Advanced Scripts
 
-Scripts in this section demonstrate complex animation like transitions/transformations.
+Scripts in this section demonstrate complex animation like transitions/transformations. Only images are supported, no video input support.
 
-- Compatible with bash
-- Only images supported, no video input support
-
-ps: Sample animations used in this page are low in quality and does not represent full functionality of the scripts.
+Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Blurred Background
 

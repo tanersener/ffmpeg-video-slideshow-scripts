@@ -1,11 +1,8 @@
 # FFmpeg Video Slideshow Transition Scripts
 
-Each script in this section demonstrates a different transition animation.
+Each script in this section demonstrates a different transition animation. Only images are supported, no video input support.
 
-- Compatible with bash
-- Only images supported, no video input support
-
-ps: Sample animations used in this page are low in quality and does not represent full functionality of the scripts.
+Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Bars #1
 
