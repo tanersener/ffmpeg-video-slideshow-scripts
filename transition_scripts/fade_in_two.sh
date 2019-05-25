@@ -58,7 +58,7 @@ done
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS
+# 4. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -79,7 +79,7 @@ do
     esac
 done
 
-# 5. APPLYING PADDING
+# 5. APPLY PADDING
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
 
@@ -101,7 +101,7 @@ do
     fi
 done
 
-# 6. CREATING TRANSITION FRAMES
+# 6. CREATE TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream$((c+1))fadein][stream${c}fadeout]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"

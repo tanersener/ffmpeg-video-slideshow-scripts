@@ -55,7 +55,7 @@ done
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS
+# 4. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     if [[ $((c+1)) -eq 1 ]] || [[ $((c+1)) -eq ${PHOTOS_COUNT} ]]; then
@@ -65,14 +65,14 @@ do
     fi
 done
 
-# 5. ROTATING & BLURRING
+# 5. ROTATE & BLUR
 for (( c=2; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}sample]rotate=PI,split=2[stream${c}rotate_in_background][stream${c}pre_rotate_in];"
     FULL_SCRIPT+="[stream${c}pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream${c}rotate_in];"
 done
 
-# 6. CREATING TRANSITION FRAMES
+# 6. CREATE TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream${c}rotate_out];"

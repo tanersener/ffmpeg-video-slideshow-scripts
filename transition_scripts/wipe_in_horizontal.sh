@@ -59,7 +59,7 @@ done
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS
+# 4. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -80,7 +80,7 @@ do
     esac
 done
 
-# 5. APPLYING PADDING
+# 5. APPLY PADDING
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
@@ -95,7 +95,7 @@ do
     fi
 done
 
-# 6. CREATING TRANSITION FRAMES
+# 6. CREATE TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${DIRECTION} in

@@ -2,9 +2,10 @@
 
 Scripts in this section demonstrate complex animation like transitions/transformations.
 
-Animations are implemented inside filter_complex blocks.
+- Compatible with bash
+- Only images supported, no video input support
 
-Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
+ps: Sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Blurred Background
 

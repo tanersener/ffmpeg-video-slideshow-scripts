@@ -14,7 +14,7 @@ FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
 MAX_PHOTO_ANGLE=25
-BACKGROUND_COLOR="black"
+BACKGROUND_COLOR="#00000000"
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
@@ -64,7 +64,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 5. PREPARE BACKGROUND
 FULL_SCRIPT+="[${PHOTOS_COUNT}:v]trim=duration=${TOTAL_DURATION}[stream0collected];"
 
-# 6. PREPARING SCALED INPUTS
+# 6. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,pad=width=$((WIDTH*4)):height=${HEIGHT}:x=($((WIDTH*4))-iw)/2:y=(${HEIGHT}-ih)/2:color=#00000000,trim=duration=$(( (c+1)*(TRANSITION_DURATION+PHOTO_DURATION) )),setpts=PTS-STARTPTS[stream$((c+1))];"

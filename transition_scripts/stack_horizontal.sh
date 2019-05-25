@@ -55,7 +55,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=-1:${HEIGHT},setsar=sar=1/1,fps=${FPS}[stream$((c+1))];"

@@ -61,7 +61,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -82,7 +82,7 @@ do
     esac
 done
 
-# 6. APPLYING PADDING
+# 6. APPLY PADDING
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
 
@@ -103,7 +103,7 @@ do
     fi
 done
 
-# 7. CREATING ROTATING FRAMES
+# 7. CREATE ROTATION FRAMES
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     if [[ ${c} -eq 1 ]]; then

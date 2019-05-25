@@ -72,7 +72,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -130,13 +130,13 @@ do
     FULL_SCRIPT+="[stream${c}checkpoint]trim=duration=${CHECKPOINT_DURATION},split=2[stream${c}checkin][stream${c}checkout];"
 done
 
-# 7. CREATING TRANSITIONS 1
+# 7. CREATE TRANSITIONS 1
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}prezoomin]scale=iw*5:ih*5,zoompan=z='min(pzoom+0.04,2)':d=${TRANSITION_DURATION}:fps=${FPS}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${WIDTH}x${HEIGHT},setpts=0.5*PTS[stream${c}zoomin];"
 done
 
-# 8. CREATING TRANSITIONS 2
+# 8. CREATE TRANSITIONS 2
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}prezoomout]scale=iw*5:ih*5,zoompan=z='2-in*0.04':d=${TRANSITION_DURATION}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${WIDTH}x${HEIGHT},setpts=0.5*PTS[stream${c}zoomout];"

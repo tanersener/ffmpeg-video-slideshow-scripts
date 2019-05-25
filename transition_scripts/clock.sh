@@ -13,7 +13,7 @@ HEIGHT=720
 FPS=30
 PHOTO_DURATION=2
 SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
-BACKGROUND_COLOR="black"
+BACKGROUND_COLOR="#00000000"
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
@@ -58,7 +58,7 @@ done
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS
+# 4. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -94,7 +94,7 @@ do
     fi
 done
 
-# 6. CREATING TRANSITION FRAMES
+# 6. CREATE TRANSITION FRAMES
 for (( c=2; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}starting][stream$((c-1))ending]blend=all_expr='if(lte(T,0.125),if(gt(X,W/2)*lte(Y,H/2)*lte(X-W/2+Y-H/2,0),A,B),if(lte(T,0.25),if(gt(X,W/2)*lte(Y,H/2),A,B),if(lte(T,0.375),if((gt(X,W/2)*gt(Y,H/2)*gt(X-W/2-Y+H/2,0))+(gt(X,W/2)*lte(Y,H/2)),A,B),if(lte(T,0.5),if(gt(X,W/2),A,B),if(lte(T,0.625),if((lte(X,W/2)*gt(Y,H/2)*gt(X-W/2+Y-H/2,0))+gt(X,W/2),A,B),if(lte(T,0.75),if((lte(X,W/2)*gt(Y,H/2))+gt(X,W/2),A,B),if(lte(T,0.875),if((lte(X,W/2)*lte(Y,H/2)*lte(Y-H/2-X+W/2,0)),B,A),A)))))))':shortest=1[stream${c}blended];"

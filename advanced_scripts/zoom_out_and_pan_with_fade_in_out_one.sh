@@ -59,7 +59,7 @@ done
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS & FADE IN/OUT PARTS
+# 4. PREPARE INPUTS & FADE IN/OUT PARTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in

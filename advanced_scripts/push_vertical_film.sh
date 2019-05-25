@@ -13,7 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
-BACKGROUND_COLOR="black"
+BACKGROUND_COLOR="#00000000"
 DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
@@ -63,7 +63,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 5. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 6. PREPARING SCALED INPUTS
+# 6. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -84,7 +84,7 @@ do
     esac
 done
 
-# 7. PREPARING FILM STRIP PHOTO
+# 7. PREPARE FILM STRIP PHOTO
 FULL_SCRIPT+="[${PHOTOS_COUNT}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,split=${PHOTOS_COUNT}"
 
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))

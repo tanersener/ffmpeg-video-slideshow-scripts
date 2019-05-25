@@ -2,14 +2,10 @@
 
 Each script in this section demonstrates a different transition animation.
 
-Transitions are implemented in -filter_complex blocks in the following execution order.
+- Compatible with bash
+- Only images supported, no video input support
 
-1. Prepare input streams
-2. Generate static frames
-3. Generate transition frames
-4. Concat static and transition streams
-
-Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
+ps: Sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Bars #1
 

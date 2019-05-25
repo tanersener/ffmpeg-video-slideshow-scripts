@@ -14,7 +14,7 @@ FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
 SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
-BACKGROUND_COLOR="black"
+BACKGROUND_COLOR="#00000000"
 DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
@@ -67,7 +67,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -107,13 +107,13 @@ do
     esac
 done
 
-# 7. CREATING TRANSITIONS 1
+# 7. CREATE TRANSITIONS 1
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}prezoomin]scale=${WIDTH}*5:-1,zoompan=z='min(pzoom+0.04,2)':d=${TRANSITION_DURATION}:fps=${FPS}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${WIDTH}x${HEIGHT},setpts=0.5*PTS[stream${c}zoomin];"
 done
 
-# 8. CREATING TRANSITIONS 2
+# 8. CREATE TRANSITIONS 2
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}prezoomout]scale=${WIDTH}*5:-1,zoompan=z='2-in*0.04':d=${TRANSITION_DURATION}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s=${WIDTH}x${HEIGHT},setpts=0.5*PTS[stream${c}zoomout];"

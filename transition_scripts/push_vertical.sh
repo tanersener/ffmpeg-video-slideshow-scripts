@@ -65,7 +65,7 @@ FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT},fps=${FPS} "
 # 5. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 6. PREPARING SCALED INPUTS
+# 6. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
@@ -104,7 +104,7 @@ do
     fi
 done
 
-# 8. CREATING TRANSITIONS 1
+# 8. CREATE TRANSITIONS 1
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${DIRECTION} in
