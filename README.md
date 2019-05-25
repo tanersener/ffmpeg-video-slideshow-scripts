@@ -34,7 +34,7 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
     - **FPS:** Frames per second value for the output video
     - **PHOTO DURATION:** Defines how long each photo will be displayed, excluding transition, in seconds
     - **TRANSITION DURATION:** Defines transition duration, in seconds
-    - **PHOTO MODE:** Defines how photos will be fitted to screen. Supported modes are `center`, `crop`, `scale` and `blur`
+    - **SCREEN MODE:** Defines how photos/videos will be fitted to screen. Supported modes are `center`, `crop`, `scale` and `blur`
     - **DIRECTION:** Controls transition direction in supported scripts, e.g., `left to right`, `right to left`, `top to bottom`, `bottom to top` 
     - **BACKGROUND COLOR:** Defines background color. You can use short names like `black`, `white`; hex values in `0xYYYYYY` format like `0x265074`, `0xc4cdd4` or transparent color with `#00000000`. Refer to [color-syntax documentation](https://ffmpeg.org/ffmpeg-utils.html#color-syntax) for the details.
 

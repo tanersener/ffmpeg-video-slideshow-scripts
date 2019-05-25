@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom in and pan and fade in/out #1 transition v5 (21.05.2019)
+# ffmpeg video slideshow script with zoom in and pan and fade in/out #1 transition v6 (25.05.2019)
 #
 # Copyright (c) 2018-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -13,7 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
-PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 ZOOM_SPEED=2                # 1=SLOWEST, 2=SLOW, 3=MODERATE, 4=FASTER, 5=FASTEST, ...
 BACKGROUND_COLOR="black"
 
@@ -61,7 +61,7 @@ FULL_SCRIPT+="-filter_complex \""
 # 4. PREPARING SCALED INPUTS & FADE IN/OUT PARTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    case ${PHOTO_MODE} in
+    case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
         ;;
@@ -78,7 +78,7 @@ do
         ;;
     esac
 
-    case ${PHOTO_MODE} in
+    case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[stream$((c+1))out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
             FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"

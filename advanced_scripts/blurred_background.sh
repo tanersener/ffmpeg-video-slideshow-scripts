@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced blurred background v2 (01.12.2018)
+# ffmpeg video slideshow script with advanced blurred background v3 (25.05.2019)
 #
-# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #

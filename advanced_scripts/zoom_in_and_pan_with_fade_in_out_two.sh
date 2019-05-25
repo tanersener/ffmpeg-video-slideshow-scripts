@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with zoom in and pan and fade in/out #2 transition v3 (21.05.2019)
+# ffmpeg video slideshow script with zoom in and pan and fade in/out #2 transition v4 (25.05.2019)
 #
 # Copyright (c) 2019, Taner Sener (https://github.com/tanersener)
 #
@@ -13,7 +13,7 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=2
 PHOTO_DURATION=1
-PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
@@ -80,7 +80,7 @@ do
         ;;
     esac
 
-    case ${PHOTO_MODE} in
+    case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR}"
         ;;

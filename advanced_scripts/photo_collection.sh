@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script for advanced photo collection v2 (03.12.2018)
+# ffmpeg video slideshow script for advanced photo collection v3 (25.05.2019)
 #
-# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -14,7 +14,7 @@ FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
 MAX_PHOTO_ANGLE=25
-BACKGROUND_COLOR="#00000000"
+BACKGROUND_COLOR="black"
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
