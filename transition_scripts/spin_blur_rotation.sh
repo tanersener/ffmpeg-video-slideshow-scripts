@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with spin blur rotation transition v2 (05.12.2018)
+# ffmpeg video slideshow script with spin blur rotation transition v3 (25.05.2019)
 #
-# Copyright (c) 2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2018-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -13,11 +13,12 @@ HEIGHT=720
 FPS=30
 PHOTO_DURATION=2
 
-IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
-# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
-# PHOTOS=`find ../photos/* | sort -r`
-PHOTOS=`find ../photos/*`
+# FILE OPTIONS
+# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
+FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
 ############################
 # DO NO MODIFY LINES BELOW
@@ -25,7 +26,7 @@ PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
 let PHOTOS_COUNT=0
-for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
 
 if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     echo "Error: photos folder should contain at least two photos"
@@ -47,14 +48,14 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${PHOTOS}; do
+for photo in ${FILES[@]}; do
     FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 4. PREPARING SCALED INPUTS
+# 4. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     if [[ $((c+1)) -eq 1 ]] || [[ $((c+1)) -eq ${PHOTOS_COUNT} ]]; then
@@ -64,14 +65,14 @@ do
     fi
 done
 
-# 5. ROTATING & BLURRING
+# 5. ROTATE & BLUR
 for (( c=2; c<=${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}sample]rotate=PI,split=2[stream${c}rotate_in_background][stream${c}pre_rotate_in];"
     FULL_SCRIPT+="[stream${c}pre_rotate_in]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.6:c=none[stream${c}rotate_in];"
 done
 
-# 6. CREATING TRANSITION FRAMES
+# 6. CREATE TRANSITION FRAMES
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}pre_rotate_out]boxblur=luma_radius=10:luma_power=3,rotate=2*PI*t/0.4:c=none[stream${c}rotate_out];"

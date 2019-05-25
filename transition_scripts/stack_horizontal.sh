@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with horizontal stack transition v1 (11.12.2018)
+# ffmpeg video slideshow script with horizontal stack transition v2 (25.05.2019)
 #
-# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -17,11 +17,12 @@ DIRECTION=2                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 INCLUDE_INTRO=1             # START WITH EMPTY SCREEN
 INCLUDE_OUTRO=0             # END WITH EMPTY SCREEN
 
-IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
-# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
-# PHOTOS=`find ../photos/* | sort -r`
-PHOTOS=`find ../photos/*`
+# FILE OPTIONS
+# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
+FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
 ############################
 # DO NO MODIFY LINES BELOW
@@ -29,7 +30,7 @@ PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
 let PHOTOS_COUNT=0
-for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
 
 if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     echo "Error: photos folder should contain at least two photos"
@@ -44,7 +45,7 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${PHOTOS}; do
+for photo in ${FILES[@]}; do
     FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
@@ -54,7 +55,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=-1:${HEIGHT},setsar=sar=1/1,fps=${FPS}[stream$((c+1))];"

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with rotate transition v3 (19.05.2019)
+# ffmpeg video slideshow script with rotate transition v4 (25.05.2019)
 #
 # Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -12,15 +12,16 @@ WIDTH=1280
 HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
-PHOTO_MODE=4                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+SCREEN_MODE=4                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 PHOTO_DURATION=2
 BACKGROUND_COLOR="black"
 
-IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
-# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
-# PHOTOS=`find ../photos/* | sort -r`
-PHOTOS=`find ../photos/*`
+# FILE OPTIONS
+# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
+FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
 ############################
 # DO NO MODIFY LINES BELOW
@@ -28,7 +29,7 @@ PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
 let PHOTOS_COUNT=0
-for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
 
 if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     echo "Error: photos folder should contain at least two photos"
@@ -50,7 +51,7 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${PHOTOS}; do
+for photo in ${FILES[@]}; do
     FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
@@ -60,10 +61,10 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 5. PREPARING SCALED INPUTS
+# 5. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    case ${PHOTO_MODE} in
+    case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))pre1][stream$((c+1))pre2];"
         ;;
@@ -81,7 +82,7 @@ do
     esac
 done
 
-# 6. APPLYING PADDING
+# 6. APPLY PADDING
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
 
@@ -102,7 +103,7 @@ do
     fi
 done
 
-# 7. CREATING ROTATING FRAMES
+# 7. CREATE ROTATION FRAMES
 for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
 do
     if [[ ${c} -eq 1 ]]; then

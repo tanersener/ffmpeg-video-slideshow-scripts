@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with vertical push transition v4 (10.12.2018)
+# ffmpeg video slideshow script with vertical push transition v5 (25.05.2019)
 #
-# Copyright (c) 2017-2018, Taner Sener (https://github.com/tanersener)
+# Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 #
@@ -13,15 +13,16 @@ HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
 PHOTO_DURATION=2
-PHOTO_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
 DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
-IFS=$'\t\n'                 # NECESSARY TO SUPPORT SPACE IN FILE NAMES
+IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
-# PHOTO OPTIONS - ALL FILES UNDER photos FOLDER ARE USED - USE sort TO SPECIFY A SORTING MECHANISM
-# PHOTOS=`find ../photos/* | sort -r`
-PHOTOS=`find ../photos/*`
+# FILE OPTIONS
+# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
+FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
 ############################
 # DO NO MODIFY LINES BELOW
@@ -29,7 +30,7 @@ PHOTOS=`find ../photos/*`
 
 # CALCULATE LENGTH MANUALLY
 let PHOTOS_COUNT=0
-for photo in ${PHOTOS}; do (( PHOTOS_COUNT+=1 )); done
+for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
 
 if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
     echo "Error: photos folder should contain at least two photos"
@@ -51,7 +52,7 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${PHOTOS}; do
+for photo in ${FILES[@]}; do
     FULL_SCRIPT+="-loop 1 -i '${photo}' "
 done
 
@@ -64,10 +65,10 @@ FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT},fps=${FPS} "
 # 5. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
-# 6. PREPARING SCALED INPUTS
+# 6. PREPARE INPUTS
 for (( c=0; c<${PHOTOS_COUNT}; c++ ))
 do
-    case ${PHOTO_MODE} in
+    case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
         ;;
@@ -103,7 +104,7 @@ do
     fi
 done
 
-# 8. CREATING TRANSITIONS 1
+# 8. CREATE TRANSITIONS 1
 for (( c=1; c<${PHOTOS_COUNT}; c++ ))
 do
     case ${DIRECTION} in
