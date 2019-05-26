@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced vertical push box v4 (25.05.2019)
+# ffmpeg video slideshow script with vertical push box transition v4 (25.05.2019)
 #
 # Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -152,7 +152,7 @@ done
 FULL_SCRIPT+="[stream${IMAGE_COUNT}phaseout]concat=n=$(( 6*IMAGE_COUNT+1 )):v=1:a=0,format=yuv420p[video]\""
 
 # 11. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_push_box_vertical.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_box_vertical.mp4"
 
 eval ${FULL_SCRIPT}
 

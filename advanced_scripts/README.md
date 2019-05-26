@@ -104,35 +104,6 @@ Enhanced version of `Rotate` transition. Each image stops rotating on a specific
 <img src="../docs/advanced_photo_collection.gif" width="360">
 
 
-## Push Box
-
-`Box In` and `Push` transitions combined.
-
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
-
-#### Scene Arrangement
-
-|  #  |      Scene    |    Duration (seconds)    |
-|:---:|:-------------:|:------------------------:|
-|  1  | Box in Image #1 |   transition duration    |
-|  2  | Show Image #1          |      image duration      |
-|  3  | Box out Image #1 |   transition duration    |
-|  4  | Box in Image #2 |   transition duration    |
-|  5  | Show Image #2          |      image duration      |
-|  6  | Box out Image #2 |   transition duration    |
-| ... | ...                    |      ...                 |
-|  n*3-2  | Box in Image #n |   transition duration    |
-|  n*3-1  | Show Image #n  |      image duration      |
-|  n*3  | Box out Image #n |   transition duration    |
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
-
-<p float="left">
-  <img src="../docs/advanced_push_box_horizontal.gif" width="360">
-  <img src="../docs/advanced_push_box_vertical.gif" width="360" hspace="60"> 
-</p>
-
-
 ## Push Film
 
 Enhanced version of `Push` transition. Static parts are removed and a strip frame is used as overlay image to create film strip animation
@@ -155,31 +126,6 @@ Enhanced version of `Push` transition. Static parts are removed and a strip fram
 <p float="left">
   <img src="../docs/advanced_push_horizontal_film.gif" width="360">
   <img src="../docs/advanced_push_vertical_film.gif" width="360" hspace="60"> 
-</p>
-
-
-## Sliding Bars
-
-Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one side to another
-
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction
-
-#### Scene Arrangement
-
-|  #  |      Scene    |    Duration (seconds)    |
-|:---:|:-------------:|:------------------------:|
-|  1  | Show Image #1          |      image duration      |
-|  2  | Transition to Image #2 |   transition duration    |
-|  3  | Show Image #2          |      image duration      |
-|  4  | Transition to Image #3 |   transition duration    |
-| ... | ...                    |      ...                 |
-|  (n-1)*2+1  | Show Image #n  |      image duration      |
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
-
-<p float="left">
-  <img src="../docs/advanced_sliding_bars_horizontal.gif" width="360">
-  <img src="../docs/advanced_sliding_bars_vertical.gif" width="360" hspace="60"> 
 </p>
 
 

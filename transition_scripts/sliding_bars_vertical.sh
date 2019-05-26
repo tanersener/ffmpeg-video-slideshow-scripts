@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced horizontal sliding bars v5 (25.05.2019)
+# ffmpeg video slideshow script with advanced vertical sliding bars transition v5 (25.05.2019)
 #
 # Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -14,9 +14,9 @@ FPS=30
 TRANSITION_DURATION=1
 IMAGE_DURATION=2
 SCREEN_MODE=2               # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
-BAR_COUNT=8                 # HEIGHT SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT HORIZONTAL LINES WILL APPEAR ON TRANSITION
+BAR_COUNT=10                # WIDTH SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT VERTICAL LINES WILL APPEAR ON TRANSITION
 BACKGROUND_COLOR="black"
-DIRECTION=1                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
+DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
@@ -110,7 +110,7 @@ do
 
     for (( d=1; d<=${BAR_COUNT}; d++ ))
     do
-        FULL_SCRIPT+="[stream${c}starting${d}]crop=out_w=iw:out_h=ih/${BAR_COUNT}:x=0:y=ih/${BAR_COUNT}*$(( d-1 )),pad=w=${WIDTH}:h=${HEIGHT}:x=0:y=0:color=#00000000[stream${c}starting${d}cropped];"
+        FULL_SCRIPT+="[stream${c}starting${d}]crop=out_w=iw/${BAR_COUNT}:out_h=ih:x=iw/${BAR_COUNT}*$(( d-1 )):y=0,pad=w=${WIDTH}:h=${HEIGHT}:x=0:y=0:color=#00000000[stream${c}starting${d}cropped];"
     done
 
     for (( d=1; d<=${BAR_COUNT}; d++ ))
@@ -122,12 +122,14 @@ do
             FULL_SCRIPT+="[stream${c}starting$((d-1))added]"
         fi
 
+        # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
+
         case ${DIRECTION} in
             1)
-                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=x='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-w+${WIDTH}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-w))':y=h/${BAR_COUNT}*$((d-1)),select=lte(n\,${TRANSITION_FRAME_COUNT})"
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
             ;;
             *)
-                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=x='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),w-${WIDTH}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,w))':y=h/${BAR_COUNT}*$((d-1)),select=lte(n\,${TRANSITION_FRAME_COUNT})"
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),h-${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
             ;;
         esac
 
@@ -150,7 +152,7 @@ done
 FULL_SCRIPT+="[stream${IMAGE_COUNT}overlaid]concat=n=$((2*IMAGE_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
 
 # 9. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_sliding_bars_horizontal.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_sliding_bars_vertical.mp4"
 
 eval ${FULL_SCRIPT}
 
