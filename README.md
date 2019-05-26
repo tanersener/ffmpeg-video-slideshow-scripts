@@ -25,7 +25,7 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
 
 ## Customization
 
-- There exists a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
+- There is a `# SCRIPT OPTIONS` section at the top of each script. That section lists all editable parameters for that individual file. 
   
   Below you can see the list of commonly used options. Please note that editable options are not limited to the list below and some scripts define some extra options too.
 

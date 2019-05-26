@@ -59,9 +59,9 @@ FULL_SCRIPT+="-filter_complex \""
 for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     if [[ $((c+1)) -eq 1 ]] || [[ $((c+1)) -eq ${IMAGE_COUNT} ]]; then
-        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,trim=duration=$(( IMAGE_DURATION+1 )),crop=${WIDTH}:${HEIGHT},split=2[stream$((c+1))][stream$((c+1))sample];"
+        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,trim=duration=${IMAGE_DURATION},crop=${WIDTH}:${HEIGHT},split=2[stream$((c+1))][stream$((c+1))sample];"
     else
-        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,trim=duration=$(( IMAGE_DURATION+1 )),crop=${WIDTH}:${HEIGHT},split=3[stream$((c+1))][stream$((c+1))sample][stream$((c+1))sample2];"
+        FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,trim=duration=${IMAGE_DURATION},crop=${WIDTH}:${HEIGHT},split=3[stream$((c+1))][stream$((c+1))sample][stream$((c+1))sample2];"
     fi
 done
 

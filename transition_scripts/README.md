@@ -8,7 +8,18 @@ Please note that sample animations used in this page are low in quality and does
 
 New image appears through growing bars, bars grow from one side to the other side
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count 
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -24,6 +35,17 @@ New image appears through growing bars, bars grow from center to the both sides
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
@@ -37,6 +59,21 @@ New image appears through growing bars, bars grow from center to the both sides
 New image appears as a box moving in and out
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Box in Image #1 |   transition duration    |
+|  2  | Show Image #1          |      image duration      |
+|  3  | Box out Image #1 |   transition duration    |
+|  4  | Box in Image #2 |   transition duration    |
+|  5  | Show Image #2          |      image duration      |
+|  6  | Box out Image #2 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  n*3-2  | Box in Image #n |   transition duration    |
+|  n*3-1  | Show Image #n  |      image duration      |
+|  n*3  | Box out Image #n |   transition duration    |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -52,6 +89,17 @@ New image appears in growing square boxes
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, cell size
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_checkerboard.gif" width="360">
 
 
@@ -61,6 +109,17 @@ New image is revealed by a clock like line swiping across the screen
 
 **Options:** screen mode, width, height, fps, image duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_clock.gif" width="360">
 
 
@@ -69,6 +128,17 @@ New image is revealed by a clock like line swiping across the screen
 New image appears as two lines move from sides to center
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -83,6 +153,17 @@ Horizontal and vertical collapse at the same time
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_collapse_both.gif" width="360">
 
 ## Collapse Circular
@@ -90,6 +171,17 @@ Horizontal and vertical collapse at the same time
 Circular collapse
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 <img src="../docs/transition_collapse_circular.gif" width="360">
 
@@ -99,6 +191,17 @@ Circular collapse
 A line moving shows the new image
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -114,6 +217,17 @@ New image appears as two lines move from center to sides
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
@@ -127,6 +241,17 @@ Horizontal and vertical expand at the same time
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_expand_both.gif" width="360">
 
 ## Expand Circular
@@ -134,6 +259,17 @@ Horizontal and vertical expand at the same time
 Circular expand
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 <img src="../docs/transition_expand_circular.gif" width="360">
 
@@ -144,6 +280,17 @@ New image appears fading in
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_fade_in_one.gif" width="360">
 
 
@@ -153,6 +300,17 @@ New image appears fading in while the previous one is fading out
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_fade_in_two.gif" width="360">
 
 
@@ -161,6 +319,17 @@ New image appears fading in while the previous one is fading out
 New image pushes previous image
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -176,6 +345,17 @@ New image appears moving from left to right and rotating
 
 **Options:** width, height, fps, image duration, transition duration, screen mode, background color
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Transition to Image #1 |   transition duration    |
+|  2  | Show Image #1          |      image duration      |
+|  3  | Transition to Image #2 |   transition duration    |
+|  4  | Show Image #2          |      image duration      |
+| ... | ...                    |      ...                 |
+|  n*2  | Show Image #n  |      image duration      |
+
 <img src="../docs/transition_rotate.gif" width="360">
 
 
@@ -185,6 +365,17 @@ New image appears with spin blur rotation effect
 
 **Options:** width, height, fps, image duration
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |  image duration      |
+|  2  | Transition to Image #2 |     0.5    |
+|  3  | Show Image #2          |  image duration      |
+|  4  | Transition to Image #3 |     0.5    |
+| ... | ...                    |      ...             |
+|  (n-1)*2+1  | Show Image #n  |  image duration      |
+
 <img src="../docs/transition_spin_blur_rotation.gif" width="360">
 
 
@@ -193,6 +384,16 @@ New image appears with spin blur rotation effect
 Scrolls the images horizontally or vertically
 
 **Options:** width, height, fps, total duration, background color, direction, include intro, include outro  
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Transition to Image #1 |   total duration/image count    |
+|  2  | Transition to Image #2 |   total duration/image count    |
+|  3  | Transition to Image #3 |   total duration/image count    |
+| ... | ...                    |      ...                 |
+|  n  | Transition to Image #n |   total duration/image count    |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -208,6 +409,17 @@ New image appears moving in
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
+
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
 <p float="left">
@@ -221,6 +433,17 @@ New image appears moving in
 New image disappears moving out
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+
+#### Scene Arrangement
+
+|  #  |      Scene    |    Duration (seconds)    |
+|:---:|:-------------:|:------------------------:|
+|  1  | Show Image #1          |      image duration      |
+|  2  | Transition to Image #2 |   transition duration    |
+|  3  | Show Image #2          |      image duration      |
+|  4  | Transition to Image #3 |   transition duration    |
+| ... | ...                    |      ...                 |
+|  (n-1)*2+1  | Show Image #n  |      image duration      |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
