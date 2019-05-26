@@ -6,9 +6,9 @@ Please note that sample animations used in this page are low in quality and does
 
 ## Bars #1
 
-New photo appears through growing bars, bars grow from one side to the other side
+New image appears through growing bars, bars grow from one side to the other side
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, bar count 
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count 
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -20,9 +20,9 @@ New photo appears through growing bars, bars grow from one side to the other sid
 
 ## Bars #2
 
-New photo appears through growing bars, bars grow from center to the both sides
+New image appears through growing bars, bars grow from center to the both sides
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, bar count
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -34,9 +34,9 @@ New photo appears through growing bars, bars grow from center to the both sides
 
 ## Box In
 
-New photo appears as a box moving in and out
+New image appears as a box moving in and out
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -48,27 +48,27 @@ New photo appears as a box moving in and out
 
 ## Checkerboard
 
-New photo appears in growing square boxes
+New image appears in growing square boxes
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, cell size
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, cell size
 
 <img src="../docs/transition_checkerboard.gif" width="360">
 
 
 ## Clock
 
-New photo is revealed by a clock like line swiping across the screen
+New image is revealed by a clock like line swiping across the screen
 
-**Options:** screen mode, width, height, fps, photo duration, background color
+**Options:** screen mode, width, height, fps, image duration, background color
 
 <img src="../docs/transition_clock.gif" width="360">
 
 
 ## Collapse
 
-New photo appears as two lines move from sides to center
+New image appears as two lines move from sides to center
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -81,7 +81,7 @@ New photo appears as two lines move from sides to center
 
 Horizontal and vertical collapse at the same time
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_collapse_both.gif" width="360">
 
@@ -89,16 +89,16 @@ Horizontal and vertical collapse at the same time
 
 Circular collapse
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_collapse_circular.gif" width="360">
 
 
 ## Cover
 
-A line moving shows the new photo
+A line moving shows the new image
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -110,9 +110,9 @@ A line moving shows the new photo
 
 ## Expand
 
-New photo appears as two lines move from center to sides
+New image appears as two lines move from center to sides
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -125,7 +125,7 @@ New photo appears as two lines move from center to sides
 
 Horizontal and vertical expand at the same time
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_expand_both.gif" width="360">
 
@@ -133,34 +133,34 @@ Horizontal and vertical expand at the same time
 
 Circular expand
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_expand_circular.gif" width="360">
 
 
 ## Fade In #1
 
-New photo appears fading in
+New image appears fading in
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_fade_in_one.gif" width="360">
 
 
 ## Fade In #2
 
-New photo appears fading in while the previous one is fading out
+New image appears fading in while the previous one is fading out
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
 <img src="../docs/transition_fade_in_two.gif" width="360">
 
 
 ## Push
 
-New photo pushes previous photo
+New image pushes previous image
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -172,25 +172,25 @@ New photo pushes previous photo
 
 ## Rotate
 
-New photo appears moving from left to right and rotating
+New image appears moving from left to right and rotating
 
-**Options:** width, height, fps, photo duration, transition duration, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, screen mode, background color
 
 <img src="../docs/transition_rotate.gif" width="360">
 
 
 ## Spin Blur Rotation
 
-New photo appears with spin blur rotation effect
+New image appears with spin blur rotation effect
 
-**Options:** width, height, fps, photo duration
+**Options:** width, height, fps, image duration
 
 <img src="../docs/transition_spin_blur_rotation.gif" width="360">
 
 
 ## Stack
 
-Scrolls the photos horizontally or vertically
+Scrolls the images horizontally or vertically
 
 **Options:** width, height, fps, total duration, background color, direction, include intro, include outro  
 
@@ -204,9 +204,9 @@ Scrolls the photos horizontally or vertically
 
 ## Wipe In
 
-New photo appears moving in
+New image appears moving in
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -218,9 +218,9 @@ New photo appears moving in
 
 ## Wipe Out
 
-New photo disappears moving out
+New image disappears moving out
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 

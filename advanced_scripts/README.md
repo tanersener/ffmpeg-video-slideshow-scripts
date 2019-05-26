@@ -8,7 +8,7 @@ Please note that sample animations used in this page are low in quality and does
 
 Replaces empty areas from sides/top/bottom with blur effect
 
-**Options:** width, height, fps, photo duration, transition duration
+**Options:** width, height, fps, image duration, transition duration
 
 <img src="../docs/advanced_blurred_background.gif" width="360">
 
@@ -17,7 +17,7 @@ Replaces empty areas from sides/top/bottom with blur effect
 
 Overlays a beating heart animation (generated from a static heart image with zoom effect) at the right bottom corner of the slideshow
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, heart frame size, heart frame position
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, heart frame size, heart frame position
 
 <img src="../docs/advanced_logo_overlay_and_zoom.gif" width="360">
 
@@ -26,7 +26,7 @@ Overlays a beating heart animation (generated from a static heart image with zoo
 
 Moves text from right to the left or from left to the right on a slideshow
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position, direction
 
 <img src="../docs/advanced_moving_text.gif" width="360">
 
@@ -35,16 +35,16 @@ Moves text from right to the left or from left to the right on a slideshow
 
 Animates snow flakes falling (from random positions) and rotating around themselves
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
 
 <img src="../docs/advanced_object_animation.gif" width="360">
 
 
 ## Photo Collection
 
-Enhanced version of `Rotate` transition. Each photo stops rotating on a specific angle where some parts of the previous photos are still visible
+Enhanced version of `Rotate` transition. Each image stops rotating on a specific angle where some parts of the previous images are still visible
 
-**Options:** width, height, fps, photo duration, transition duration, background color, max photo angle 
+**Options:** width, height, fps, image duration, transition duration, background color, max image angle 
 
 <img src="../docs/advanced_photo_collection.gif" width="360">
 
@@ -53,7 +53,7 @@ Enhanced version of `Rotate` transition. Each photo stops rotating on a specific
 
 `Box In` and `Push` transitions combined.
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -81,7 +81,7 @@ Enhanced version of `Push` transition. Static parts are removed and a strip fram
 
 Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one to side to another
 
-**Options:** screen mode, width, height, fps, photo duration, transition duration, background color, bar count, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Horizontal &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Vertical
 
@@ -93,14 +93,14 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars sliding fr
 
 ## Zoom & Pan with Fade In/Out Transition #1
 
-Each photo focuses towards a different area of the photo
+Each image focuses towards a different area of the image
 
-**Options:** width, height, fps, photo duration, transition duration, zoom speed, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, zoom speed, screen mode, background color
 
-**Scene Arrangement (for each photo): Zoom & Pan is applied during all three stages**
-- fade in photo for `TRANSITION_DURATION` seconds
-- show photo for `PHOTO_DURATION` seconds
-- fade out photo for for `TRANSITION_DURATION` seconds
+**Scene Arrangement (for each image): Zoom & Pan is applied during all three stages**
+- fade in image for `TRANSITION_DURATION` seconds
+- show image for `IMAGE_DURATION` seconds
+- fade out image for for `TRANSITION_DURATION` seconds
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
 
@@ -112,14 +112,14 @@ Each photo focuses towards a different area of the photo
 
 ## Zoom & Pan with Fade In/Out Transition #2
 
-Each photo focuses towards a different area of the photo
+Each image focuses towards a different area of the image
 
-**Options:** width, height, fps, photo duration, transition duration, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, screen mode, background color
 
-**Scene Arrangement (for each photo): Zoom & Pan is applied only during fade in stage**
-- fade in photo for `TRANSITION_DURATION` seconds
-- show photo for `PHOTO_DURATION` seconds
-- fade out photo for for `TRANSITION_DURATION` seconds
+**Scene Arrangement (for each image): Zoom & Pan is applied only during fade in stage**
+- fade in image for `TRANSITION_DURATION` seconds
+- show image for `IMAGE_DURATION` seconds
+- fade out image for for `TRANSITION_DURATION` seconds
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
 

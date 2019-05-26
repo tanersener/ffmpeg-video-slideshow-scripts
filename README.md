@@ -32,9 +32,9 @@ Output of all scripts is an `h264` encoded `MPEG-4` video.
     - **WIDTH:** Width of the slideshow, in pixels
     - **HEIGHT:** Height of the slideshow, in pixels
     - **FPS:** Frames per second value for the output video
-    - **PHOTO DURATION:** Defines how long each photo will be displayed, in seconds
+    - **IMAGE DURATION:** Defines how long each image will be displayed, in seconds
     - **TRANSITION DURATION:** Defines transition duration, in seconds
-    - **SCREEN MODE:** Defines how photos/videos will be fitted. Supported modes are `center`, `crop`, `scale` and `blur`
+    - **SCREEN MODE:** Defines how images/videos will be fitted. Supported modes are `center`, `crop`, `scale` and `blur`
     - **DIRECTION:** Controls transition direction in supported scripts, e.g., `left to right`, `right to left`, `top to bottom`, `bottom to top` 
     - **BACKGROUND COLOR:** Defines background color. You can use short names like `black`, `white`; hex values in `0xYYYYYY` format like `0x265074`, `0xc4cdd4` or transparent color with `#00000000`. Refer to [color-syntax documentation](https://ffmpeg.org/ffmpeg-utils.html#color-syntax) for the details.
 
@@ -63,7 +63,7 @@ There are many different tuning parameters defined in that guide and some of the
 
 #### Memory 
 
-- Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your photos/videos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. 
+- Unfortunately some scripts consume too much memory. If you experience memory issues, you may try to split your images/videos into two or more smaller sets, create partial videos for each set and concatenate them with the following command. 
 Although this technique works perfect for some scripts and it won't be possible to guess that video is concatenated, some others will not include a transition between the partial videos and it will be noticeable that final video is concatenated. 
 If you decide to apply this method, please pay attention to that.
     
@@ -121,7 +121,7 @@ Feel free to submit issues or pull requests.
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) with the following exceptions.
 
-Photos inside `media` folder are published in the public domain. These photos are:
+Images inside `media` folder are published in the public domain. These images are:
 
 - [Colosseum](https://www.flickr.com/photos/134331036@N08/35674227104/) by [Klaus Berdiin Jensen](https://www.flickr.com/photos/134331036@N08/)
 

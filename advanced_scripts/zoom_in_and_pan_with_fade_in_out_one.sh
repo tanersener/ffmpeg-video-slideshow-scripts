@@ -12,15 +12,15 @@ WIDTH=1280
 HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
-PHOTO_DURATION=2
-SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+IMAGE_DURATION=2
+SCREEN_MODE=2               # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 ZOOM_SPEED=2                # 1=SLOWEST, 2=SLOW, 3=MODERATE, 4=FASTER, 5=FASTEST, ...
 BACKGROUND_COLOR="black"
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
 # FILE OPTIONS
-# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=`find ../media/*.jpg | sort -r`             # USE ALL IMAGES UNDER THE media FOLDER SORTED
 # FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
 FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
@@ -29,21 +29,21 @@ FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE m
 ############################
 
 # CALCULATE LENGTH MANUALLY
-let PHOTOS_COUNT=0
-for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
+let IMAGE_COUNT=0
+for IMAGE in ${FILES[@]}; do (( IMAGE_COUNT+=1 )); done
 
-if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
-    echo "Error: photos folder should contain at least two photos"
+if [[ ${IMAGE_COUNT} -lt 2 ]]; then
+    echo "Error: media folder should contain at least two images"
     exit 1;
 fi
 
 # INTERNAL VARIABLES
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
-PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
-TOTAL_DURATION=$(( (PHOTO_DURATION+2*TRANSITION_DURATION)*PHOTOS_COUNT ))
+IMAGE_FRAME_COUNT=$(( IMAGE_DURATION*FPS ))
+TOTAL_DURATION=$(( (IMAGE_DURATION+2*TRANSITION_DURATION)*IMAGE_COUNT ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nPhoto duration: ${PHOTO_DURATION} s\n\
+echo -e "\nVideo Slideshow Info\n------------------------\nImage count: ${IMAGE_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nImage duration: ${IMAGE_DURATION} s\n\
 Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
@@ -52,15 +52,15 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${FILES[@]}; do
-    FULL_SCRIPT+="-loop 1 -i '${photo}' "
+for IMAGE in ${FILES[@]}; do
+    FULL_SCRIPT+="-loop 1 -i '${IMAGE}' "
 done
 
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
 # 4. PREPARE INPUTS & FADE IN/OUT PARTS
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
         1)
@@ -82,11 +82,11 @@ do
     case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[stream$((c+1))out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
-            FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+            FULL_SCRIPT+="[stream$((c+1))out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${IMAGE_DURATION},select=lte(n\,${IMAGE_FRAME_COUNT})[stream$((c+1))];"
         ;;
         *)
             FULL_SCRIPT+="[stream$((c+1))out1]trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream$((c+1))in][stream$((c+1))out];"
-            FULL_SCRIPT+="[stream$((c+1))out2]trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream$((c+1))];"
+            FULL_SCRIPT+="[stream$((c+1))out2]trim=duration=${IMAGE_DURATION},select=lte(n\,${IMAGE_FRAME_COUNT})[stream$((c+1))];"
         ;;
     esac
 
@@ -95,7 +95,7 @@ do
 done
 
 # 5. ZOOM & PAN EACH STREAM
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
 
     POSITION_NUMBER=$((RANDOM % 5));
@@ -122,13 +122,13 @@ do
 done
 
 # 6. BEGIN CONCAT
-for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}panning]"
 done
 
 # 7. END CONCAT
-FULL_SCRIPT+="concat=n=${PHOTOS_COUNT}:v=1:a=0,format=yuv420p[video]\""
+FULL_SCRIPT+="concat=n=${IMAGE_COUNT}:v=1:a=0,format=yuv420p[video]\""
 
 # 8. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_zoom_in_and_pan_with_fade_in_out_one.mp4"
