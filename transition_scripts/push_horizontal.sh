@@ -12,15 +12,15 @@ WIDTH=1280
 HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
-PHOTO_DURATION=2
-SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+IMAGE_DURATION=2
+SCREEN_MODE=2               # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 BACKGROUND_COLOR="black"
 DIRECTION=1                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
 # FILE OPTIONS
-# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=`find ../media/*.jpg | sort -r`             # USE ALL IMAGES UNDER THE media FOLDER SORTED
 # FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
 FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
@@ -29,21 +29,21 @@ FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE m
 ############################
 
 # CALCULATE LENGTH MANUALLY
-let PHOTOS_COUNT=0
-for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
+let IMAGE_COUNT=0
+for IMAGE in ${FILES[@]}; do (( IMAGE_COUNT+=1 )); done
 
-if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
-    echo "Error: photos folder should contain at least two photos"
+if [[ ${IMAGE_COUNT} -lt 2 ]]; then
+    echo "Error: media folder should contain at least two images"
     exit 1;
 fi
 
 # INTERNAL VARIABLES
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
-PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
-TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+IMAGE_FRAME_COUNT=$(( IMAGE_DURATION*FPS ))
+TOTAL_DURATION=$(( (IMAGE_DURATION+TRANSITION_DURATION)*IMAGE_COUNT - TRANSITION_DURATION ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nPhoto duration: ${PHOTO_DURATION} s\n\
+echo -e "\nVideo Slideshow Info\n------------------------\nImage count: ${IMAGE_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nImage duration: ${IMAGE_DURATION} s\n\
 Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
@@ -52,8 +52,8 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${FILES[@]}; do
-    FULL_SCRIPT+="-loop 1 -i '${photo}' "
+for IMAGE in ${FILES[@]}; do
+    FULL_SCRIPT+="-loop 1 -i '${IMAGE}' "
 done
 
 # 3. ADD BACKGROUND COLOR SCREEN INPUT
@@ -66,14 +66,14 @@ FULL_SCRIPT+="-f lavfi -i nullsrc=s=${WIDTH}x${HEIGHT},fps=${FPS} "
 FULL_SCRIPT+="-filter_complex \""
 
 # 6. PREPARE INPUTS
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
         1)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),min(iw,${WIDTH}),-1)':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,min(ih,${HEIGHT}))',scale=trunc(iw/2)*2:trunc(ih/2)*2,setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
         ;;
         2)
-            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',[${PHOTOS_COUNT}:v]overlay,crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
+            FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=w='if(gte(iw/ih,${WIDTH}/${HEIGHT}),-1,${WIDTH})':h='if(gte(iw/ih,${WIDTH}/${HEIGHT}),${HEIGHT},-1)',[${IMAGE_COUNT}:v]overlay,crop=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
         ;;
         3)
             FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=${WIDTH}:${HEIGHT},setsar=sar=1/1,fps=${FPS},format=rgba,split=2[stream$((c+1))out1][stream$((c+1))out2];"
@@ -87,43 +87,43 @@ do
 done
 
 # 7. OVERLAY INPUTS ON TOP OF BACKGROUND COLOR SCREEN
-for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
+    FULL_SCRIPT+="[${IMAGE_COUNT}:v][stream${c}out1]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${IMAGE_DURATION},select=lte(n\,${IMAGE_FRAME_COUNT})[stream${c}overlaid];"
     if [[ ${c} -eq 1 ]]; then
-        if  [[ ${PHOTOS_COUNT} -gt 1 ]]; then
-            FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
+        if  [[ ${IMAGE_COUNT} -gt 1 ]]; then
+            FULL_SCRIPT+="[${IMAGE_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
         fi
-    elif [[ ${c} -lt ${PHOTOS_COUNT} ]]; then
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
-    elif [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
+    elif [[ ${c} -lt ${IMAGE_COUNT} ]]; then
+        FULL_SCRIPT+="[${IMAGE_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
+    elif [[ ${c} -eq ${IMAGE_COUNT} ]]; then
+        FULL_SCRIPT+="[${IMAGE_COUNT}:v][stream${c}out2]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
     fi
 done
 
 # 8. CREATE TRANSITIONS 1
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<${IMAGE_COUNT}; c++ ))
 do
     case ${DIRECTION} in
         1)
-            FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+            FULL_SCRIPT+="[$((IMAGE_COUNT+1)):v][stream${c}ending]overlay=x='t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
             FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=x='-w+t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
         ;;
         *)
-            FULL_SCRIPT+="[$((PHOTOS_COUNT+1)):v][stream${c}ending]overlay=x='-t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+            FULL_SCRIPT+="[$((IMAGE_COUNT+1)):v][stream${c}ending]overlay=x='-t/${TRANSITION_DURATION}*${WIDTH}':y=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
             FULL_SCRIPT+="[stream${c}moving][stream$((c+1))starting]overlay=x='w-t/${TRANSITION_DURATION}*${WIDTH}':y=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
         ;;
     esac
 done
 
 # 9. BEGIN CONCAT
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}overlaid][stream$((c+1))blended]"
 done
 
 # 10. END CONCAT
-FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
+FULL_SCRIPT+="[stream${IMAGE_COUNT}overlaid]concat=n=$((2*IMAGE_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
 
 # 11. END
 FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_push_horizontal.mp4"

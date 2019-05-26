@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-05-26
+- Renamed PHOTO_DURATION parameter as IMAGE_DURATION in v2.x branch.
+- Moved advanced scripts for push box and sliding bars to transition folder in v2.x branch.
+
 ## - 2019-05-25
 - Renamed PHOTO_MODE as SCREEN_MODE in v2.x branch.
 - Replaced photos folder with media folder in v2.x branch.

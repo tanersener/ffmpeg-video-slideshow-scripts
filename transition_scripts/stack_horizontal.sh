@@ -20,7 +20,7 @@ INCLUDE_OUTRO=0             # END WITH EMPTY SCREEN
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
 # FILE OPTIONS
-# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=`find ../media/*.jpg | sort -r`             # USE ALL IMAGES UNDER THE media FOLDER SORTED
 # FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
 FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
@@ -29,15 +29,15 @@ FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE m
 ############################
 
 # CALCULATE LENGTH MANUALLY
-let PHOTOS_COUNT=0
-for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
+let IMAGE_COUNT=0
+for IMAGE in ${FILES[@]}; do (( IMAGE_COUNT+=1 )); done
 
-if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
-    echo "Error: photos folder should contain at least two photos"
+if [[ ${IMAGE_COUNT} -lt 2 ]]; then
+    echo "Error: media folder should contain at least two images"
     exit 1;
 fi
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nTotal duration: ${TOTAL_DURATION} s\n"
+echo -e "\nVideo Slideshow Info\n------------------------\nImage count: ${IMAGE_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
 
@@ -45,8 +45,8 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${FILES[@]}; do
-    FULL_SCRIPT+="-loop 1 -i '${photo}' "
+for IMAGE in ${FILES[@]}; do
+    FULL_SCRIPT+="-loop 1 -i '${IMAGE}' "
 done
 
 # 3. ADD BACKGROUND COLOR SCREEN INPUT
@@ -56,7 +56,7 @@ FULL_SCRIPT+="-f lavfi -i color=${BACKGROUND_COLOR}:s=${WIDTH}x${HEIGHT},fps=${F
 FULL_SCRIPT+="-filter_complex \""
 
 # 5. PREPARE INPUTS
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[${c}:v]setpts=PTS-STARTPTS,scale=trunc(iw/2)*2:trunc(ih/2)*2,scale=-1:${HEIGHT},setsar=sar=1/1,fps=${FPS}[stream$((c+1))];"
 done
@@ -66,30 +66,30 @@ declare -i INTRO_OUTRO_COUNT=0
 
 # 6. BEGIN STACK INPUTS
 if [[ ${INCLUDE_INTRO} -eq 1 ]]; then
-    STACKED_INPUTS+="[${PHOTOS_COUNT}:v]"
+    STACKED_INPUTS+="[${IMAGE_COUNT}:v]"
     INTRO_OUTRO_COUNT+=1;
 fi
 
-for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
     STACKED_INPUTS+="[stream${c}]"
 done
 
 if [[ ${INCLUDE_OUTRO} -eq 1 ]]; then
-    STACKED_INPUTS+="[${PHOTOS_COUNT}:v]"
+    STACKED_INPUTS+="[${IMAGE_COUNT}:v]"
     INTRO_OUTRO_COUNT+=1;
 fi
 
 # 7. END STACK INPUTS
-FULL_SCRIPT+="${STACKED_INPUTS}hstack=inputs=$((${PHOTOS_COUNT}+${INTRO_OUTRO_COUNT}))[stack];"
+FULL_SCRIPT+="${STACKED_INPUTS}hstack=inputs=$((${IMAGE_COUNT}+${INTRO_OUTRO_COUNT}))[stack];"
 
 # 8. SLIDE STACK
 case ${DIRECTION} in
     1)
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stack]overlay=x='-(overlay_w-${WIDTH})+(overlay_w-${WIDTH})*t/${TOTAL_DURATION}':y=0,trim=duration=${TOTAL_DURATION},format=yuv420p[video]\""
+        FULL_SCRIPT+="[${IMAGE_COUNT}:v][stack]overlay=x='-(overlay_w-${WIDTH})+(overlay_w-${WIDTH})*t/${TOTAL_DURATION}':y=0,trim=duration=${TOTAL_DURATION},format=yuv420p[video]\""
     ;;
     *)
-        FULL_SCRIPT+="[${PHOTOS_COUNT}:v][stack]overlay=x='-(overlay_w-${WIDTH})*t/${TOTAL_DURATION}':y=0,trim=duration=${TOTAL_DURATION},format=yuv420p[video]\""
+        FULL_SCRIPT+="[${IMAGE_COUNT}:v][stack]overlay=x='-(overlay_w-${WIDTH})*t/${TOTAL_DURATION}':y=0,trim=duration=${TOTAL_DURATION},format=yuv420p[video]\""
     ;;
 esac
 

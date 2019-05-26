@@ -12,7 +12,7 @@ WIDTH=1280
 HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
-PHOTO_DURATION=2
+IMAGE_DURATION=2
 SCREEN_MODE=3                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
 SNOW_FLAKE_WIDTH=52
 SNOW_FLAKE_HEIGHT=60
@@ -23,7 +23,7 @@ BACKGROUND_COLOR="#00000000"
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
 # FILE OPTIONS
-# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=`find ../media/*.jpg | sort -r`             # USE ALL IMAGES UNDER THE media FOLDER SORTED
 # FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
 FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
@@ -32,21 +32,21 @@ FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE m
 ############################
 
 # CALCULATE LENGTH MANUALLY
-let PHOTOS_COUNT=0
-for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
+let IMAGE_COUNT=0
+for IMAGE in ${FILES[@]}; do (( IMAGE_COUNT+=1 )); done
 
-if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
-    echo "Error: photos folder should contain at least two photos"
+if [[ ${IMAGE_COUNT} -lt 2 ]]; then
+    echo "Error: media folder should contain at least two images"
     exit 1;
 fi
 
 # INTERNAL VARIABLES
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
-PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
-TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+IMAGE_FRAME_COUNT=$(( IMAGE_DURATION*FPS ))
+TOTAL_DURATION=$(( (IMAGE_DURATION+TRANSITION_DURATION)*IMAGE_COUNT - TRANSITION_DURATION ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nPhoto duration: ${PHOTO_DURATION} s\n\
+echo -e "\nVideo Slideshow Info\n------------------------\nImage count: ${IMAGE_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nImage duration: ${IMAGE_DURATION} s\n\
 Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
@@ -55,18 +55,18 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${FILES[@]}; do
-    FULL_SCRIPT+="-loop 1 -i '${photo}' "
+for IMAGE in ${FILES[@]}; do
+    FULL_SCRIPT+="-loop 1 -i '${IMAGE}' "
 done
 
-# 3. ADD SNOW FLAKE PHOTO INPUT
+# 3. ADD SNOW FLAKE IMAGE INPUT
 FULL_SCRIPT+="-loop 1 -i ../objects/snow-flake.png "
 
 # 4. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
 # 5. PREPARE INPUTS
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
         1)
@@ -87,39 +87,39 @@ do
 done
 
 # 6. APPLY PADDING
-for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream${c}out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
+    FULL_SCRIPT+="[stream${c}out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${IMAGE_DURATION},select=lte(n\,${IMAGE_FRAME_COUNT})[stream${c}overlaid];"
     if [[ ${c} -eq 1 ]]; then
-        if  [[ ${PHOTOS_COUNT} -gt 1 ]]; then
+        if  [[ ${IMAGE_COUNT} -gt 1 ]]; then
             FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
         fi
-    elif [[ ${c} -lt ${PHOTOS_COUNT} ]]; then
+    elif [[ ${c} -lt ${IMAGE_COUNT} ]]; then
         FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
-    elif [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
+    elif [[ ${c} -eq ${IMAGE_COUNT} ]]; then
         FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
     fi
 done
 
 # 7. CREATE TRANSITION FRAMES
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream$((c+1))starting][stream${c}ending]blend=all_expr='A*(if(gte(T,${TRANSITION_DURATION}),${TRANSITION_DURATION},T/${TRANSITION_DURATION}))+B*(1-(if(gte(T,${TRANSITION_DURATION}),${TRANSITION_DURATION},T/${TRANSITION_DURATION})))',select=lte(n\,${TRANSITION_FRAME_COUNT})[stream$((c+1))blended];"
 done
 
 # 8. BEGIN CONCAT
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}overlaid][stream$((c+1))blended]"
 done
 
 # 9. END CONCAT
-FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[videowithoutobject];"
+FULL_SCRIPT+="[stream${IMAGE_COUNT}overlaid]concat=n=$((2*IMAGE_COUNT-1)):v=1:a=0,format=yuv420p[videowithoutobject];"
 
-# 10. PREPARE SNOW FLAKE PHOTO INPUTS - NOTE THAT COUNT IS FIXED TO FIVE
+# 10. PREPARE SNOW FLAKE IMAGE INPUTS - NOTE THAT COUNT IS FIXED TO FIVE
 for (( c=1; c<=5; c++ ))
 do
-    FULL_SCRIPT+="[${PHOTOS_COUNT}:v]setpts=PTS-STARTPTS,scale=${SNOW_FLAKE_WIDTH}:${SNOW_FLAKE_HEIGHT},setsar=sar=1/1,rotate=PI/${c}+${SNOW_FLAKE_ROTATE_SPEED}*PI*t/${TRANSITION_DURATION}.$((c-1)):ow=hypot(iw\,ih):oh=ow:c=#00000000,trim=duration=${TOTAL_DURATION},select=lte(n\,${TOTAL_FRAME_COUNT})[flake${c}];"
+    FULL_SCRIPT+="[${IMAGE_COUNT}:v]setpts=PTS-STARTPTS,scale=${SNOW_FLAKE_WIDTH}:${SNOW_FLAKE_HEIGHT},setsar=sar=1/1,rotate=PI/${c}+${SNOW_FLAKE_ROTATE_SPEED}*PI*t/${TRANSITION_DURATION}.$((c-1)):ow=hypot(iw\,ih):oh=ow:c=#00000000,trim=duration=${TOTAL_DURATION},select=lte(n\,${TOTAL_FRAME_COUNT})[flake${c}];"
 done
 
 # 11. OVERLAY SNOW FLAKES ON TOP OF SLIDESHOW

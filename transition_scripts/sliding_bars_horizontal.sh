@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with advanced vertical sliding bars v5 (25.05.2019)
+# ffmpeg video slideshow script with horizontal sliding bars transition v5 (25.05.2019)
 #
 # Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -12,16 +12,16 @@ WIDTH=1280
 HEIGHT=720
 FPS=30
 TRANSITION_DURATION=1
-PHOTO_DURATION=2
-SCREEN_MODE=2                # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
-BAR_COUNT=10                # WIDTH SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT VERTICAL LINES WILL APPEAR ON TRANSITION
+IMAGE_DURATION=2
+SCREEN_MODE=2               # 1=CENTER, 2=CROP, 3=SCALE, 4=BLUR
+BAR_COUNT=8                 # HEIGHT SHOULD BE DIVISIBLE BY BAR_COUNT. IF NOT HORIZONTAL LINES WILL APPEAR ON TRANSITION
 BACKGROUND_COLOR="black"
-DIRECTION=1                 # 1=TOP TO BOTTOM, 2=BOTTOM TO TOP
+DIRECTION=1                 # 1=LEFT TO RIGHT, 2=RIGHT TO LEFT
 
 IFS=$'\t\n'                 # REQUIRED TO SUPPORT SPACES IN FILE NAMES
 
 # FILE OPTIONS
-# FILES=`find ../media/*.jpg | sort -r`                 # USE ALL IMAGES UNDER THE media FOLDER SORTED
+# FILES=`find ../media/*.jpg | sort -r`             # USE ALL IMAGES UNDER THE media FOLDER SORTED
 # FILES=('../media/1.jpg' '../media/2.jpg')         # USE ONLY THESE IMAGE FILES
 FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE media FOLDER
 
@@ -30,21 +30,21 @@ FILES=`find ../media/*.jpg`                         # USE ALL IMAGES UNDER THE m
 ############################
 
 # CALCULATE LENGTH MANUALLY
-let PHOTOS_COUNT=0
-for photo in ${FILES[@]}; do (( PHOTOS_COUNT+=1 )); done
+let IMAGE_COUNT=0
+for IMAGE in ${FILES[@]}; do (( IMAGE_COUNT+=1 )); done
 
-if [[ ${PHOTOS_COUNT} -lt 2 ]]; then
-    echo "Error: photos folder should contain at least two photos"
+if [[ ${IMAGE_COUNT} -lt 2 ]]; then
+    echo "Error: media folder should contain at least two images"
     exit 1;
 fi
 
 # INTERNAL VARIABLES
 TRANSITION_FRAME_COUNT=$(( TRANSITION_DURATION*FPS ))
-PHOTO_FRAME_COUNT=$(( PHOTO_DURATION*FPS ))
-TOTAL_DURATION=$(( (PHOTO_DURATION+TRANSITION_DURATION)*PHOTOS_COUNT - TRANSITION_DURATION ))
+IMAGE_FRAME_COUNT=$(( IMAGE_DURATION*FPS ))
+TOTAL_DURATION=$(( (IMAGE_DURATION+TRANSITION_DURATION)*IMAGE_COUNT - TRANSITION_DURATION ))
 TOTAL_FRAME_COUNT=$(( TOTAL_DURATION*FPS ))
 
-echo -e "\nVideo Slideshow Info\n------------------------\nPhoto count: ${PHOTOS_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nPhoto duration: ${PHOTO_DURATION} s\n\
+echo -e "\nVideo Slideshow Info\n------------------------\nImage count: ${IMAGE_COUNT}\nDimension: ${WIDTH}x${HEIGHT}\nFPS: ${FPS}\nImage duration: ${IMAGE_DURATION} s\n\
 Transition duration: ${TRANSITION_DURATION} s\nTotal duration: ${TOTAL_DURATION} s\n"
 
 START_TIME=$SECONDS
@@ -53,15 +53,15 @@ START_TIME=$SECONDS
 FULL_SCRIPT="ffmpeg -y "
 
 # 2. ADD INPUTS
-for photo in ${FILES[@]}; do
-    FULL_SCRIPT+="-loop 1 -i '${photo}' "
+for IMAGE in ${FILES[@]}; do
+    FULL_SCRIPT+="-loop 1 -i '${IMAGE}' "
 done
 
 # 3. START FILTER COMPLEX
 FULL_SCRIPT+="-filter_complex \""
 
 # 4. PREPARE INPUTS
-for (( c=0; c<${PHOTOS_COUNT}; c++ ))
+for (( c=0; c<${IMAGE_COUNT}; c++ ))
 do
     case ${SCREEN_MODE} in
         1)
@@ -82,22 +82,22 @@ do
 done
 
 # 5. APPLY PADDING
-for (( c=1; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
-    FULL_SCRIPT+="[stream${c}out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${PHOTO_DURATION},select=lte(n\,${PHOTO_FRAME_COUNT})[stream${c}overlaid];"
+    FULL_SCRIPT+="[stream${c}out1]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${IMAGE_DURATION},select=lte(n\,${IMAGE_FRAME_COUNT})[stream${c}overlaid];"
     if [[ ${c} -eq 1 ]]; then
-        if  [[ ${PHOTOS_COUNT} -gt 1 ]]; then
+        if  [[ ${IMAGE_COUNT} -gt 1 ]]; then
             FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}ending];"
         fi
-    elif [[ ${c} -lt ${PHOTOS_COUNT} ]]; then
+    elif [[ ${c} -lt ${IMAGE_COUNT} ]]; then
         FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
-    elif [[ ${c} -eq ${PHOTOS_COUNT} ]]; then
+    elif [[ ${c} -eq ${IMAGE_COUNT} ]]; then
         FULL_SCRIPT+="[stream${c}out2]pad=width=${WIDTH}:height=${HEIGHT}:x=(${WIDTH}-iw)/2:y=(${HEIGHT}-ih)/2:color=${BACKGROUND_COLOR},trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}starting];"
     fi
 done
 
 # 6. PREPARE BARS
-for (( c=2; c<=${PHOTOS_COUNT}; c++ ))
+for (( c=2; c<=${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}starting]split=${BAR_COUNT}"
 
@@ -110,7 +110,7 @@ do
 
     for (( d=1; d<=${BAR_COUNT}; d++ ))
     do
-        FULL_SCRIPT+="[stream${c}starting${d}]crop=out_w=iw/${BAR_COUNT}:out_h=ih:x=iw/${BAR_COUNT}*$(( d-1 )):y=0,pad=w=${WIDTH}:h=${HEIGHT}:x=0:y=0:color=#00000000[stream${c}starting${d}cropped];"
+        FULL_SCRIPT+="[stream${c}starting${d}]crop=out_w=iw:out_h=ih/${BAR_COUNT}:x=0:y=ih/${BAR_COUNT}*$(( d-1 )),pad=w=${WIDTH}:h=${HEIGHT}:x=0:y=0:color=#00000000[stream${c}starting${d}cropped];"
     done
 
     for (( d=1; d<=${BAR_COUNT}; d++ ))
@@ -122,14 +122,12 @@ do
             FULL_SCRIPT+="[stream${c}starting$((d-1))added]"
         fi
 
-        # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
-
         case ${DIRECTION} in
             1)
-                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-h+${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=x='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),-w+${WIDTH}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,-w))':y=h/${BAR_COUNT}*$((d-1)),select=lte(n\,${TRANSITION_FRAME_COUNT})"
             ;;
             *)
-                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=y='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),h-${HEIGHT}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,h))':x=w/${BAR_COUNT}*$((d-1)):threads=1,select=lte(n\,${TRANSITION_FRAME_COUNT})"
+                FULL_SCRIPT+="[stream${c}starting${d}cropped]overlay=x='if(between(t,(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)),(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),w-${WIDTH}*(t-(${TRANSITION_DURATION}/${BAR_COUNT})*$((d-1)))/(${TRANSITION_DURATION}/${BAR_COUNT}),if(gte(t,(${TRANSITION_DURATION}/${BAR_COUNT})*${d}),0,w))':y=h/${BAR_COUNT}*$((d-1)),select=lte(n\,${TRANSITION_FRAME_COUNT})"
             ;;
         esac
 
@@ -143,16 +141,16 @@ do
 done
 
 # 7. BEGIN CONCAT
-for (( c=1; c<${PHOTOS_COUNT}; c++ ))
+for (( c=1; c<${IMAGE_COUNT}; c++ ))
 do
     FULL_SCRIPT+="[stream${c}overlaid][stream$((c+1))blended]"
 done
 
 # 8. END CONCAT
-FULL_SCRIPT+="[stream${PHOTOS_COUNT}overlaid]concat=n=$((2*PHOTOS_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
+FULL_SCRIPT+="[stream${IMAGE_COUNT}overlaid]concat=n=$((2*IMAGE_COUNT-1)):v=1:a=0,format=yuv420p[video]\""
 
 # 9. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../advanced_sliding_bars_vertical.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_sliding_bars_horizontal.mp4"
 
 eval ${FULL_SCRIPT}
 
