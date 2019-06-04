@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ffmpeg video slideshow script with rotate transition v4 (25.05.2019)
+# ffmpeg video slideshow script with rotate #1 transition v5 (04.06.2019)
 #
 # Copyright (c) 2017-2019, Taner Sener (https://github.com/tanersener)
 #
@@ -125,7 +125,7 @@ done
 FULL_SCRIPT+="[stream${IMAGE_COUNT}rotating][stream${IMAGE_COUNT}out2][stream${IMAGE_COUNT}out3]concat=n=$((3*IMAGE_COUNT)):v=1:a=0,format=yuv420p[video]\""
 
 # 10. END
-FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_rotate.mp4"
+FULL_SCRIPT+=" -map [video] -vsync 2 -async 1 -rc-lookahead 0 -g 0 -profile:v main -level 42 -c:v libx264 -r ${FPS} ../transition_rotate_one.mp4"
 
 eval ${FULL_SCRIPT}
 
