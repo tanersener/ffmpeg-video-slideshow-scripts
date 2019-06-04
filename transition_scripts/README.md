@@ -368,7 +368,7 @@ New image pushes previous image
 </p>
 
 
-## Rotate
+## Rotate #1
 
 New image appears moving from left to right and rotating
 
@@ -385,7 +385,7 @@ New image appears moving from left to right and rotating
 | ... | ...                    |      ...                 |
 |  n*2  | Show Image #n  |      image duration      |
 
-<img src="../docs/transition_rotate.gif" width="360">
+<img src="../docs/transition_rotate_one.gif" width="360">
 
 
 ## Sliding Bars
