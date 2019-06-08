@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-06-08
+- Added small gif samples in main README in v2.x branch.
+
 ## - 2019-06-04
 - Renamed rotate transition as rotate #1 in v2.x branch.
 
