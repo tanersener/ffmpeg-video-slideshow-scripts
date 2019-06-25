@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Scripts [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+# FFmpeg Video Slideshow Scripts [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/) [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=master)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts)
 
 Configurable shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
 
@@ -97,6 +97,15 @@ To include files in a specific order, it is possible to append `sort` at the end
 
 If you want to learn more about how a specific script works refer to [v1.x](https://github.com/tanersener/ffmpeg-video-slideshow-scripts/tree/v1.x) branch of this repository. Scripts in `v1.x` branch are not customizable but easier to understand.
 
+
+## Build Status
+
+| branch | status |
+| :---: | :---: |
+|  master | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=master)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
+|  v2.x | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=v2.x)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
+
+
 ## Tips
 
 #### Speed
@@ -132,6 +141,7 @@ If you decide to apply this method, please pay attention to that.
 ## Updates
 
 Refer to [Changelog](CHANGELOG.md) for updates.
+
 
 ## Known Issues
 

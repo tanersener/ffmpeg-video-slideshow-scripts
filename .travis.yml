@@ -1,0 +1,33 @@
+branches:
+  only:
+    - master
+    - v2.x
+sudo: false
+git:
+  quiet: true
+addons:
+  apt:
+    packages:
+      - ffmpeg
+matrix:
+  include:
+    - name: "Advanced scripts"
+      dist: xenial
+      language: generic
+      before_script:
+        - cd advanced_scripts
+      after_script:
+        - cd ..
+      script:
+        - bash ./push_horizontal_film.sh
+        - bash ./push_vertical_film.sh
+    - name: "Transition scripts"
+      dist: xenial
+      language: generic
+      before_script:
+        - cd transition_scripts
+      after_script:
+        - cd ..
+      script:
+        - bash ./stack_horizontal.sh
+        - bash ./stack_vertical.sh
