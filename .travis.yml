@@ -11,11 +11,13 @@ addons:
 matrix:
   include:
     - name: "Advanced scripts"
+      dist: xenial
       language: generic
       script:
         - bash ./advanced_scripts/zoom_in_and_pan_with_fade_in_out_two.sh
         - bash ./advanced_scripts/zoom_out_and_pan_with_fade_in_out_two.sh
     - name: "Transition scripts"
+      dist: xenial
       language: generic
       script:
         - bash ./transition_scripts/stack_horizontal.sh
