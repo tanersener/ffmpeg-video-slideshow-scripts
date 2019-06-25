@@ -1,6 +1,6 @@
 branches:
   only:
-    - v2.x
+    - travis-test
 sudo: false
 git:
   quiet: true
