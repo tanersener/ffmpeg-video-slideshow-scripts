@@ -13,12 +13,20 @@ matrix:
     - name: "Advanced scripts"
       dist: xenial
       language: generic
+      before_script:
+        - cd advanced_scripts
+      after_script:
+        - cd ..
       script:
-        - bash ./advanced_scripts/zoom_in_and_pan_with_fade_in_out_two.sh
-        - bash ./advanced_scripts/zoom_out_and_pan_with_fade_in_out_two.sh
+        - bash ./zoom_in_and_pan_with_fade_in_out_two.sh
+        - bash ./zoom_out_and_pan_with_fade_in_out_two.sh
     - name: "Transition scripts"
       dist: xenial
       language: generic
+      before_script:
+        - cd transition_scripts
+      after_script:
+        - cd ..
       script:
-        - bash ./transition_scripts/stack_horizontal.sh
-        - bash ./transition_scripts/stack_vertical.sh
+        - bash ./stack_horizontal.sh
+        - bash ./stack_vertical.sh
