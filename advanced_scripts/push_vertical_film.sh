@@ -98,13 +98,11 @@ FULL_SCRIPT+=";"
 for (( c=1; c<=${IMAGE_COUNT}; c++ ))
 do
 
-    # NOTE THAT threads=1 is a workaround for ffmpeg v4.1
-
-    FULL_SCRIPT+="[stream${c}][frame${c}]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:threads=1:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
+    FULL_SCRIPT+="[stream${c}][frame${c}]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2:format=rgb,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT}),split=2[stream${c}starting][stream${c}ending];"
 
     case ${DIRECTION} in
         1)
-            FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v][stream${c}ending]overlay=y='t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+            FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v][stream${c}ending]overlay=y='t/${TRANSITION_DURATION}*${HEIGHT}':x=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
 
             if [[ ${c} -eq 1 ]]; then
                 FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v]"
@@ -112,10 +110,10 @@ do
                 FULL_SCRIPT+="[stream$(( c-1 ))moving]"
             fi
 
-            FULL_SCRIPT+="[stream${c}starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:shortest=1:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
+            FULL_SCRIPT+="[stream${c}starting]overlay=y='-h+t/${TRANSITION_DURATION}*${HEIGHT}':x=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
         ;;
         *)
-            FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v][stream${c}ending]overlay=y='-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
+            FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v][stream${c}ending]overlay=y='-t/${TRANSITION_DURATION}*${HEIGHT}':x=0,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}moving];"
 
             if [[ ${c} -eq 1 ]]; then
                 FULL_SCRIPT+="[$(( IMAGE_COUNT+1 )):v]"
@@ -123,7 +121,7 @@ do
                 FULL_SCRIPT+="[stream$(( c-1 ))moving]"
             fi
 
-            FULL_SCRIPT+="[stream${c}starting]overlay=y='h-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:shortest=1:threads=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
+            FULL_SCRIPT+="[stream${c}starting]overlay=y='h-t/${TRANSITION_DURATION}*${HEIGHT}':x=0:shortest=1,trim=duration=${TRANSITION_DURATION},select=lte(n\,${TRANSITION_FRAME_COUNT})[stream${c}blended];"
         ;;
     esac
 done
