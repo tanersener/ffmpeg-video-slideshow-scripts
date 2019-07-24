@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Advanced Scripts
+# Advanced Scripts
 
 Scripts in this section demonstrate complex animation like transitions/transformations. Only images are supported, no video input support.
 
@@ -6,7 +6,7 @@ Please note that sample animations used in this page are low in quality and does
 
 ## Blurred Background
 
-Replaces blank areas from sides/top/bottom with blur effect
+Blurs blank areas from sides/top/bottom
 
 **Options:** width, height, fps, image duration, transition duration
 
@@ -66,7 +66,7 @@ Moves text from right to the left or from left to the right on a slideshow
 
 ## Object Animation
 
-Animates snow flakes falling from random positions and rotating around themselves
+Animates falling and rotating snow flakes
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
 
@@ -131,7 +131,7 @@ Enhanced version of `Push` transition. Static parts are removed and a strip fram
 
 ## Zoom & Pan with Fade In/Out Transition #1
 
-Each image focuses on a different area of the image
+Zooms in/out on a specific part of the image
 
 **Options:** width, height, fps, image duration, transition duration, zoom speed, screen mode, background color
 
@@ -214,7 +214,7 @@ Each image focuses on a different area of the image
 
 ## Zoom & Pan with Fade In/Out Transition #2
 
-Each image focuses on a different area of the image
+Zooms in/out on a specific part of the image
 
 **Options:** width, height, fps, image duration, transition duration, screen mode, background color
 

@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Transition Scripts
+# Transition Scripts
 
 Each script in this section demonstrates a different transition animation. Only images are supported, no video input support.
 
