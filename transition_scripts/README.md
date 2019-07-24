@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Transition Scripts
+# Transition Scripts
 
 Each script in this section demonstrates a different transition animation. Only images are supported, no video input support.
 
@@ -6,7 +6,7 @@ Please note that sample animations used in this page are low in quality and does
 
 ## Bars #1
 
-New image appears through growing bars, bars grow from one side to the other side
+New image appears through growing bars, bars grow from one side to the other
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count
 
@@ -125,7 +125,7 @@ New image is revealed by a clock like line swiping across the screen
 
 ## Collapse
 
-New image appears as two lines move from sides to center
+New image appears as two lines move from both sides to the center
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
@@ -188,7 +188,7 @@ Circular collapse
 
 ## Cover
 
-A line moving shows the new image
+A moving line shows the new image
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
@@ -213,7 +213,7 @@ A line moving shows the new image
 
 ## Expand
 
-New image appears as two lines move from center to sides
+New image appears as two lines move from center to the sides
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color
 
@@ -316,7 +316,7 @@ New image appears fading in while the previous one is fading out
 
 ## Push
 
-New image pushes previous image
+New image pushes previous one
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
@@ -390,7 +390,7 @@ New image appears moving from left to right and rotating
 
 ## Sliding Bars
 
-Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one side to another
+Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one side to the other
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction
 
@@ -484,7 +484,7 @@ New image appears moving in
 
 ## Wipe Out
 
-New image disappears moving out
+New image appears as the previous one moves out
 
 **Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
 
