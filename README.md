@@ -1,6 +1,6 @@
 # FFmpeg Video Slideshow Scripts [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/) [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=master)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts)
 
-Configurable shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
+Configurable shell scripts to create video slideshows from images and videos using [FFmpeg](https://www.ffmpeg.org/).
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/ffmpeg-video-slideshow-scripts-logo-v2.png" width="240">
 
