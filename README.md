@@ -118,7 +118,17 @@ Configurable shell scripts to create video slideshows from images and videos usi
 
 ## Requirements
 
-- `ffmpeg 2.8.x` or later (newer versions are faster and consume less memory)
+1. `ffmpeg 2.8.x` or later for all scripts except those listed in `2.`
+2. `ffmpeg 3.x` or later for the following scripts
+   - `logo_overlay_and_zoom.sh` 
+   - `zoom_in_and_pan_with_fade_in_out_one.sh` 
+   - `zoom_in_and_pan_with_fade_in_out_two.sh` 
+   - `zoom_out_and_pan_with_fade_in_out_one.sh` 
+   - `zoom_out_and_pan_with_fade_in_out_two.sh`
+   - `box_in_horizontal.sh`
+   - `box_in_vertical.sh`
+   - `push_box_horizontal.sh`
+   - `push_box_vertical.sh`
 
 Please note that `Advanced Moving Text` script needs `FFmpeg` to be build with `freetype`. If you compile `FFmpeg` from source you need to provide `--enable-libfreetype` flag on `./configure`. 
 
