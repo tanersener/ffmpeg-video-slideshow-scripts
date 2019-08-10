@@ -4,7 +4,7 @@ You can get Transition Scripts with Video Support by buying me a coffee from <a 
 
 Each script in this section demonstrates a different transition animation.
 
-Both images and videos are supported as input.
+Both images and videos (with or without audio) are supported as input.
 
 Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
@@ -12,7 +12,7 @@ Please note that sample animations used in this page are low in quality and does
 
 New image/video appears through growing bars, bars grow from one side to the other
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count 
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -37,7 +37,7 @@ New image/video appears through growing bars, bars grow from one side to the oth
 
 New image/video appears through growing bars, bars grow from center to the both sides
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -62,7 +62,7 @@ New image/video appears through growing bars, bars grow from center to the both 
 
 New image/video appears as a box moving in and out
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -91,7 +91,7 @@ New image/video appears as a box moving in and out
 
 New image/video appears in growing square boxes
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, cell size
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, cell size, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -111,7 +111,7 @@ New image/video appears in growing square boxes
 
 New image/video is revealed by a clock like line swiping across the screen
 
-**Options:** screen mode, width, height, fps, image duration, background color
+**Options:** screen mode, width, height, fps, image duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -131,7 +131,7 @@ New image/video is revealed by a clock like line swiping across the screen
 
 New image/video appears as two lines move from both sides to the center
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -155,7 +155,7 @@ New image/video appears as two lines move from both sides to the center
 
 Horizontal and vertical collapse at the same time
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -174,7 +174,7 @@ Horizontal and vertical collapse at the same time
 
 Circular collapse
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -194,7 +194,7 @@ Circular collapse
 
 A moving line shows the new image/video
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -219,7 +219,7 @@ A moving line shows the new image/video
 
 New image/video appears as two lines move from center to the sides
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -243,7 +243,7 @@ New image/video appears as two lines move from center to the sides
 
 Horizontal and vertical expand at the same time
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -262,7 +262,7 @@ Horizontal and vertical expand at the same time
 
 Circular expand
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -282,7 +282,7 @@ Circular expand
 
 New image/video appears fading in
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -302,7 +302,7 @@ New image/video appears fading in
 
 New image/video appears fading in while the previous one is fading out
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -322,7 +322,7 @@ New image/video appears fading in while the previous one is fading out
 
 Enhanced version of `Wipe In` transition. Screen is divided into bars moving from one side to the other
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -347,7 +347,7 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars moving fro
 
 New image/video pushes the previous one
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -372,7 +372,7 @@ New image/video pushes the previous one
 
 `Box In` and `Push` transitions combined.
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -401,7 +401,7 @@ New image/video pushes the previous one
 
 New image/video appears moving from left to right and rotating
 
-**Options:** width, height, fps, image duration, transition duration, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, screen mode, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -421,7 +421,7 @@ New image/video appears moving from left to right and rotating
 
 New image/video appears rotating clockwise around the lower left corner
 
-**Options:** width, height, fps, image duration, transition duration, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, screen mode, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -441,7 +441,7 @@ New image/video appears rotating clockwise around the lower left corner
 
 Enhanced version of `Wipe In` transition. Screen is divided into bars sliding from one side to the other
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, bar count, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -466,7 +466,7 @@ Enhanced version of `Wipe In` transition. Screen is divided into bars sliding fr
 
 New image/video appears with spin blur rotation effect
 
-**Options:** width, height, fps, image duration
+**Options:** width, height, fps, image duration, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -486,7 +486,7 @@ New image/video appears with spin blur rotation effect
 
 New image/video appears moving in
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -511,7 +511,7 @@ New image/video appears moving in
 
 New image/video appears as the previous one moves out
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 

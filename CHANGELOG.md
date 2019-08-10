@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-08-10
+- Added audio support for video inputs
+
 ## - 2019-07-24
 - Added scripts with video input support
 
