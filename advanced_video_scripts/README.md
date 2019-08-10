@@ -4,7 +4,7 @@ You can get Advanced Scripts with Video Support by buying me a coffee from <a hr
 
 Scripts in this section demonstrate complex animation like transitions/transformations.
 
-Both images and videos are supported as input.
+Both images and videos (with or without audio) are supported as input.
 
 Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
@@ -12,7 +12,7 @@ Please note that sample animations used in this page are low in quality and does
 
 Blurs blank areas from sides/top/bottom
 
-**Options:** width, height, fps, image duration, transition duration
+**Options:** width, height, fps, image duration, transition duration, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -32,7 +32,7 @@ Blurs blank areas from sides/top/bottom
 
 Overlays a beating heart animation (generated from a static heart image with zoom effect) at the right bottom corner of the slideshow
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, heart frame size, heart frame position
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, heart frame size, heart frame position, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -52,7 +52,7 @@ Overlays a beating heart animation (generated from a static heart image with zoo
 
 Moves text from right to the left or from left to the right on a slideshow
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position, direction
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, text, text font, text size, text color, text speed, text position, text frame height, text frame position, direction, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -72,7 +72,7 @@ Moves text from right to the left or from left to the right on a slideshow
 
 Animates falling and rotating snow flakes
 
-**Options:** screen mode, width, height, fps, image duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed 
+**Options:** screen mode, width, height, fps, image duration, transition duration, background color, snow flake size, snow flake rotate speed, snow flake fall speed, audio sample format, audio sample rate, audio channel layout 
 
 #### Scene Arrangement
 
@@ -92,7 +92,7 @@ Animates falling and rotating snow flakes
 
 Zooms in/out on a specific part of the image/video
 
-**Options:** width, height, fps, image duration, transition duration, zoom speed, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, zoom speed, screen mode, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
@@ -115,7 +115,7 @@ Zooms in/out on a specific part of the image/video
 <tr>
 <td align="center">2</td>
 <td align="center">Show Image #1</td>
-<td align="center">image/video duration - transition duration</td>
+<td align="center">image/video duration - 2*transition duration</td>
 </tr>
 <tr>
 <td align="center">3</td>
@@ -131,7 +131,7 @@ Zooms in/out on a specific part of the image/video
 <tr>
 <td align="center">5</td>
 <td align="center">Show Image #2</td>
-<td align="center">image/video duration - transition duration</td>
+<td align="center">image/video duration - 2*transition duration</td>
 </tr>
 <tr>
 <td align="center">6</td>
@@ -153,7 +153,7 @@ Zooms in/out on a specific part of the image/video
 <tr>
 <td align="center">n*3-1</td>
 <td align="center">Show Image #n</td>
-<td align="center">image/video duration - transition duration</td>
+<td align="center">image/video duration - 2*transition duration</td>
 </tr>
 <tr>
 <td align="center">n*3</td>
@@ -175,21 +175,21 @@ Zooms in/out on a specific part of the image/video
 
 Zooms in/out on a specific part of the image/video
 
-**Options:** width, height, fps, image duration, transition duration, screen mode, background color
+**Options:** width, height, fps, image duration, transition duration, screen mode, background color, audio sample format, audio sample rate, audio channel layout
 
 #### Scene Arrangement
 
 |  #  |     Effect    |    Scene      |    Duration (seconds)    |
 |:---:|:-------------:|:-------------:|:------------------------:|
 |  1  |  Zoom & Pan  |  Fade in Image #1  |      transition duration      |
-|  2  |  -  | Show Image #1          |      image/video duration - transition duration      |
+|  2  |  -  | Show Image #1          |      image/video duration - 2*transition duration      |
 |  3  |  -  | Fade out Image #1 |   transition duration    |
 |  4  |  Zoom & Pan  |  Fade in Image #2  |      transition duration      |
-|  5  |  -  | Show Image #2          |      image/video duration - transition duration      |
+|  5  |  -  | Show Image #2          |      image/video duration - 2*transition duration      |
 |  6  |  -  | Fade out Image #2 |   transition duration    |
 | ... |     |     ...           |      ...                 |
 |  n*3-2  |  Zoom & Pan  |  Fade in Image #n  |      transition duration      |
-|  n*3-1  |  -  | Show Image #n          |      image/video duration - transition duration      |
+|  n*3-1  |  -  | Show Image #n          |      image/video duration - 2*transition duration      |
 |  n*3  |  -  | Fade out Image #n |   transition duration    |
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom In &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Zoom Out
