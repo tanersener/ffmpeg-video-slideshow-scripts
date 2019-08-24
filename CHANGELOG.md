@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-08-24
+- Added video slideshow script generator
+
 ## - 2019-08-10
 - Added audio support for video inputs
 
