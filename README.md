@@ -7,7 +7,7 @@ Configurable shell scripts to create video slideshows from images and videos usi
 ## Features
 ### [Video Slideshow Script Generator](video_slideshow_script_generator)
 
-<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-welcome-screen.png" width="260">
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-gui.png" width="440">
 
 ### [Advanced Scripts](advanced_scripts)
 
