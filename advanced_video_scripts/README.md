@@ -6,6 +6,8 @@ Scripts in this section demonstrate complex animation like transitions/transform
 
 Both images and videos (with or without audio) are supported as input.
 
+Scripts in this section are licensed under the `ARTHENICA Commercial License`.
+
 Please note that sample animations used in this page are low in quality and does not represent full functionality of the scripts.
 
 ## Blurred Background
@@ -198,3 +200,15 @@ Zooms in/out on a specific part of the image/video
   <img src="../docs/advanced_media_zoom_in_and_pan_with_fade_in_out_two.gif" width="360">
   <img src="../docs/advanced_media_zoom_out_and_pan_with_fade_in_out_two.gif" width="360" hspace="60"> 
 </p>
+
+### ARTHENICA Commercial License
+
+ARTHENICA Commercial License
+
+Copyright (c) 2019, Taner Sener (https://github.com/tanersener), All rights reserved.
+
+Permission is hereby granted, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
