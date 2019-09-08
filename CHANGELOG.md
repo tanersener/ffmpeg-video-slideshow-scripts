@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## - 2019-09-08
+- Updated the license of scripts with video support
+
 ## - 2019-08-24
 - Added video slideshow script generator
 

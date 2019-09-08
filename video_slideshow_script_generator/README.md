@@ -196,13 +196,13 @@ those transitions.
 - You can see the following messages if you enable audio in your slideshows. 
 They are for informational purposes only and do not cause any errors.
 
-> [Parsed_amerge_128 @ 0x7ffca1c7d440] No channel layout for input 1
-> [Parsed_amerge_128 @ 0x7ffca1c7d440] Input channel layouts overlap: output layout will be determined by the number of distinct input channels
+  > [Parsed_amerge_128 @ 0x7ffca1c7d440] No channel layout for input 1
+  > [Parsed_amerge_128 @ 0x7ffca1c7d440] Input channel layouts overlap: output layout will be determined by the number of distinct input channels
 
 - If the sum of transition durations for a video is equal or bigger than the video duration then your script fill fail 
 with the following error. You need to review transition durations and decrease if necessary.
 
-> Assertion start_sample < end_sample || (start_sample == end_sample && !frame->nb_samples) failed at libavfilter/trim.c:303
+  > Assertion start_sample < end_sample || (start_sample == end_sample && !frame->nb_samples) failed at libavfilter/trim.c:303
 
 ## 7. Tips
 
