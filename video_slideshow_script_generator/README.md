@@ -2,13 +2,14 @@
 
 Java GUI to create video slideshow scripts
 
-<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-gui.png" width="440">
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/master/docs/vssg/vssg-gui.png" width="440">
 
 ## 1. Features
 - Generates `bash` scripts that create video slideshows using [FFmpeg](https://www.ffmpeg.org/)
 - Supports 
     - Both image and video inputs
     - Audio inside video inputs
+    - Background Audio
     - 32 transition types
     - Intro/outro transitions for all transition types 
     - Text messages
@@ -99,11 +100,14 @@ Transitions can be added using `File` -> `Add Transition` menu item.
 
 Transition element allows you to select a transition and set transition specific options.
 
+There is also a `File` -> `Add Random Transition` option to automatically add a random Transition to all adjacent
+Image and Video elements in the slideshow.
+
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-transition.png" width="440">
 
 ### 4.5 Settings
 
-`Settings` element is mandatory in all slideshows. It is the last element and it can't be deleted or moved.
+`Settings` element is mandatory in all slideshows. It is the last element, and it can't be deleted or moved.
 
 Settings element allows you to
  - Specify script name
@@ -123,7 +127,13 @@ Audio element allows you to specify slideshow audio options.
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-audio.png" width="440">
 
-### 4.7 Preferences
+### 4.7 Background Audio
+
+Background Audio element allows you to select an audio file and use it in your slideshow as audio.
+
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-background-audio.png" width="440">
+
+### 4.8 Preferences
 
 Preferences frame allows you to
  - Set overwrite options
@@ -132,13 +142,13 @@ Preferences frame allows you to
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-preferences.png" width="440">
 
-### 4.8 Fonts
+### 4.9 Fonts
 
 Fonts frame allows you to register fonts available for Text elements.
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-fonts.png" width="440">
 
-### 4.9 Text Messages
+### 4.10 Text Messages
 
 You can add unlimited number of text messages on top of your images/videos.
 
@@ -151,7 +161,7 @@ Text element allows you to
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-text.png" width="440">
 
-### 4.10 Overlay Images
+### 4.11 Overlay Images
 
 You can add unlimited number of overlay images on top of your images/videos.
 
@@ -164,7 +174,7 @@ Overlay Image element allows you to
 
 <img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/v2.x/docs/vssg/vssg-overlay.png" width="440">
 
-### 4.10 Input Filters
+### 4.12 Input Filters
 
 Input filters block allows you to apply custom filters for files imported in Images/Videos/Overlay Images elements.
 
@@ -224,6 +234,8 @@ Feel free to submit issues. Please include your slideshow (.vssg file) and input
 
 Icons used in `Video Slideshow Script Generator` are published in [Dripicons 2.0](https://github.com/amitjakhu/dripicons) which is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
+`FFmpeg` is a trademark of [Fabrice Bellard](http://www.bellard.org/), originator of the FFmpeg project
+
 ### 9.1 Permissions
 
 |   | use | copy | modify | merge | publish | distribute | sublicense | sell |
@@ -235,7 +247,7 @@ Icons used in `Video Slideshow Script Generator` are published in [Dripicons 2.0
 
 ARTHENICA Personal License
 
-Copyright (c) 2019, Taner Sener (https://github.com/tanersener), All rights reserved.
+Copyright (c) 2019-2022, Taner Sener (https://github.com/tanersener), All rights reserved.
 
 Permission is hereby granted, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify and merge, subject to the following conditions:
 
@@ -247,7 +259,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ARTHENICA Commercial License
 
-Copyright (c) 2019, Taner Sener (https://github.com/tanersener), All rights reserved.
+Copyright (c) 2019-2022, Taner Sener (https://github.com/tanersener), All rights reserved.
 
 Permission is hereby granted, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, distribute, sublicense, and/or sell copies of the Software, subject to the following conditions:
 

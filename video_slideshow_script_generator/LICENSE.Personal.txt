@@ -1,6 +1,6 @@
 ARTHENICA Personal License
 
-Copyright (c) 2019, Taner Sener (https://github.com/tanersener), All rights reserved.
+Copyright (c) 2019-2022, Taner Sener (https://github.com/tanersener), All rights reserved.
 
 Permission is hereby granted, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify and merge, subject to the following conditions:
 
