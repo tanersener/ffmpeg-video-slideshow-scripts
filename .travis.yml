@@ -1,6 +1,6 @@
 branches:
   only:
-    - master
+    - main
     - v2.x
 sudo: false
 git:

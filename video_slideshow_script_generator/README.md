@@ -2,7 +2,7 @@
 
 Java GUI to create video slideshow scripts
 
-<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/master/docs/vssg/vssg-gui.png" width="440">
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/main/docs/vssg/vssg-gui.png" width="440">
 
 ## 1. Features
 - Generates `bash` scripts that create video slideshows using [FFmpeg](https://www.ffmpeg.org/)
