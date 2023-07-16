@@ -1,4 +1,4 @@
-# FFmpeg Video Slideshow Scripts [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/) [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=master)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts)
+# FFmpeg Video Slideshow Scripts [![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/) [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=main)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts)
 
 Configurable shell scripts to create video slideshows from images and videos using [FFmpeg](https://www.ffmpeg.org/).
 
@@ -169,10 +169,10 @@ If you want to learn more about how a specific script works refer to [v1.x](http
 
 ## Build Status
 
-| branch | status |
-| :---: | :---: |
-|  master | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=master)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
-|  v2.x | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=v2.x)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
+| branch |                                                                               status                                                                                |
+|:------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|  main  | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=main)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
+|  v2.x  | [![Build Status](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts.svg?branch=v2.x)](https://travis-ci.org/tanersener/ffmpeg-video-slideshow-scripts) |
 
 
 ## Tips
