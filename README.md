@@ -2,7 +2,7 @@
 
 Shell scripts to create video slideshows from images using [FFmpeg](https://www.ffmpeg.org/).
 
-<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/master/docs/ffmpeg-video-slideshow-scripts-logo-v1.png" width="240">
+<img src="https://github.com/tanersener/ffmpeg-video-slideshow-scripts/blob/main/docs/ffmpeg-video-slideshow-scripts-logo-v1.png" width="240">
 
 ## Features
 - [Transition scripts](transition_scripts) 
